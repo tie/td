@@ -20,7 +20,7 @@ func sendText(ctx context.Context) error {
 	// This example creates a plaing message and sends it
 	// to your Saved Message folder.
 	return client.Run(ctx, func(ctx context.Context) error {
-		_, err := message.NewSender(tg.NewClient(client)).Self().Text(ctx, "Hi!")
+		_, err := message.NewSender(client).Self().Text(ctx, "Hi!")
 		return err
 	})
 }

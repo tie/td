@@ -13,7 +13,6 @@ import (
 
 func Test_plainResolver_Resolve(t *testing.T) {
 	mock := rpcmock.NewMock(t, require.New(t))
-	raw := tg.NewClient(mock)
 
 	domain := "adcd"
 	mock.ExpectCall(&tg.ContactsResolveUsernameRequest{
@@ -32,7 +31,7 @@ func Test_plainResolver_Resolve(t *testing.T) {
 	})
 
 	ctx := context.Background()
-	resolver := plainResolver{raw: raw}
+	resolver := plainResolver{raw: mock}
 
 	r, err := resolver.Resolve(ctx, domain)
 	mock.IsType(&tg.InputPeerUser{}, r)

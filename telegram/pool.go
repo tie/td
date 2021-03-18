@@ -63,7 +63,7 @@ func (c *Client) dc(ctx context.Context, dcID int, max int64) (*pool.DC, error) 
 	}
 
 	if dc.CDN {
-		cdnCfg, err := c.tg.HelpGetCDNConfig(ctx)
+		cdnCfg, err := tg.HelpGetCDNConfig(ctx, c)
 		if err != nil {
 			return nil, xerrors.Errorf("get CDN config: %w", err)
 		}
@@ -106,7 +106,7 @@ func (c *Client) dc(ctx context.Context, dcID int, max int64) (*pool.DC, error) 
 	}
 
 	if !dc.CDN {
-		_, err = c.transfer(ctx, tg.NewClient(p), dcID)
+		_, err = c.transfer(ctx, p, dcID)
 		if err != nil {
 			// Ignore case then we are not authorized.
 			if unauthorized(err) {

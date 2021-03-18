@@ -43,7 +43,6 @@ func TestIterator(t *testing.T) {
 	limit := 10
 	totalRecords := 3 * limit
 	expected := generateStickers(totalRecords)
-	raw := tg.NewClient(mock)
 
 	mock.ExpectCall(&tg.MessagesGetOldFeaturedStickersRequest{
 		Offset: 0,
@@ -62,7 +61,7 @@ func TestIterator(t *testing.T) {
 		Limit:  limit,
 	}).ThenResult(result(expected[3*limit:], totalRecords))
 
-	iter := NewQueryBuilder(raw).GetOldFeaturedStickers().BatchSize(10).Iter()
+	iter := NewQueryBuilder(mock).GetOldFeaturedStickers().BatchSize(10).Iter()
 	i := 0
 	for iter.Next(ctx) {
 		mock.Equal(expected[i], iter.Value().Sticker)

@@ -20,7 +20,7 @@ func saveDraft(ctx context.Context) error {
 	}
 
 	return client.Run(ctx, func(ctx context.Context) error {
-		sender := message.NewSender(tg.NewClient(client))
+		sender := message.NewSender(client)
 		r := sender.Resolve("@durov")
 
 		// Save draft message.

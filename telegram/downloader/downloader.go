@@ -35,9 +35,9 @@ func (d *Downloader) WithPartSize(partSize int) *Downloader {
 // direct downloads without CDN support.
 //
 // See https://core.telegram.org/cdn.
-func (d *Downloader) Download(rpc Client, location tg.InputFileLocationClass) *Builder {
+func (d *Downloader) Download(rpc tg.Invoker, location tg.InputFileLocationClass) *Builder {
 	return newBuilder(d, master{
-		client:   rpc,
+		rpc:      rpc,
 		precise:  true,
 		allowCDN: true,
 		location: location,
@@ -46,9 +46,9 @@ func (d *Downloader) Download(rpc Client, location tg.InputFileLocationClass) *B
 
 // DownloadDirect creates Builder for plain downloads with disabled CDN redirect
 // handling.
-func (d *Downloader) DownloadDirect(rpc Client, location tg.InputFileLocationClass) *Builder {
+func (d *Downloader) DownloadDirect(rpc tg.Invoker, location tg.InputFileLocationClass) *Builder {
 	return newBuilder(d, master{
-		client:   rpc,
+		rpc:      rpc,
 		precise:  true,
 		allowCDN: false,
 		location: location,
@@ -56,10 +56,10 @@ func (d *Downloader) DownloadDirect(rpc Client, location tg.InputFileLocationCla
 }
 
 // CDN creates Builder for CDN downloads.
-func (d *Downloader) CDN(rpc Client, cdnRPC CDN, redirect *tg.UploadFileCDNRedirect) *Builder {
+func (d *Downloader) CDN(rpc tg.Invoker, cdnRPC tg.Invoker, redirect *tg.UploadFileCDNRedirect) *Builder {
 	b := newBuilder(d, cdn{
-		cdn:      cdnRPC,
-		client:   rpc,
+		cdnRPC:   cdnRPC,
+		rpc:      rpc,
 		pool:     d.pool,
 		redirect: redirect,
 	})
@@ -68,9 +68,9 @@ func (d *Downloader) CDN(rpc Client, cdnRPC CDN, redirect *tg.UploadFileCDNRedir
 }
 
 // Web creates Builder for web files downloads.
-func (d *Downloader) Web(rpc Client, location tg.InputWebFileLocationClass) *Builder {
+func (d *Downloader) Web(rpc tg.Invoker, location tg.InputWebFileLocationClass) *Builder {
 	return newBuilder(d, web{
-		client:   rpc,
+		rpc:      rpc,
 		location: location,
 	})
 }

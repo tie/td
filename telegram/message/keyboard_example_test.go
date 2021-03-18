@@ -19,7 +19,7 @@ func sendKeyboard(ctx context.Context) error {
 	}
 
 	return client.Run(ctx, func(ctx context.Context) error {
-		sender := message.NewSender(tg.NewClient(client))
+		sender := message.NewSender(client)
 
 		// Uploads and sends keyboard result to the @durovschat.
 		if _, err := sender.Resolve("@durovschat").Row(

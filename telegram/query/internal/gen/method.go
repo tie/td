@@ -36,7 +36,7 @@ type RequestArgument struct {
 type Method struct {
 	// Name to use in function declaration.
 	Name string
-	// OriginalName is name of method of tg.Client.
+	// OriginalName is name of function in tg package.
 	OriginalName string
 	// RequestName is name of request struct.
 	RequestName string

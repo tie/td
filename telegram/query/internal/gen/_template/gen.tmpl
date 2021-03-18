@@ -12,7 +12,10 @@ import (
 )
 
 // No-op definition for keeping imports.
-var _ = context.Background()
+var (
+    _ = xerrors.Errorf
+    _ = context.Background
+)
 
 // Request is a parameter for Query.
 type Request struct {

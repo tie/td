@@ -169,12 +169,11 @@ func (m *mockInvoker) InvokeRaw(ctx context.Context, input bin.Encoder, output b
 
 func TestVectorResponse(t *testing.T) {
 	elems := []int{1, 2, 3}
-	m := mockInvoker{
+	m := &mockInvoker{
 		output: &IntVector{Elems: []int{1, 2, 3}},
 	}
-	client := NewClient(&m)
 
-	r, err := client.EchoVector(context.Background(), nil)
+	r, err := EchoVector(context.Background(), m, nil)
 	if err != nil {
 		t.Fatal(err)
 	}

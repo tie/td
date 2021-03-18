@@ -24,7 +24,7 @@ func run(ctx context.Context) error {
 		Logger:        logger,
 		UpdateHandler: dispatcher,
 	}, func(ctx context.Context, client *telegram.Client) error {
-		sender := message.NewSender(tg.NewClient(client))
+		sender := message.NewSender(client)
 		dispatcher.OnNewMessage(func(ctx tg.UpdateContext, u *tg.UpdateNewMessage) error {
 			m, ok := u.Message.(*tg.Message)
 			if !ok || m.Out {

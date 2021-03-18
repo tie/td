@@ -63,9 +63,8 @@ func run(ctx context.Context) error {
 			}
 		}
 
-		c := tg.NewClient(client)
 		for range time.NewTicker(time.Second * 5).C {
-			chats, err := c.MessagesGetAllChats(ctx, nil)
+			chats, err := tg.MessagesGetAllChats(ctx, client, nil)
 
 			if d, ok := telegram.AsFloodWait(err); ok {
 				// Server told us to wait N seconds before sending next message.

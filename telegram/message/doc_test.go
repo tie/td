@@ -13,7 +13,7 @@ import (
 
 func testSender(t *testing.T) (*Sender, *rpcmock.Mock) {
 	mock := rpcmock.NewMock(t, require.New(t))
-	sender := NewSender(tg.NewClient(mock))
+	sender := NewSender(mock)
 	return sender, mock
 }
 

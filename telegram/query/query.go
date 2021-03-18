@@ -13,11 +13,11 @@ import (
 
 // Query is common struct to create query builders.
 type Query struct {
-	raw *tg.Client
+	raw tg.Invoker
 }
 
 // NewQuery creates Query.
-func NewQuery(raw *tg.Client) *Query {
+func NewQuery(raw tg.Invoker) *Query {
 	return &Query{raw: raw}
 }
 

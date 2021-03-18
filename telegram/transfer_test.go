@@ -31,7 +31,7 @@ func TestTransfer(t *testing.T) {
 			User: user,
 		})
 
-		r, err := client.transfer(ctx, tg.NewClient(client), dc)
+		r, err := client.transfer(ctx, client, dc)
 		a.NoError(err)
 		a.Equal(auth, r)
 	})(t)

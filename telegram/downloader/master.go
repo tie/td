@@ -23,7 +23,7 @@ func (r *RedirectError) Error() string {
 // master is a master DC download schema.
 // See https://core.telegram.org/api/files#downloading-files.
 type master struct {
-	client Client
+	rpc tg.Invoker
 
 	precise  bool
 	allowCDN bool
@@ -41,7 +41,7 @@ func (c master) Chunk(ctx context.Context, offset, limit int) (chunk, error) {
 	req.SetCDNSupported(c.allowCDN)
 	req.SetPrecise(c.precise)
 
-	r, err := c.client.UploadGetFile(ctx, req)
+	r, err := tg.UploadGetFile(ctx, c.rpc, req)
 	if err != nil {
 		return chunk{}, err
 	}
@@ -57,7 +57,7 @@ func (c master) Chunk(ctx context.Context, offset, limit int) (chunk, error) {
 }
 
 func (c master) Hashes(ctx context.Context, offset int) ([]tg.FileHash, error) {
-	return c.client.UploadGetFileHashes(ctx, &tg.UploadGetFileHashesRequest{
+	return tg.UploadGetFileHashes(ctx, c.rpc, &tg.UploadGetFileHashesRequest{
 		Location: c.location,
 		Offset:   offset,
 	})

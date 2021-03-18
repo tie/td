@@ -18,7 +18,7 @@ func sendDice(ctx context.Context) error {
 	}
 
 	return client.Run(ctx, func(ctx context.Context) error {
-		sender := message.NewSender(tg.NewClient(client))
+		sender := message.NewSender(client)
 
 		// Sends dice "🎲" to the @durovschat.
 		if _, err := sender.Resolve("@durovschat").Dice(ctx); err != nil {

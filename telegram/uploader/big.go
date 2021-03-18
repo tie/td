@@ -24,7 +24,7 @@ func (u *Uploader) uploadBigFilePart(ctx context.Context, p part) (int, error) {
 
 	// Upload loop.
 	for {
-		r, err := u.rpc.UploadSaveBigFilePart(ctx, &tg.UploadSaveBigFilePartRequest{
+		r, err := tg.UploadSaveBigFilePart(ctx, u.raw, &tg.UploadSaveBigFilePartRequest{
 			FileID:         p.upload.id,
 			FilePart:       p.id,
 			FileTotalParts: p.upload.totalParts,

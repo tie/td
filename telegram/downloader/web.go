@@ -13,7 +13,7 @@ var errHashesNotSupported = xerrors.New("this schema does not support hashes fet
 // web is a web file download schema.
 // See https://core.telegram.org/api/files#downloading-webfiles.
 type web struct {
-	client Client
+	rpc tg.Invoker
 
 	location tg.InputWebFileLocationClass
 }
@@ -21,7 +21,7 @@ type web struct {
 var _ schema = web{}
 
 func (w web) Chunk(ctx context.Context, offset, limit int) (chunk, error) {
-	file, err := w.client.UploadGetWebFile(ctx, &tg.UploadGetWebFileRequest{
+	file, err := tg.UploadGetWebFile(ctx, w.rpc, &tg.UploadGetWebFileRequest{
 		Location: w.location,
 		Offset:   offset,
 		Limit:    limit,

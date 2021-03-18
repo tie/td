@@ -26,8 +26,8 @@ func (r *ExpiredTokenError) Error() string {
 // cdn is a CDN DC download schema.
 // See https://core.telegram.org/cdn#getting-files-from-a-cdn.
 type cdn struct {
-	cdn      CDN
-	client   Client
+	cdnRPC   tg.Invoker
+	rpc      tg.Invoker
 	pool     *bin.Pool
 	redirect *tg.UploadFileCDNRedirect
 }
@@ -64,7 +64,7 @@ func (c cdn) decrypt(src []byte, offset int) ([]byte, error) {
 }
 
 func (c cdn) Chunk(ctx context.Context, offset, limit int) (chunk, error) {
-	r, err := c.cdn.UploadGetCDNFile(ctx, &tg.UploadGetCDNFileRequest{
+	r, err := tg.UploadGetCDNFile(ctx, c.cdnRPC, &tg.UploadGetCDNFileRequest{
 		Offset:    offset,
 		Limit:     limit,
 		FileToken: c.redirect.FileToken,
@@ -91,7 +91,7 @@ func (c cdn) Chunk(ctx context.Context, offset, limit int) (chunk, error) {
 }
 
 func (c cdn) Hashes(ctx context.Context, offset int) ([]tg.FileHash, error) {
-	return c.client.UploadGetCDNFileHashes(ctx, &tg.UploadGetCDNFileHashesRequest{
+	return tg.UploadGetCDNFileHashes(ctx, c.rpc, &tg.UploadGetCDNFileHashesRequest{
 		FileToken: c.redirect.FileToken,
 		Offset:    offset,
 	})

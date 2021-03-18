@@ -18,7 +18,7 @@ func sendGif(ctx context.Context) error {
 	}
 
 	return client.Run(ctx, func(ctx context.Context) error {
-		sender := message.NewSender(tg.NewClient(client))
+		sender := message.NewSender(client)
 
 		// Uploads and sends gif to the @durovschat.
 		if _, err := sender.Resolve("https://t.me/durovschat").

@@ -64,14 +64,13 @@ func TestIterator(t *testing.T) {
 	limit := 10
 	totalRows := 3 * limit
 	expected := generateDialogs(totalRows)
-	raw := tg.NewClient(mock)
 
 	mock.Expect().ThenResult(result(expected[0:limit], totalRows))
 	mock.Expect().ThenResult(result(expected[limit:2*limit], totalRows))
 	mock.Expect().ThenResult(result(expected[2*limit:3*limit], totalRows))
 	mock.Expect().ThenResult(result(expected[3*limit:], totalRows))
 
-	iter := NewQueryBuilder(raw).GetDialogs().BatchSize(10).Iter()
+	iter := NewQueryBuilder(mock).GetDialogs().BatchSize(10).Iter()
 	i := 0
 	for iter.Next(ctx) {
 		mock.Equal(expected[i].GetPeer(), iter.Value().Dialog.GetPeer())

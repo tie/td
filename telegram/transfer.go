@@ -9,7 +9,7 @@ import (
 )
 
 func (c *Client) exportAuth(ctx context.Context, dcID int) (*tg.AuthExportedAuthorization, error) {
-	export, err := c.tg.AuthExportAuthorization(ctx, dcID)
+	export, err := tg.AuthExportAuthorization(ctx, c, dcID)
 	if err != nil {
 		return nil, xerrors.Errorf("export auth to %d: %w", dcID, err)
 	}
@@ -19,7 +19,7 @@ func (c *Client) exportAuth(ctx context.Context, dcID int) (*tg.AuthExportedAuth
 
 // transfer exports current authorization and imports it to another DC.
 // See https://core.telegram.org/api/datacenter#authorization-transfer.
-func (c *Client) transfer(ctx context.Context, to *tg.Client, dc int) (tg.AuthAuthorizationClass, error) {
+func (c *Client) transfer(ctx context.Context, to tg.Invoker, dc int) (tg.AuthAuthorizationClass, error) {
 	auth, err := c.exportAuth(ctx, dc)
 	if err != nil {
 		return nil, xerrors.Errorf("export to %d: %w", dc, err)
@@ -27,7 +27,7 @@ func (c *Client) transfer(ctx context.Context, to *tg.Client, dc int) (tg.AuthAu
 
 	req := &tg.AuthImportAuthorizationRequest{}
 	req.FillFrom(auth)
-	r, err := to.AuthImportAuthorization(ctx, req)
+	r, err := tg.AuthImportAuthorization(ctx, to, req)
 	if err != nil {
 		return nil, xerrors.Errorf("import from %d: %w", dc, err)
 	}

@@ -92,7 +92,7 @@ if err := client.AuthBot(ctx, "token:12345"); err != nil {
 
 ### Calling MTProto directly
 
-You can use generated `tg.Client` that allows calling any MTProto methods
+You can use generated `tg` package that allows calling any MTProto methods
 directly.
 
 ```go
@@ -104,7 +104,7 @@ client.Run(ctx, func(ctx context.Context) error) {
   if err := client.AuthBot(ctx, "token:12345"); err != nil {
     return err
   }
-  state, err := tg.NewClient(client).UpdatesGetState(ctx)
+  state, err := tg.UpdatesGetState(ctx, client)
   if err != nil {
     return err
   }

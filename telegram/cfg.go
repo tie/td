@@ -32,7 +32,7 @@ func (c *Client) Config() tg.Config {
 }
 
 func (c *Client) fetchConfig(ctx context.Context) {
-	cfg, err := c.tg.HelpGetConfig(ctx)
+	cfg, err := tg.HelpGetConfig(ctx, c)
 	if err != nil {
 		c.log.Warn("Got error on config update", zap.Error(err))
 		return

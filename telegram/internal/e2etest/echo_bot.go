@@ -78,8 +78,7 @@ func (b EchoBot) login(ctx context.Context, client *telegram.Client) (*tg.User, 
 	}
 
 	expectedUsername := "echobot" + strconv.Itoa(me.ID)
-	raw := tg.NewClient(client)
-	_, err = raw.AccountUpdateUsername(ctx, expectedUsername)
+	_, err = tg.AccountUpdateUsername(ctx, client, expectedUsername)
 	if err != nil {
 		var rpcErr *tgerr.Error
 		if !errors.As(err, &rpcErr) || rpcErr.Message != "USERNAME_NOT_MODIFIED" {
@@ -109,8 +108,7 @@ func (b EchoBot) login(ctx context.Context, client *telegram.Client) (*tg.User, 
 func (b EchoBot) handler(client *telegram.Client) tg.NewMessageHandler {
 	dialogsUsers := newUsers()
 
-	raw := tg.NewClient(client)
-	sender := message.NewSender(raw)
+	sender := message.NewSender(client)
 	return func(ctx tg.UpdateContext, update *tg.UpdateNewMessage) error {
 		if filterMessage(update) {
 			return nil
@@ -122,7 +120,7 @@ func (b EchoBot) handler(client *telegram.Client) tg.NewMessageHandler {
 		}
 
 		if dialogsUsers.empty() {
-			dialogs, err := raw.MessagesGetDialogs(ctx, &tg.MessagesGetDialogsRequest{
+			dialogs, err := tg.MessagesGetDialogs(ctx, client, &tg.MessagesGetDialogsRequest{
 				Limit:      100,
 				OffsetPeer: &tg.InputPeerEmpty{},
 			})

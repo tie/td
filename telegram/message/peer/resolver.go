@@ -22,16 +22,16 @@ func (p ResolverFunc) Resolve(ctx context.Context, domain string) (tg.InputPeerC
 }
 
 // DefaultResolver creates and returns default resolver.
-func DefaultResolver(raw *tg.Client) Resolver {
+func DefaultResolver(raw tg.Invoker) Resolver {
 	return NewLRUResolver(&plainResolver{raw: raw}, 10)
 }
 
 type plainResolver struct {
-	raw *tg.Client
+	raw tg.Invoker
 }
 
 func (p plainResolver) Resolve(ctx context.Context, domain string) (tg.InputPeerClass, error) {
-	peer, err := p.raw.ContactsResolveUsername(ctx, domain)
+	peer, err := tg.ContactsResolveUsername(ctx, p.raw, domain)
 	if err != nil {
 		return nil, xerrors.Errorf("resolve: %w", err)
 	}

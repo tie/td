@@ -38,7 +38,6 @@ func TestIterator(t *testing.T) {
 	limit := 10
 	totalMessages := 3 * limit
 	expected := generateMessages(totalMessages)
-	raw := tg.NewClient(mock)
 
 	mock.ExpectCall(&tg.MessagesSearchRequest{
 		Q:        "query",
@@ -73,7 +72,7 @@ func TestIterator(t *testing.T) {
 		Limit:    limit,
 	}).ThenResult(messagesClass(expected[:0], totalMessages))
 
-	iter := NewQueryBuilder(raw).Search(&tg.InputPeerSelf{}).
+	iter := NewQueryBuilder(mock).Search(&tg.InputPeerSelf{}).
 		Filter(&tg.InputMessagesFilterEmpty{}).
 		Q("query").BatchSize(10).Iter()
 	i := 0

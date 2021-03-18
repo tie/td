@@ -37,7 +37,6 @@ func TestIterator(t *testing.T) {
 	limit := 10
 	totalRecords := 3 * limit
 	expected := generatePhotos(totalRecords)
-	raw := tg.NewClient(mock)
 
 	mock.ExpectCall(&tg.PhotosGetUserPhotosRequest{
 		UserID: &tg.InputUserSelf{},
@@ -60,7 +59,7 @@ func TestIterator(t *testing.T) {
 		Limit:  limit,
 	}).ThenResult(result(expected[3*limit:], totalRecords))
 
-	iter := NewQueryBuilder(raw).GetUserPhotos(&tg.InputUserSelf{}).BatchSize(10).Iter()
+	iter := NewQueryBuilder(mock).GetUserPhotos(&tg.InputUserSelf{}).BatchSize(10).Iter()
 	i := 0
 	for iter.Next(ctx) {
 		mock.Equal(expected[i], iter.Value().Photo)

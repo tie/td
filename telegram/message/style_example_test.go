@@ -40,7 +40,7 @@ func sendStyledText(ctx context.Context) error {
 			message.BankCard("5550111111111111"), message.Plain("\n\n"),
 		}
 
-		_, err := message.NewSender(tg.NewClient(client)).
+		_, err := message.NewSender(client).
 			Self().StyledText(ctx, formats[0], formats[1:]...)
 		return err
 	})

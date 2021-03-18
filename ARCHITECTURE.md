@@ -43,7 +43,7 @@ that is convenient to use.
 
 Can handle reconnects, DC migration, connection pooling, session management.
 
-Also, it is possible to call methods directly using `tg.Client`, because
+Also, it is possible to call methods directly using `tg` package, because
 `telegram.Client` implements `Invoker` interface:
 
 ```go

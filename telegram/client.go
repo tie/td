@@ -46,9 +46,6 @@ type clientConn interface {
 
 // Client represents a MTProto client to Telegram.
 type Client struct {
-	// tg provides RPC calls via Client.
-	tg *tg.Client // immutable
-
 	// Telegram device information.
 	device DeviceConfig // immutable
 
@@ -202,8 +199,6 @@ func (c *Client) init() {
 	c.exported = make(chan *tg.AuthExportedAuthorization, 1)
 	c.sessions = map[int]*pool.SyncSession{}
 	c.subConns = map[int]CloseInvoker{}
-	// Initializing internal RPC caller.
-	c.tg = tg.NewClient(c)
 }
 
 func (c *Client) restoreConnection(ctx context.Context) error {
@@ -300,10 +295,9 @@ func (c *Client) reconnectUntilClosed(ctx context.Context) error {
 				// initialization, so we can reset backoff.
 				b.Reset()
 
-				raw := tg.NewClient(invoker)
 				select {
 				case export := <-c.exported:
-					_, err := raw.AuthImportAuthorization(ctx, &tg.AuthImportAuthorizationRequest{
+					_, err := tg.AuthImportAuthorization(ctx, invoker, &tg.AuthImportAuthorizationRequest{
 						ID:    export.ID,
 						Bytes: export.Bytes,
 					})

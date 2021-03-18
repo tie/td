@@ -31,7 +31,7 @@ func (u *Uploader) smallLoop(ctx context.Context, h io.Writer, upload *Upload) e
 
 		// Upload loop.
 		for {
-			r, err := u.rpc.UploadSaveFilePart(ctx, &tg.UploadSaveFilePartRequest{
+			r, err := tg.UploadSaveFilePart(ctx, u.raw, &tg.UploadSaveFilePartRequest{
 				FileID:   upload.id,
 				FilePart: int(upload.sentParts.Load()) % partsLimit,
 				Bytes:    read,

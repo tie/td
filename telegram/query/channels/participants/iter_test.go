@@ -36,7 +36,6 @@ func TestIterator(t *testing.T) {
 	limit := 10
 	totalRecords := 3 * limit
 	expected := generateParticipants(totalRecords)
-	raw := tg.NewClient(mock)
 	ch := &tg.InputChannel{
 		ChannelID:  10,
 		AccessHash: 10,
@@ -67,7 +66,7 @@ func TestIterator(t *testing.T) {
 		Limit:   limit,
 	}).ThenResult(result(expected[3*limit:], totalRecords))
 
-	iter := NewQueryBuilder(raw).GetParticipants(ch).BatchSize(10).Iter()
+	iter := NewQueryBuilder(mock).GetParticipants(ch).BatchSize(10).Iter()
 	i := 0
 	for iter.Next(ctx) {
 		mock.Equal(expected[i], iter.Value().Participant)
