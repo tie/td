@@ -360,10 +360,10 @@ _ {{ $s.Interface }} = &{{ $s.Name }}{}
 {{- end }}
 {{- if $s.Result }}
 {{- if $s.ResultSingular }}
-func (c *Client) {{ $s.Method }}({{ template "request_params" $s }}) ({{ if not $s.ResultVector }}*{{ $s.Result }}{{ else }}{{ template "slice_result_name" $s }}{{ end }}, error) {
+func {{ $s.Method }}({{ template "request_params" $s }}) ({{ if not $s.ResultVector }}*{{ $s.Result }}{{ else }}{{ template "slice_result_name" $s }}{{ end }}, error) {
     var result {{ $s.Result }}
     {{ template "pack_request" $s }}
-    if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+    if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
         return nil, err
     }
     {{- if $s.ResultVector }}
@@ -373,10 +373,10 @@ func (c *Client) {{ $s.Method }}({{ template "request_params" $s }}) ({{ if not 
     {{- end }}
 }
 {{- else }}
-func (c *Client) {{ $s.Method }}({{ template "request_params" $s }}) ({{if ne $s.Result "BoolClass"}}{{ $s.Result }}{{ else }}bool{{ end }}, error) {
+func {{ $s.Method }}({{ template "request_params" $s }}) ({{if ne $s.Result "BoolClass"}}{{ $s.Result }}{{ else }}bool{{ end }}, error) {
     var result {{ $s.ResultFunc }}Box
     {{ template "pack_request" $s }}
-    if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+    if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 {{- if ne $s.Result "BoolClass" }}return nil, err{{- else }}return false, err{{- end }}
     }
     {{- if ne $s.Result "BoolClass" }}
@@ -388,10 +388,10 @@ func (c *Client) {{ $s.Method }}({{ template "request_params" $s }}) ({{if ne $s
 }
 {{- end }}
 {{- else }}
-func (c *Client) {{ $s.Method }}({{ template "request_params" $s }}) error {
+func {{ $s.Method }}({{ template "request_params" $s }}) error {
     var ok Ok
     {{ template "pack_request" $s }}
-    if err := c.rpc.InvokeRaw(ctx, request, &ok); err != nil {
+    if err := rpc.InvokeRaw(ctx, request, &ok); err != nil {
         return err
     }
     return nil

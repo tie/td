@@ -1,4 +1,4 @@
-{{ define "request_params" }}ctx context.Context{{- if .UnpackParameters }}{{- if .Fields }},
+{{ define "request_params" }}ctx context.Context, rpc Invoker{{- if .UnpackParameters }}{{- if .Fields }},
 {{- range $f := .Fields }}{{ lower $f.Name }} {{ template "print_type" $f }},{{- end}}
 {{- end }}
 {{- else }}, request *{{ .Name }}{{- end }}
