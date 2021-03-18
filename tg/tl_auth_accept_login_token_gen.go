@@ -173,13 +173,13 @@ var (
 //  400 AUTH_TOKEN_INVALIDX: The specified auth token is invalid
 //
 // See https://core.telegram.org/method/auth.acceptLoginToken for reference.
-func (c *Client) AuthAcceptLoginToken(ctx context.Context, token []byte) (*Authorization, error) {
+func AuthAcceptLoginToken(ctx context.Context, rpc Invoker, token []byte) (*Authorization, error) {
 	var result Authorization
 
 	request := &AuthAcceptLoginTokenRequest{
 		Token: token,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

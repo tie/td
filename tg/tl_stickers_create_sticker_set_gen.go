@@ -399,10 +399,10 @@ var (
 //
 // See https://core.telegram.org/method/stickers.createStickerSet for reference.
 // Can be used by bots.
-func (c *Client) StickersCreateStickerSet(ctx context.Context, request *StickersCreateStickerSetRequest) (*MessagesStickerSet, error) {
+func StickersCreateStickerSet(ctx context.Context, rpc Invoker, request *StickersCreateStickerSetRequest) (*MessagesStickerSet, error) {
 	var result MessagesStickerSet
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

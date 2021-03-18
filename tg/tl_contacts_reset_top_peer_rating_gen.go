@@ -200,10 +200,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/contacts.resetTopPeerRating for reference.
-func (c *Client) ContactsResetTopPeerRating(ctx context.Context, request *ContactsResetTopPeerRatingRequest) (bool, error) {
+func ContactsResetTopPeerRating(ctx context.Context, rpc Invoker, request *ContactsResetTopPeerRatingRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

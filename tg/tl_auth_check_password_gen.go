@@ -181,13 +181,13 @@ var (
 //  400 SRP_PASSWORD_CHANGED: Password has changed
 //
 // See https://core.telegram.org/method/auth.checkPassword for reference.
-func (c *Client) AuthCheckPassword(ctx context.Context, password InputCheckPasswordSRPClass) (AuthAuthorizationClass, error) {
+func AuthCheckPassword(ctx context.Context, rpc Invoker, password InputCheckPasswordSRPClass) (AuthAuthorizationClass, error) {
 	var result AuthAuthorizationBox
 
 	request := &AuthCheckPasswordRequest{
 		Password: password,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Authorization, nil

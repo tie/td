@@ -227,10 +227,10 @@ var (
 //  400 CHAT_ADMIN_REQUIRED: You must be an admin in this chat to do this
 //
 // See https://core.telegram.org/method/stats.getBroadcastStats for reference.
-func (c *Client) StatsGetBroadcastStats(ctx context.Context, request *StatsGetBroadcastStatsRequest) (*StatsBroadcastStats, error) {
+func StatsGetBroadcastStats(ctx context.Context, rpc Invoker, request *StatsGetBroadcastStatsRequest) (*StatsBroadcastStats, error) {
 	var result StatsBroadcastStats
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

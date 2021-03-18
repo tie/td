@@ -185,10 +185,10 @@ var (
 //  400 DATA_JSON_INVALID: The provided JSON data is invalid
 //
 // See https://core.telegram.org/method/phone.saveCallDebug for reference.
-func (c *Client) PhoneSaveCallDebug(ctx context.Context, request *PhoneSaveCallDebugRequest) (bool, error) {
+func PhoneSaveCallDebug(ctx context.Context, rpc Invoker, request *PhoneSaveCallDebugRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -196,10 +196,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.editChatPhoto for reference.
 // Can be used by bots.
-func (c *Client) MessagesEditChatPhoto(ctx context.Context, request *MessagesEditChatPhotoRequest) (UpdatesClass, error) {
+func MessagesEditChatPhoto(ctx context.Context, rpc Invoker, request *MessagesEditChatPhotoRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

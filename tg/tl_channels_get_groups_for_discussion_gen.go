@@ -143,11 +143,11 @@ var (
 //  4) https://core.telegram.org/method/channels.togglePreHistoryHidden
 //
 // See https://core.telegram.org/method/channels.getGroupsForDiscussion for reference.
-func (c *Client) ChannelsGetGroupsForDiscussion(ctx context.Context) (MessagesChatsClass, error) {
+func ChannelsGetGroupsForDiscussion(ctx context.Context, rpc Invoker) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
 	request := &ChannelsGetGroupsForDiscussionRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

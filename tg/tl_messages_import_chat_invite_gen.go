@@ -170,13 +170,13 @@ var (
 //  400 USER_CHANNELS_TOO_MUCH: One of the users you tried to add is already in too many channels/supergroups
 //
 // See https://core.telegram.org/method/messages.importChatInvite for reference.
-func (c *Client) MessagesImportChatInvite(ctx context.Context, hash string) (UpdatesClass, error) {
+func MessagesImportChatInvite(ctx context.Context, rpc Invoker, hash string) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &MessagesImportChatInviteRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

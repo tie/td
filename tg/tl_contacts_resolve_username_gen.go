@@ -165,13 +165,13 @@ var (
 //
 // See https://core.telegram.org/method/contacts.resolveUsername for reference.
 // Can be used by bots.
-func (c *Client) ContactsResolveUsername(ctx context.Context, username string) (*ContactsResolvedPeer, error) {
+func ContactsResolveUsername(ctx context.Context, rpc Invoker, username string) (*ContactsResolvedPeer, error) {
 	var result ContactsResolvedPeer
 
 	request := &ContactsResolveUsernameRequest{
 		Username: username,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

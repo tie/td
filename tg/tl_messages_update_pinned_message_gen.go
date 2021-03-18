@@ -307,10 +307,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.updatePinnedMessage for reference.
 // Can be used by bots.
-func (c *Client) MessagesUpdatePinnedMessage(ctx context.Context, request *MessagesUpdatePinnedMessageRequest) (UpdatesClass, error) {
+func MessagesUpdatePinnedMessage(ctx context.Context, rpc Invoker, request *MessagesUpdatePinnedMessageRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -209,10 +209,10 @@ var (
 //  400 PRIVACY_VALUE_INVALID: The specified privacy rule combination is invalid
 //
 // See https://core.telegram.org/method/account.setPrivacy for reference.
-func (c *Client) AccountSetPrivacy(ctx context.Context, request *AccountSetPrivacyRequest) (*AccountPrivacyRules, error) {
+func AccountSetPrivacy(ctx context.Context, rpc Invoker, request *AccountSetPrivacyRequest) (*AccountPrivacyRules, error) {
 	var result AccountPrivacyRules
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

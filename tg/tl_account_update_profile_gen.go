@@ -288,10 +288,10 @@ var (
 //  400 FIRSTNAME_INVALID: The first name is invalid
 //
 // See https://core.telegram.org/method/account.updateProfile for reference.
-func (c *Client) AccountUpdateProfile(ctx context.Context, request *AccountUpdateProfileRequest) (UserClass, error) {
+func AccountUpdateProfile(ctx context.Context, rpc Invoker, request *AccountUpdateProfileRequest) (UserClass, error) {
 	var result UserBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.User, nil

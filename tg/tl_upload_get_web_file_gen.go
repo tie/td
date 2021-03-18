@@ -208,10 +208,10 @@ var (
 // UploadGetWebFile invokes method upload.getWebFile#24e6818d returning error if any.
 //
 // See https://core.telegram.org/method/upload.getWebFile for reference.
-func (c *Client) UploadGetWebFile(ctx context.Context, request *UploadGetWebFileRequest) (*UploadWebFile, error) {
+func UploadGetWebFile(ctx context.Context, rpc Invoker, request *UploadGetWebFileRequest) (*UploadWebFile, error) {
 	var result UploadWebFile
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

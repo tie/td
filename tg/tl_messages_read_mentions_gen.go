@@ -168,13 +168,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.readMentions for reference.
-func (c *Client) MessagesReadMentions(ctx context.Context, peer InputPeerClass) (*MessagesAffectedHistory, error) {
+func MessagesReadMentions(ctx context.Context, rpc Invoker, peer InputPeerClass) (*MessagesAffectedHistory, error) {
 	var result MessagesAffectedHistory
 
 	request := &MessagesReadMentionsRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

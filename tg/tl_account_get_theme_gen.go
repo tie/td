@@ -214,10 +214,10 @@ var (
 //  400 THEME_INVALID: Invalid theme provided
 //
 // See https://core.telegram.org/method/account.getTheme for reference.
-func (c *Client) AccountGetTheme(ctx context.Context, request *AccountGetThemeRequest) (*Theme, error) {
+func AccountGetTheme(ctx context.Context, rpc Invoker, request *AccountGetThemeRequest) (*Theme, error) {
 	var result Theme
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

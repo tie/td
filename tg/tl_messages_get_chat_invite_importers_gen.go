@@ -261,10 +261,10 @@ var (
 // MessagesGetChatInviteImporters invokes method messages.getChatInviteImporters#26fb7289 returning error if any.
 //
 // See https://core.telegram.org/method/messages.getChatInviteImporters for reference.
-func (c *Client) MessagesGetChatInviteImporters(ctx context.Context, request *MessagesGetChatInviteImportersRequest) (*MessagesChatInviteImporters, error) {
+func MessagesGetChatInviteImporters(ctx context.Context, rpc Invoker, request *MessagesGetChatInviteImportersRequest) (*MessagesChatInviteImporters, error) {
 	var result MessagesChatInviteImporters
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

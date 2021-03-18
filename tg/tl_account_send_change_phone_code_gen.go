@@ -184,10 +184,10 @@ var (
 //  400 PHONE_NUMBER_INVALID: The phone number is invalid
 //
 // See https://core.telegram.org/method/account.sendChangePhoneCode for reference.
-func (c *Client) AccountSendChangePhoneCode(ctx context.Context, request *AccountSendChangePhoneCodeRequest) (*AuthSentCode, error) {
+func AccountSendChangePhoneCode(ctx context.Context, rpc Invoker, request *AccountSendChangePhoneCodeRequest) (*AuthSentCode, error) {
 	var result AuthSentCode
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

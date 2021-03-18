@@ -160,13 +160,13 @@ var (
 // PhoneGetGroupCallJoinAs invokes method phone.getGroupCallJoinAs#ef7c213a returning error if any.
 //
 // See https://core.telegram.org/method/phone.getGroupCallJoinAs for reference.
-func (c *Client) PhoneGetGroupCallJoinAs(ctx context.Context, peer InputPeerClass) (*PhoneJoinAsPeers, error) {
+func PhoneGetGroupCallJoinAs(ctx context.Context, rpc Invoker, peer InputPeerClass) (*PhoneJoinAsPeers, error) {
 	var result PhoneJoinAsPeers
 
 	request := &PhoneGetGroupCallJoinAsRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

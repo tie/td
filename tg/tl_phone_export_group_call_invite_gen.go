@@ -200,10 +200,10 @@ var (
 // PhoneExportGroupCallInvite invokes method phone.exportGroupCallInvite#e6aa647f returning error if any.
 //
 // See https://core.telegram.org/method/phone.exportGroupCallInvite for reference.
-func (c *Client) PhoneExportGroupCallInvite(ctx context.Context, request *PhoneExportGroupCallInviteRequest) (*PhoneExportedGroupCallInvite, error) {
+func PhoneExportGroupCallInvite(ctx context.Context, rpc Invoker, request *PhoneExportGroupCallInviteRequest) (*PhoneExportedGroupCallInvite, error) {
 	var result PhoneExportedGroupCallInvite
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -207,10 +207,10 @@ var (
 //  400 ENCRYPTION_ID_INVALID: The provided secret chat ID is invalid
 //
 // See https://core.telegram.org/method/messages.discardEncryption for reference.
-func (c *Client) MessagesDiscardEncryption(ctx context.Context, request *MessagesDiscardEncryptionRequest) (bool, error) {
+func MessagesDiscardEncryption(ctx context.Context, rpc Invoker, request *MessagesDiscardEncryptionRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

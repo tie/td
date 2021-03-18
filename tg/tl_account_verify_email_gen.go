@@ -190,10 +190,10 @@ var (
 //  400 EMAIL_VERIFY_EXPIRED: The verification email has expired
 //
 // See https://core.telegram.org/method/account.verifyEmail for reference.
-func (c *Client) AccountVerifyEmail(ctx context.Context, request *AccountVerifyEmailRequest) (bool, error) {
+func AccountVerifyEmail(ctx context.Context, rpc Invoker, request *AccountVerifyEmailRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

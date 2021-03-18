@@ -254,10 +254,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.reorderPinnedDialogs for reference.
-func (c *Client) MessagesReorderPinnedDialogs(ctx context.Context, request *MessagesReorderPinnedDialogsRequest) (bool, error) {
+func MessagesReorderPinnedDialogs(ctx context.Context, rpc Invoker, request *MessagesReorderPinnedDialogsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

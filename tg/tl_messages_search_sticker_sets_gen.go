@@ -232,10 +232,10 @@ var (
 // Search for stickersets
 //
 // See https://core.telegram.org/method/messages.searchStickerSets for reference.
-func (c *Client) MessagesSearchStickerSets(ctx context.Context, request *MessagesSearchStickerSetsRequest) (MessagesFoundStickerSetsClass, error) {
+func MessagesSearchStickerSets(ctx context.Context, rpc Invoker, request *MessagesSearchStickerSetsRequest) (MessagesFoundStickerSetsClass, error) {
 	var result MessagesFoundStickerSetsBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.FoundStickerSets, nil

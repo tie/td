@@ -342,10 +342,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getHistory for reference.
-func (c *Client) MessagesGetHistory(ctx context.Context, request *MessagesGetHistoryRequest) (MessagesMessagesClass, error) {
+func MessagesGetHistory(ctx context.Context, rpc Invoker, request *MessagesGetHistoryRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

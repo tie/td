@@ -237,10 +237,10 @@ var (
 // MessagesUploadImportedMedia invokes method messages.uploadImportedMedia#2a862092 returning error if any.
 //
 // See https://core.telegram.org/method/messages.uploadImportedMedia for reference.
-func (c *Client) MessagesUploadImportedMedia(ctx context.Context, request *MessagesUploadImportedMediaRequest) (MessageMediaClass, error) {
+func MessagesUploadImportedMedia(ctx context.Context, rpc Invoker, request *MessagesUploadImportedMediaRequest) (MessageMediaClass, error) {
 	var result MessageMediaBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.MessageMedia, nil

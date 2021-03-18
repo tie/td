@@ -298,10 +298,10 @@ var (
 // PhoneJoinGroupCall invokes method phone.joinGroupCall#b132ff7b returning error if any.
 //
 // See https://core.telegram.org/method/phone.joinGroupCall for reference.
-func (c *Client) PhoneJoinGroupCall(ctx context.Context, request *PhoneJoinGroupCallRequest) (UpdatesClass, error) {
+func PhoneJoinGroupCall(ctx context.Context, rpc Invoker, request *PhoneJoinGroupCallRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -191,10 +191,10 @@ var (
 //
 // See https://core.telegram.org/method/stickers.addStickerToSet for reference.
 // Can be used by bots.
-func (c *Client) StickersAddStickerToSet(ctx context.Context, request *StickersAddStickerToSetRequest) (*MessagesStickerSet, error) {
+func StickersAddStickerToSet(ctx context.Context, rpc Invoker, request *StickersAddStickerToSetRequest) (*MessagesStickerSet, error) {
 	var result MessagesStickerSet
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

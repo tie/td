@@ -262,10 +262,10 @@ var (
 //  400 MSG_WAIT_FAILED: A waiting call returned an error
 //
 // See https://core.telegram.org/method/messages.sendEncrypted for reference.
-func (c *Client) MessagesSendEncrypted(ctx context.Context, request *MessagesSendEncryptedRequest) (MessagesSentEncryptedMessageClass, error) {
+func MessagesSendEncrypted(ctx context.Context, rpc Invoker, request *MessagesSendEncryptedRequest) (MessagesSentEncryptedMessageClass, error) {
 	var result MessagesSentEncryptedMessageBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.SentEncryptedMessage, nil

@@ -219,10 +219,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/account.reportPeer for reference.
-func (c *Client) AccountReportPeer(ctx context.Context, request *AccountReportPeerRequest) (bool, error) {
+func AccountReportPeer(ctx context.Context, rpc Invoker, request *AccountReportPeerRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

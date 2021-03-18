@@ -127,11 +127,11 @@ var (
 // Get dialogs manually marked as unread
 //
 // See https://core.telegram.org/method/messages.getDialogUnreadMarks for reference.
-func (c *Client) MessagesGetDialogUnreadMarks(ctx context.Context) ([]DialogPeerClass, error) {
+func MessagesGetDialogUnreadMarks(ctx context.Context, rpc Invoker) ([]DialogPeerClass, error) {
 	var result DialogPeerClassVector
 
 	request := &MessagesGetDialogUnreadMarksRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []DialogPeerClass(result.Elems), nil

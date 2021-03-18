@@ -161,13 +161,13 @@ var (
 // Returns the current user's contact list.
 //
 // See https://core.telegram.org/method/contacts.getContacts for reference.
-func (c *Client) ContactsGetContacts(ctx context.Context, hash int) (ContactsContactsClass, error) {
+func ContactsGetContacts(ctx context.Context, rpc Invoker, hash int) (ContactsContactsClass, error) {
 	var result ContactsContactsBox
 
 	request := &ContactsGetContactsRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Contacts, nil

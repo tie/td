@@ -276,10 +276,10 @@ var (
 // Install a theme
 //
 // See https://core.telegram.org/method/account.installTheme for reference.
-func (c *Client) AccountInstallTheme(ctx context.Context, request *AccountInstallThemeRequest) (bool, error) {
+func AccountInstallTheme(ctx context.Context, rpc Invoker, request *AccountInstallThemeRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

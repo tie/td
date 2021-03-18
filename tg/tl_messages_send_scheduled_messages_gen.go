@@ -198,10 +198,10 @@ var (
 //  400 MESSAGE_ID_INVALID: The provided message id is invalid
 //
 // See https://core.telegram.org/method/messages.sendScheduledMessages for reference.
-func (c *Client) MessagesSendScheduledMessages(ctx context.Context, request *MessagesSendScheduledMessagesRequest) (UpdatesClass, error) {
+func MessagesSendScheduledMessages(ctx context.Context, rpc Invoker, request *MessagesSendScheduledMessagesRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

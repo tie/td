@@ -196,10 +196,10 @@ var (
 //
 // See https://core.telegram.org/method/stickers.changeStickerPosition for reference.
 // Can be used by bots.
-func (c *Client) StickersChangeStickerPosition(ctx context.Context, request *StickersChangeStickerPositionRequest) (*MessagesStickerSet, error) {
+func StickersChangeStickerPosition(ctx context.Context, rpc Invoker, request *StickersChangeStickerPositionRequest) (*MessagesStickerSet, error) {
 	var result MessagesStickerSet
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

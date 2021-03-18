@@ -166,13 +166,13 @@ var (
 //
 // See https://core.telegram.org/method/messages.getStickerSet for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetStickerSet(ctx context.Context, stickerset InputStickerSetClass) (*MessagesStickerSet, error) {
+func MessagesGetStickerSet(ctx context.Context, rpc Invoker, stickerset InputStickerSetClass) (*MessagesStickerSet, error) {
 	var result MessagesStickerSet
 
 	request := &MessagesGetStickerSetRequest{
 		Stickerset: stickerset,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

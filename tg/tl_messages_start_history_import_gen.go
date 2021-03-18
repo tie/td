@@ -184,10 +184,10 @@ var (
 // MessagesStartHistoryImport invokes method messages.startHistoryImport#b43df344 returning error if any.
 //
 // See https://core.telegram.org/method/messages.startHistoryImport for reference.
-func (c *Client) MessagesStartHistoryImport(ctx context.Context, request *MessagesStartHistoryImportRequest) (bool, error) {
+func MessagesStartHistoryImport(ctx context.Context, rpc Invoker, request *MessagesStartHistoryImportRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

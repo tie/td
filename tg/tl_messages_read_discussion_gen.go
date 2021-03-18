@@ -217,10 +217,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.readDiscussion for reference.
 // Can be used by bots.
-func (c *Client) MessagesReadDiscussion(ctx context.Context, request *MessagesReadDiscussionRequest) (bool, error) {
+func MessagesReadDiscussion(ctx context.Context, rpc Invoker, request *MessagesReadDiscussionRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

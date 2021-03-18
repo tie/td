@@ -425,10 +425,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.editInlineBotMessage for reference.
 // Can be used by bots.
-func (c *Client) MessagesEditInlineBotMessage(ctx context.Context, request *MessagesEditInlineBotMessageRequest) (bool, error) {
+func MessagesEditInlineBotMessage(ctx context.Context, rpc Invoker, request *MessagesEditInlineBotMessageRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

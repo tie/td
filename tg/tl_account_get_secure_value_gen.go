@@ -184,13 +184,13 @@ var (
 //  2) https://core.telegram.org/passport/encryption#encryption
 //
 // See https://core.telegram.org/method/account.getSecureValue for reference.
-func (c *Client) AccountGetSecureValue(ctx context.Context, types []SecureValueTypeClass) ([]SecureValue, error) {
+func AccountGetSecureValue(ctx context.Context, rpc Invoker, types []SecureValueTypeClass) ([]SecureValue, error) {
 	var result SecureValueVector
 
 	request := &AccountGetSecureValueRequest{
 		Types: types,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []SecureValue(result.Elems), nil

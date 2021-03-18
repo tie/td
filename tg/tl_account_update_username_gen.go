@@ -163,13 +163,13 @@ var (
 //  400 USERNAME_OCCUPIED: Username is taken
 //
 // See https://core.telegram.org/method/account.updateUsername for reference.
-func (c *Client) AccountUpdateUsername(ctx context.Context, username string) (UserClass, error) {
+func AccountUpdateUsername(ctx context.Context, rpc Invoker, username string) (UserClass, error) {
 	var result UserBox
 
 	request := &AccountUpdateUsernameRequest{
 		Username: username,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.User, nil

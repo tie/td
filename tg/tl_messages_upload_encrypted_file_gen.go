@@ -191,10 +191,10 @@ var (
 // Upload encrypted file and associate it to a secret chat
 //
 // See https://core.telegram.org/method/messages.uploadEncryptedFile for reference.
-func (c *Client) MessagesUploadEncryptedFile(ctx context.Context, request *MessagesUploadEncryptedFileRequest) (EncryptedFileClass, error) {
+func MessagesUploadEncryptedFile(ctx context.Context, rpc Invoker, request *MessagesUploadEncryptedFileRequest) (EncryptedFileClass, error) {
 	var result EncryptedFileBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.EncryptedFile, nil

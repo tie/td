@@ -250,10 +250,10 @@ var (
 //  400 SMS_CODE_CREATE_FAILED: An error occurred while creating the SMS code
 //
 // See https://core.telegram.org/method/auth.sendCode for reference.
-func (c *Client) AuthSendCode(ctx context.Context, request *AuthSendCodeRequest) (*AuthSentCode, error) {
+func AuthSendCode(ctx context.Context, rpc Invoker, request *AuthSendCodeRequest) (*AuthSentCode, error) {
 	var result AuthSentCode
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

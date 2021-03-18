@@ -312,10 +312,10 @@ var (
 //
 // See https://core.telegram.org/method/updates.getChannelDifference for reference.
 // Can be used by bots.
-func (c *Client) UpdatesGetChannelDifference(ctx context.Context, request *UpdatesGetChannelDifferenceRequest) (UpdatesChannelDifferenceClass, error) {
+func UpdatesGetChannelDifference(ctx context.Context, rpc Invoker, request *UpdatesGetChannelDifferenceRequest) (UpdatesChannelDifferenceClass, error) {
 	var result UpdatesChannelDifferenceBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.ChannelDifference, nil

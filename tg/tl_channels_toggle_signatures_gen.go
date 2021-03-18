@@ -195,10 +195,10 @@ var (
 //  400 CHAT_ID_INVALID: The provided chat id is invalid
 //
 // See https://core.telegram.org/method/channels.toggleSignatures for reference.
-func (c *Client) ChannelsToggleSignatures(ctx context.Context, request *ChannelsToggleSignaturesRequest) (UpdatesClass, error) {
+func ChannelsToggleSignatures(ctx context.Context, rpc Invoker, request *ChannelsToggleSignaturesRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

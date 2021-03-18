@@ -166,13 +166,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getPeerSettings for reference.
-func (c *Client) MessagesGetPeerSettings(ctx context.Context, peer InputPeerClass) (*PeerSettings, error) {
+func MessagesGetPeerSettings(ctx context.Context, rpc Invoker, peer InputPeerClass) (*PeerSettings, error) {
 	var result PeerSettings
 
 	request := &MessagesGetPeerSettingsRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

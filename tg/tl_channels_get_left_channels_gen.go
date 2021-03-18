@@ -169,13 +169,13 @@ var (
 //  403 TAKEOUT_REQUIRED: A takeout session has to be initialized, first
 //
 // See https://core.telegram.org/method/channels.getLeftChannels for reference.
-func (c *Client) ChannelsGetLeftChannels(ctx context.Context, offset int) (MessagesChatsClass, error) {
+func ChannelsGetLeftChannels(ctx context.Context, rpc Invoker, offset int) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
 	request := &ChannelsGetLeftChannelsRequest{
 		Offset: offset,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

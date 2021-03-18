@@ -179,10 +179,10 @@ var (
 // PhoneLeaveGroupCall invokes method phone.leaveGroupCall#500377f9 returning error if any.
 //
 // See https://core.telegram.org/method/phone.leaveGroupCall for reference.
-func (c *Client) PhoneLeaveGroupCall(ctx context.Context, request *PhoneLeaveGroupCallRequest) (UpdatesClass, error) {
+func PhoneLeaveGroupCall(ctx context.Context, rpc Invoker, request *PhoneLeaveGroupCallRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

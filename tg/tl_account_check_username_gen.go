@@ -160,13 +160,13 @@ var (
 //  400 USERNAME_INVALID: Unacceptable username
 //
 // See https://core.telegram.org/method/account.checkUsername for reference.
-func (c *Client) AccountCheckUsername(ctx context.Context, username string) (bool, error) {
+func AccountCheckUsername(ctx context.Context, rpc Invoker, username string) (bool, error) {
 	var result BoolBox
 
 	request := &AccountCheckUsernameRequest{
 		Username: username,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

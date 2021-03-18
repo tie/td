@@ -155,13 +155,13 @@ var (
 // MessagesDeleteChat invokes method messages.deleteChat#83247d11 returning error if any.
 //
 // See https://core.telegram.org/method/messages.deleteChat for reference.
-func (c *Client) MessagesDeleteChat(ctx context.Context, chatid int) (bool, error) {
+func MessagesDeleteChat(ctx context.Context, rpc Invoker, chatid int) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesDeleteChatRequest{
 		ChatID: chatid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

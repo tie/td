@@ -284,10 +284,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.setBotShippingResults for reference.
 // Can be used by bots.
-func (c *Client) MessagesSetBotShippingResults(ctx context.Context, request *MessagesSetBotShippingResultsRequest) (bool, error) {
+func MessagesSetBotShippingResults(ctx context.Context, rpc Invoker, request *MessagesSetBotShippingResultsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -128,11 +128,11 @@ var (
 //
 // See https://core.telegram.org/method/updates.getState for reference.
 // Can be used by bots.
-func (c *Client) UpdatesGetState(ctx context.Context) (*UpdatesState, error) {
+func UpdatesGetState(ctx context.Context, rpc Invoker) (*UpdatesState, error) {
 	var result UpdatesState
 
 	request := &UpdatesGetStateRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

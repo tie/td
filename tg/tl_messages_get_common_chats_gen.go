@@ -220,10 +220,10 @@ var (
 //  400 USER_ID_INVALID: The provided user ID is invalid
 //
 // See https://core.telegram.org/method/messages.getCommonChats for reference.
-func (c *Client) MessagesGetCommonChats(ctx context.Context, request *MessagesGetCommonChatsRequest) (MessagesChatsClass, error) {
+func MessagesGetCommonChats(ctx context.Context, rpc Invoker, request *MessagesGetCommonChatsRequest) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

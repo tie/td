@@ -202,10 +202,10 @@ var (
 //  400 USERNAME_OCCUPIED: The provided username is already occupied
 //
 // See https://core.telegram.org/method/channels.updateUsername for reference.
-func (c *Client) ChannelsUpdateUsername(ctx context.Context, request *ChannelsUpdateUsernameRequest) (bool, error) {
+func ChannelsUpdateUsername(ctx context.Context, rpc Invoker, request *ChannelsUpdateUsernameRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -323,10 +323,10 @@ var (
 //  -503 Timeout: Timeout while fetching data
 //
 // See https://core.telegram.org/method/messages.getInlineBotResults for reference.
-func (c *Client) MessagesGetInlineBotResults(ctx context.Context, request *MessagesGetInlineBotResultsRequest) (*MessagesBotResults, error) {
+func MessagesGetInlineBotResults(ctx context.Context, rpc Invoker, request *MessagesGetInlineBotResultsRequest) (*MessagesBotResults, error) {
 	var result MessagesBotResults
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

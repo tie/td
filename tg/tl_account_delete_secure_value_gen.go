@@ -184,13 +184,13 @@ var (
 //  2) https://core.telegram.org/passport/encryption#encryption
 //
 // See https://core.telegram.org/method/account.deleteSecureValue for reference.
-func (c *Client) AccountDeleteSecureValue(ctx context.Context, types []SecureValueTypeClass) (bool, error) {
+func AccountDeleteSecureValue(ctx context.Context, rpc Invoker, types []SecureValueTypeClass) (bool, error) {
 	var result BoolBox
 
 	request := &AccountDeleteSecureValueRequest{
 		Types: types,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

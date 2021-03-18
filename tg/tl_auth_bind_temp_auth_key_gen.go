@@ -253,10 +253,10 @@ var (
 //
 // See https://core.telegram.org/method/auth.bindTempAuthKey for reference.
 // Can be used by bots.
-func (c *Client) AuthBindTempAuthKey(ctx context.Context, request *AuthBindTempAuthKeyRequest) (bool, error) {
+func AuthBindTempAuthKey(ctx context.Context, rpc Invoker, request *AuthBindTempAuthKeyRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

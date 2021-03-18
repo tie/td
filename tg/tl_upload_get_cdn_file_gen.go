@@ -211,10 +211,10 @@ var (
 //  1) https://core.telegram.org/cdn
 //
 // See https://core.telegram.org/method/upload.getCdnFile for reference.
-func (c *Client) UploadGetCDNFile(ctx context.Context, request *UploadGetCDNFileRequest) (UploadCDNFileClass, error) {
+func UploadGetCDNFile(ctx context.Context, rpc Invoker, request *UploadGetCDNFileRequest) (UploadCDNFileClass, error) {
 	var result UploadCDNFileBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.CdnFile, nil

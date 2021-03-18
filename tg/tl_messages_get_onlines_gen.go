@@ -166,13 +166,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getOnlines for reference.
-func (c *Client) MessagesGetOnlines(ctx context.Context, peer InputPeerClass) (*ChatOnlines, error) {
+func MessagesGetOnlines(ctx context.Context, rpc Invoker, peer InputPeerClass) (*ChatOnlines, error) {
 	var result ChatOnlines
 
 	request := &MessagesGetOnlinesRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -160,13 +160,13 @@ var (
 //  400 TTL_DAYS_INVALID: The provided TTL is invalid
 //
 // See https://core.telegram.org/method/account.setAccountTTL for reference.
-func (c *Client) AccountSetAccountTTL(ctx context.Context, ttl AccountDaysTTL) (bool, error) {
+func AccountSetAccountTTL(ctx context.Context, rpc Invoker, ttl AccountDaysTTL) (bool, error) {
 	var result BoolBox
 
 	request := &AccountSetAccountTTLRequest{
 		TTL: ttl,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

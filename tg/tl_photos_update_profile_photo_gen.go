@@ -175,13 +175,13 @@ var (
 //  400 PHOTO_ID_INVALID: Photo ID invalid
 //
 // See https://core.telegram.org/method/photos.updateProfilePhoto for reference.
-func (c *Client) PhotosUpdateProfilePhoto(ctx context.Context, id InputPhotoClass) (*PhotosPhoto, error) {
+func PhotosUpdateProfilePhoto(ctx context.Context, rpc Invoker, id InputPhotoClass) (*PhotosPhoto, error) {
 	var result PhotosPhoto
 
 	request := &PhotosUpdateProfilePhotoRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

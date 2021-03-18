@@ -415,10 +415,10 @@ var (
 //  403 USER_RESTRICTED: You're spamreported, you can't create channels or chats.
 //
 // See https://core.telegram.org/method/channels.createChannel for reference.
-func (c *Client) ChannelsCreateChannel(ctx context.Context, request *ChannelsCreateChannelRequest) (UpdatesClass, error) {
+func ChannelsCreateChannel(ctx context.Context, rpc Invoker, request *ChannelsCreateChannelRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

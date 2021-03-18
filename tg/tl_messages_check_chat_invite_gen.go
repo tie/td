@@ -162,13 +162,13 @@ var (
 //  400 INVITE_HASH_INVALID: The invite hash is invalid
 //
 // See https://core.telegram.org/method/messages.checkChatInvite for reference.
-func (c *Client) MessagesCheckChatInvite(ctx context.Context, hash string) (ChatInviteClass, error) {
+func MessagesCheckChatInvite(ctx context.Context, rpc Invoker, hash string) (ChatInviteClass, error) {
 	var result ChatInviteBox
 
 	request := &MessagesCheckChatInviteRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.ChatInvite, nil

@@ -166,13 +166,13 @@ var (
 //  1) https://core.telegram.org/api/push-updates
 //
 // See https://core.telegram.org/method/account.updateDeviceLocked for reference.
-func (c *Client) AccountUpdateDeviceLocked(ctx context.Context, period int) (bool, error) {
+func AccountUpdateDeviceLocked(ctx context.Context, rpc Invoker, period int) (bool, error) {
 	var result BoolBox
 
 	request := &AccountUpdateDeviceLockedRequest{
 		Period: period,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

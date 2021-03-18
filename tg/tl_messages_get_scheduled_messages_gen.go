@@ -199,10 +199,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getScheduledMessages for reference.
-func (c *Client) MessagesGetScheduledMessages(ctx context.Context, request *MessagesGetScheduledMessagesRequest) (MessagesMessagesClass, error) {
+func MessagesGetScheduledMessages(ctx context.Context, rpc Invoker, request *MessagesGetScheduledMessagesRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

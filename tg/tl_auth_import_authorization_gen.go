@@ -186,10 +186,10 @@ var (
 //
 // See https://core.telegram.org/method/auth.importAuthorization for reference.
 // Can be used by bots.
-func (c *Client) AuthImportAuthorization(ctx context.Context, request *AuthImportAuthorizationRequest) (AuthAuthorizationClass, error) {
+func AuthImportAuthorization(ctx context.Context, rpc Invoker, request *AuthImportAuthorizationRequest) (AuthAuthorizationClass, error) {
 	var result AuthAuthorizationBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Authorization, nil

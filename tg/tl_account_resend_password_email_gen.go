@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/api/srp
 //
 // See https://core.telegram.org/method/account.resendPasswordEmail for reference.
-func (c *Client) AccountResendPasswordEmail(ctx context.Context) (bool, error) {
+func AccountResendPasswordEmail(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &AccountResendPasswordEmailRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

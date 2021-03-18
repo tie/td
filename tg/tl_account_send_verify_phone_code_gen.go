@@ -187,10 +187,10 @@ var (
 //  1) https://core.telegram.org/passport
 //
 // See https://core.telegram.org/method/account.sendVerifyPhoneCode for reference.
-func (c *Client) AccountSendVerifyPhoneCode(ctx context.Context, request *AccountSendVerifyPhoneCodeRequest) (*AuthSentCode, error) {
+func AccountSendVerifyPhoneCode(ctx context.Context, rpc Invoker, request *AccountSendVerifyPhoneCodeRequest) (*AuthSentCode, error) {
 	var result AuthSentCode
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

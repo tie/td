@@ -168,13 +168,13 @@ var (
 //  400 CODE_EMPTY: The provided code is empty
 //
 // See https://core.telegram.org/method/auth.recoverPassword for reference.
-func (c *Client) AuthRecoverPassword(ctx context.Context, code string) (AuthAuthorizationClass, error) {
+func AuthRecoverPassword(ctx context.Context, rpc Invoker, code string) (AuthAuthorizationClass, error) {
 	var result AuthAuthorizationBox
 
 	request := &AuthRecoverPasswordRequest{
 		Code: code,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Authorization, nil

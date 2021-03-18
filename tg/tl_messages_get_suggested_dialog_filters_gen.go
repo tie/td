@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/api/folders
 //
 // See https://core.telegram.org/method/messages.getSuggestedDialogFilters for reference.
-func (c *Client) MessagesGetSuggestedDialogFilters(ctx context.Context) ([]DialogFilterSuggested, error) {
+func MessagesGetSuggestedDialogFilters(ctx context.Context, rpc Invoker) ([]DialogFilterSuggested, error) {
 	var result DialogFilterSuggestedVector
 
 	request := &MessagesGetSuggestedDialogFiltersRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []DialogFilterSuggested(result.Elems), nil

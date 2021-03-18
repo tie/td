@@ -160,13 +160,13 @@ var (
 // MessagesCheckHistoryImportPeer invokes method messages.checkHistoryImportPeer#5dc60f03 returning error if any.
 //
 // See https://core.telegram.org/method/messages.checkHistoryImportPeer for reference.
-func (c *Client) MessagesCheckHistoryImportPeer(ctx context.Context, peer InputPeerClass) (*MessagesCheckedHistoryImportPeer, error) {
+func MessagesCheckHistoryImportPeer(ctx context.Context, rpc Invoker, peer InputPeerClass) (*MessagesCheckedHistoryImportPeer, error) {
 	var result MessagesCheckedHistoryImportPeer
 
 	request := &MessagesCheckHistoryImportPeerRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

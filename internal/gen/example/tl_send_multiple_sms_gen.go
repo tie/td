@@ -166,13 +166,13 @@ var (
 // SendMultipleSMS invokes method sendMultipleSMS#df18e5ca returning error if any.
 //
 // See https://localhost:80/doc/constructor/sendMultipleSMS for reference.
-func (c *Client) SendMultipleSMS(ctx context.Context, messages []SMS) error {
+func SendMultipleSMS(ctx context.Context, rpc Invoker, messages []SMS) error {
 	var ok Ok
 
 	request := &SendMultipleSMSRequest{
 		Messages: messages,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &ok); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &ok); err != nil {
 		return err
 	}
 	return nil

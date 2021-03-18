@@ -168,13 +168,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/contacts.block for reference.
-func (c *Client) ContactsBlock(ctx context.Context, id InputPeerClass) (bool, error) {
+func ContactsBlock(ctx context.Context, rpc Invoker, id InputPeerClass) (bool, error) {
 	var result BoolBox
 
 	request := &ContactsBlockRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

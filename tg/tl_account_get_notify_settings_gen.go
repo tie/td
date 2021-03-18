@@ -165,13 +165,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/account.getNotifySettings for reference.
-func (c *Client) AccountGetNotifySettings(ctx context.Context, peer InputNotifyPeerClass) (*PeerNotifySettings, error) {
+func AccountGetNotifySettings(ctx context.Context, rpc Invoker, peer InputNotifyPeerClass) (*PeerNotifySettings, error) {
 	var result PeerNotifySettings
 
 	request := &AccountGetNotifySettingsRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

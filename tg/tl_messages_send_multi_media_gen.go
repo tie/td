@@ -417,10 +417,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.sendMultiMedia for reference.
 // Can be used by bots.
-func (c *Client) MessagesSendMultiMedia(ctx context.Context, request *MessagesSendMultiMediaRequest) (UpdatesClass, error) {
+func MessagesSendMultiMedia(ctx context.Context, rpc Invoker, request *MessagesSendMultiMediaRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -272,10 +272,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.deleteHistory for reference.
-func (c *Client) MessagesDeleteHistory(ctx context.Context, request *MessagesDeleteHistoryRequest) (*MessagesAffectedHistory, error) {
+func MessagesDeleteHistory(ctx context.Context, rpc Invoker, request *MessagesDeleteHistoryRequest) (*MessagesAffectedHistory, error) {
 	var result MessagesAffectedHistory
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

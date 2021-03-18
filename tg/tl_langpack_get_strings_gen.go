@@ -217,10 +217,10 @@ var (
 //  400 LANG_PACK_INVALID: The provided language pack is invalid
 //
 // See https://core.telegram.org/method/langpack.getStrings for reference.
-func (c *Client) LangpackGetStrings(ctx context.Context, request *LangpackGetStringsRequest) ([]LangPackStringClass, error) {
+func LangpackGetStrings(ctx context.Context, rpc Invoker, request *LangpackGetStringsRequest) ([]LangPackStringClass, error) {
 	var result LangPackStringClassVector
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []LangPackStringClass(result.Elems), nil

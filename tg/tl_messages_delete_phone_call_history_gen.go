@@ -176,10 +176,10 @@ var (
 // MessagesDeletePhoneCallHistory invokes method messages.deletePhoneCallHistory#f9cbe409 returning error if any.
 //
 // See https://core.telegram.org/method/messages.deletePhoneCallHistory for reference.
-func (c *Client) MessagesDeletePhoneCallHistory(ctx context.Context, request *MessagesDeletePhoneCallHistoryRequest) (*MessagesAffectedFoundMessages, error) {
+func MessagesDeletePhoneCallHistory(ctx context.Context, rpc Invoker, request *MessagesDeletePhoneCallHistoryRequest) (*MessagesAffectedFoundMessages, error) {
 	var result MessagesAffectedFoundMessages
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -181,10 +181,10 @@ var (
 // Clear recent stickers
 //
 // See https://core.telegram.org/method/messages.clearRecentStickers for reference.
-func (c *Client) MessagesClearRecentStickers(ctx context.Context, request *MessagesClearRecentStickersRequest) (bool, error) {
+func MessagesClearRecentStickers(ctx context.Context, rpc Invoker, request *MessagesClearRecentStickersRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

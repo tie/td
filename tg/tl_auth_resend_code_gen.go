@@ -195,10 +195,10 @@ var (
 //  400 PHONE_NUMBER_INVALID: The phone number is invalid
 //
 // See https://core.telegram.org/method/auth.resendCode for reference.
-func (c *Client) AuthResendCode(ctx context.Context, request *AuthResendCodeRequest) (*AuthSentCode, error) {
+func AuthResendCode(ctx context.Context, rpc Invoker, request *AuthResendCodeRequest) (*AuthSentCode, error) {
 	var result AuthSentCode
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

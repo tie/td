@@ -176,13 +176,13 @@ var (
 // Deletes profile photos.
 //
 // See https://core.telegram.org/method/photos.deletePhotos for reference.
-func (c *Client) PhotosDeletePhotos(ctx context.Context, id []InputPhotoClass) ([]int64, error) {
+func PhotosDeletePhotos(ctx context.Context, rpc Invoker, id []InputPhotoClass) ([]int64, error) {
 	var result LongVector
 
 	request := &PhotosDeletePhotosRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []int64(result.Elems), nil

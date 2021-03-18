@@ -138,11 +138,11 @@ var (
 //  406 FRESH_RESET_AUTHORISATION_FORBIDDEN: You can't logout other sessions if less than 24 hours have passed since you logged on the current session
 //
 // See https://core.telegram.org/method/auth.resetAuthorizations for reference.
-func (c *Client) AuthResetAuthorizations(ctx context.Context) (bool, error) {
+func AuthResetAuthorizations(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &AuthResetAuthorizationsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

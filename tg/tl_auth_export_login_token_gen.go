@@ -232,10 +232,10 @@ var (
 //  2) https://core.telegram.org/api/qr-login
 //
 // See https://core.telegram.org/method/auth.exportLoginToken for reference.
-func (c *Client) AuthExportLoginToken(ctx context.Context, request *AuthExportLoginTokenRequest) (AuthLoginTokenClass, error) {
+func AuthExportLoginToken(ctx context.Context, rpc Invoker, request *AuthExportLoginTokenRequest) (AuthLoginTokenClass, error) {
 	var result AuthLoginTokenBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.LoginToken, nil

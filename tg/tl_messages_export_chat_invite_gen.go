@@ -305,10 +305,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.exportChatInvite for reference.
 // Can be used by bots.
-func (c *Client) MessagesExportChatInvite(ctx context.Context, request *MessagesExportChatInviteRequest) (*ChatInviteExported, error) {
+func MessagesExportChatInvite(ctx context.Context, rpc Invoker, request *MessagesExportChatInviteRequest) (*ChatInviteExported, error) {
 	var result ChatInviteExported
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

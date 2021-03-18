@@ -179,13 +179,13 @@ var (
 //  400 PASSWORD_HASH_INVALID: The provided password hash is invalid
 //
 // See https://core.telegram.org/method/account.getPasswordSettings for reference.
-func (c *Client) AccountGetPasswordSettings(ctx context.Context, password InputCheckPasswordSRPClass) (*AccountPasswordSettings, error) {
+func AccountGetPasswordSettings(ctx context.Context, rpc Invoker, password InputCheckPasswordSRPClass) (*AccountPasswordSettings, error) {
 	var result AccountPasswordSettings
 
 	request := &AccountGetPasswordSettingsRequest{
 		Password: password,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -208,10 +208,10 @@ var (
 // Get recent stickers
 //
 // See https://core.telegram.org/method/messages.getRecentStickers for reference.
-func (c *Client) MessagesGetRecentStickers(ctx context.Context, request *MessagesGetRecentStickersRequest) (MessagesRecentStickersClass, error) {
+func MessagesGetRecentStickers(ctx context.Context, rpc Invoker, request *MessagesGetRecentStickersRequest) (MessagesRecentStickersClass, error) {
 	var result MessagesRecentStickersBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.RecentStickers, nil

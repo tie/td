@@ -151,13 +151,13 @@ var (
 )
 
 // Ping invokes method ping#7abe77ec returning error if any.
-func (c *Client) Ping(ctx context.Context, pingid int64) (*Pong, error) {
+func Ping(ctx context.Context, rpc Invoker, pingid int64) (*Pong, error) {
 	var result Pong
 
 	request := &PingRequest{
 		PingID: pingid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

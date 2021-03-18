@@ -201,10 +201,10 @@ var (
 //  400 SECONDS_INVALID: Invalid duration provided
 //
 // See https://core.telegram.org/method/channels.toggleSlowMode for reference.
-func (c *Client) ChannelsToggleSlowMode(ctx context.Context, request *ChannelsToggleSlowModeRequest) (UpdatesClass, error) {
+func ChannelsToggleSlowMode(ctx context.Context, rpc Invoker, request *ChannelsToggleSlowModeRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

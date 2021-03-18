@@ -205,10 +205,10 @@ var (
 //  400 SRP_ID_INVALID: Invalid SRP ID provided
 //
 // See https://core.telegram.org/method/account.updatePasswordSettings for reference.
-func (c *Client) AccountUpdatePasswordSettings(ctx context.Context, request *AccountUpdatePasswordSettingsRequest) (bool, error) {
+func AccountUpdatePasswordSettings(ctx context.Context, rpc Invoker, request *AccountUpdatePasswordSettingsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

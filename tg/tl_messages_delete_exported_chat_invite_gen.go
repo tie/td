@@ -184,10 +184,10 @@ var (
 // MessagesDeleteExportedChatInvite invokes method messages.deleteExportedChatInvite#d464a42b returning error if any.
 //
 // See https://core.telegram.org/method/messages.deleteExportedChatInvite for reference.
-func (c *Client) MessagesDeleteExportedChatInvite(ctx context.Context, request *MessagesDeleteExportedChatInviteRequest) (bool, error) {
+func MessagesDeleteExportedChatInvite(ctx context.Context, rpc Invoker, request *MessagesDeleteExportedChatInviteRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -249,10 +249,10 @@ var (
 //
 // See https://core.telegram.org/method/stats.getMessageStats for reference.
 // Can be used by bots.
-func (c *Client) StatsGetMessageStats(ctx context.Context, request *StatsGetMessageStatsRequest) (*StatsMessageStats, error) {
+func StatsGetMessageStats(ctx context.Context, rpc Invoker, request *StatsGetMessageStatsRequest) (*StatsMessageStats, error) {
 	var result StatsMessageStats
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -170,13 +170,13 @@ var (
 //  400 EMAIL_HASH_EXPIRED: Email hash expired
 //
 // See https://core.telegram.org/method/account.confirmPasswordEmail for reference.
-func (c *Client) AccountConfirmPasswordEmail(ctx context.Context, code string) (bool, error) {
+func AccountConfirmPasswordEmail(ctx context.Context, rpc Invoker, code string) (bool, error) {
 	var result BoolBox
 
 	request := &AccountConfirmPasswordEmailRequest{
 		Code: code,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

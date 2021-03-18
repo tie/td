@@ -167,13 +167,13 @@ var (
 //  400 HASH_INVALID: The provided hash is invalid
 //
 // See https://core.telegram.org/method/account.resetAuthorization for reference.
-func (c *Client) AccountResetAuthorization(ctx context.Context, hash int64) (bool, error) {
+func AccountResetAuthorization(ctx context.Context, rpc Invoker, hash int64) (bool, error) {
 	var result BoolBox
 
 	request := &AccountResetAuthorizationRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

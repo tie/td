@@ -177,13 +177,13 @@ var (
 //  400 FOLDER_ID_INVALID: Invalid folder ID
 //
 // See https://core.telegram.org/method/folders.editPeerFolders for reference.
-func (c *Client) FoldersEditPeerFolders(ctx context.Context, folderpeers []InputFolderPeer) (UpdatesClass, error) {
+func FoldersEditPeerFolders(ctx context.Context, rpc Invoker, folderpeers []InputFolderPeer) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &FoldersEditPeerFoldersRequest{
 		FolderPeers: folderpeers,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -184,10 +184,10 @@ var (
 // Get installed themes
 //
 // See https://core.telegram.org/method/account.getThemes for reference.
-func (c *Client) AccountGetThemes(ctx context.Context, request *AccountGetThemesRequest) (AccountThemesClass, error) {
+func AccountGetThemes(ctx context.Context, rpc Invoker, request *AccountGetThemesRequest) (AccountThemesClass, error) {
 	var result AccountThemesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Themes, nil

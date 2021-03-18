@@ -165,13 +165,13 @@ var (
 //  400 PRIVACY_KEY_INVALID: The privacy key is invalid
 //
 // See https://core.telegram.org/method/account.getPrivacy for reference.
-func (c *Client) AccountGetPrivacy(ctx context.Context, key InputPrivacyKeyClass) (*AccountPrivacyRules, error) {
+func AccountGetPrivacy(ctx context.Context, rpc Invoker, key InputPrivacyKeyClass) (*AccountPrivacyRules, error) {
 	var result AccountPrivacyRules
 
 	request := &AccountGetPrivacyRequest{
 		Key: key,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -160,13 +160,13 @@ var (
 //  400 LANG_PACK_INVALID: The provided language pack is invalid
 //
 // See https://core.telegram.org/method/langpack.getLanguages for reference.
-func (c *Client) LangpackGetLanguages(ctx context.Context, langpack string) ([]LangPackLanguage, error) {
+func LangpackGetLanguages(ctx context.Context, rpc Invoker, langpack string) ([]LangPackLanguage, error) {
 	var result LangPackLanguageVector
 
 	request := &LangpackGetLanguagesRequest{
 		LangPack: langpack,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []LangPackLanguage(result.Elems), nil

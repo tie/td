@@ -292,10 +292,10 @@ var (
 //  403 USER_PRIVACY_RESTRICTED: The user's privacy settings do not allow you to do this
 //
 // See https://core.telegram.org/method/phone.requestCall for reference.
-func (c *Client) PhoneRequestCall(ctx context.Context, request *PhoneRequestCallRequest) (*PhonePhoneCall, error) {
+func PhoneRequestCall(ctx context.Context, rpc Invoker, request *PhoneRequestCallRequest) (*PhonePhoneCall, error) {
 	var result PhonePhoneCall
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

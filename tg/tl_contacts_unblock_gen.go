@@ -165,13 +165,13 @@ var (
 //  400 CONTACT_ID_INVALID: The provided contact ID is invalid
 //
 // See https://core.telegram.org/method/contacts.unblock for reference.
-func (c *Client) ContactsUnblock(ctx context.Context, id InputPeerClass) (bool, error) {
+func ContactsUnblock(ctx context.Context, rpc Invoker, id InputPeerClass) (bool, error) {
 	var result BoolBox
 
 	request := &ContactsUnblockRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

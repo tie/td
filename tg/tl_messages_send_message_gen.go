@@ -600,10 +600,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.sendMessage for reference.
 // Can be used by bots.
-func (c *Client) MessagesSendMessage(ctx context.Context, request *MessagesSendMessageRequest) (UpdatesClass, error) {
+func MessagesSendMessage(ctx context.Context, rpc Invoker, request *MessagesSendMessageRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

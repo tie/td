@@ -170,13 +170,13 @@ var (
 //  400 AUTH_TOKEN_EXPIRED: The authorization token has expired
 //
 // See https://core.telegram.org/method/auth.importLoginToken for reference.
-func (c *Client) AuthImportLoginToken(ctx context.Context, token []byte) (AuthLoginTokenClass, error) {
+func AuthImportLoginToken(ctx context.Context, rpc Invoker, token []byte) (AuthLoginTokenClass, error) {
 	var result AuthLoginTokenBox
 
 	request := &AuthImportLoginTokenRequest{
 		Token: token,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.LoginToken, nil

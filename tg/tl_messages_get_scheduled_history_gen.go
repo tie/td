@@ -193,10 +193,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getScheduledHistory for reference.
-func (c *Client) MessagesGetScheduledHistory(ctx context.Context, request *MessagesGetScheduledHistoryRequest) (MessagesMessagesClass, error) {
+func MessagesGetScheduledHistory(ctx context.Context, rpc Invoker, request *MessagesGetScheduledHistoryRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

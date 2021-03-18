@@ -222,10 +222,10 @@ var (
 //  400 USER_NOT_PARTICIPANT: You're not a member of this supergroup/channel
 //
 // See https://core.telegram.org/method/messages.editChatAdmin for reference.
-func (c *Client) MessagesEditChatAdmin(ctx context.Context, request *MessagesEditChatAdminRequest) (bool, error) {
+func MessagesEditChatAdmin(ctx context.Context, rpc Invoker, request *MessagesEditChatAdminRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

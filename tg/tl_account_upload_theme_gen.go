@@ -282,10 +282,10 @@ var (
 //  400 THEME_FILE_INVALID: Invalid theme file provided
 //
 // See https://core.telegram.org/method/account.uploadTheme for reference.
-func (c *Client) AccountUploadTheme(ctx context.Context, request *AccountUploadThemeRequest) (DocumentClass, error) {
+func AccountUploadTheme(ctx context.Context, rpc Invoker, request *AccountUploadThemeRequest) (DocumentClass, error) {
 	var result DocumentBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Document, nil

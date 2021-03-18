@@ -151,13 +151,13 @@ var (
 )
 
 // ReqPq invokes method req_pq#60469778 returning error if any.
-func (c *Client) ReqPq(ctx context.Context, nonce bin.Int128) (*ResPQ, error) {
+func ReqPq(ctx context.Context, rpc Invoker, nonce bin.Int128) (*ResPQ, error) {
 	var result ResPQ
 
 	request := &ReqPqRequest{
 		Nonce: nonce,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

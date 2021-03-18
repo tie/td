@@ -551,10 +551,10 @@ var (
 //  400 USER_ID_INVALID: The provided user ID is invalid
 //
 // See https://core.telegram.org/method/messages.search for reference.
-func (c *Client) MessagesSearch(ctx context.Context, request *MessagesSearchRequest) (MessagesMessagesClass, error) {
+func MessagesSearch(ctx context.Context, rpc Invoker, request *MessagesSearchRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

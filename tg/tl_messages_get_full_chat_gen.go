@@ -162,13 +162,13 @@ var (
 //
 // See https://core.telegram.org/method/messages.getFullChat for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetFullChat(ctx context.Context, chatid int) (*MessagesChatFull, error) {
+func MessagesGetFullChat(ctx context.Context, rpc Invoker, chatid int) (*MessagesChatFull, error) {
 	var result MessagesChatFull
 
 	request := &MessagesGetFullChatRequest{
 		ChatID: chatid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

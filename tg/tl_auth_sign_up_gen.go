@@ -240,10 +240,10 @@ var (
 //  400 PHONE_NUMBER_OCCUPIED: The phone number is already in use
 //
 // See https://core.telegram.org/method/auth.signUp for reference.
-func (c *Client) AuthSignUp(ctx context.Context, request *AuthSignUpRequest) (AuthAuthorizationClass, error) {
+func AuthSignUp(ctx context.Context, rpc Invoker, request *AuthSignUpRequest) (AuthAuthorizationClass, error) {
 	var result AuthAuthorizationBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Authorization, nil

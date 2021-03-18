@@ -184,10 +184,10 @@ var (
 // MessagesSetHistoryTTL invokes method messages.setHistoryTTL#b80e5fe4 returning error if any.
 //
 // See https://core.telegram.org/method/messages.setHistoryTTL for reference.
-func (c *Client) MessagesSetHistoryTTL(ctx context.Context, request *MessagesSetHistoryTTLRequest) (UpdatesClass, error) {
+func MessagesSetHistoryTTL(ctx context.Context, rpc Invoker, request *MessagesSetHistoryTTLRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

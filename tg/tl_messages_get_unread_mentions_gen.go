@@ -302,10 +302,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getUnreadMentions for reference.
-func (c *Client) MessagesGetUnreadMentions(ctx context.Context, request *MessagesGetUnreadMentionsRequest) (MessagesMessagesClass, error) {
+func MessagesGetUnreadMentions(ctx context.Context, rpc Invoker, request *MessagesGetUnreadMentionsRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

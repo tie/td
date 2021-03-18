@@ -200,10 +200,10 @@ var (
 //
 // See https://core.telegram.org/method/stickers.setStickerSetThumb for reference.
 // Can be used by bots.
-func (c *Client) StickersSetStickerSetThumb(ctx context.Context, request *StickersSetStickerSetThumbRequest) (*MessagesStickerSet, error) {
+func StickersSetStickerSetThumb(ctx context.Context, rpc Invoker, request *StickersSetStickerSetThumbRequest) (*MessagesStickerSet, error) {
 	var result MessagesStickerSet
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

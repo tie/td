@@ -157,13 +157,13 @@ var (
 // Returns information on update availability for the current application.
 //
 // See https://core.telegram.org/method/help.getAppUpdate for reference.
-func (c *Client) HelpGetAppUpdate(ctx context.Context, source string) (HelpAppUpdateClass, error) {
+func HelpGetAppUpdate(ctx context.Context, rpc Invoker, source string) (HelpAppUpdateClass, error) {
 	var result HelpAppUpdateBox
 
 	request := &HelpGetAppUpdateRequest{
 		Source: source,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.AppUpdate, nil

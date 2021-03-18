@@ -420,10 +420,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.setInlineBotResults for reference.
 // Can be used by bots.
-func (c *Client) MessagesSetInlineBotResults(ctx context.Context, request *MessagesSetInlineBotResultsRequest) (bool, error) {
+func MessagesSetInlineBotResults(ctx context.Context, rpc Invoker, request *MessagesSetInlineBotResultsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

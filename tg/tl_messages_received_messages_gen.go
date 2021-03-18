@@ -157,13 +157,13 @@ var (
 // Confirms receipt of messages by a client, cancels PUSH-notification sending.
 //
 // See https://core.telegram.org/method/messages.receivedMessages for reference.
-func (c *Client) MessagesReceivedMessages(ctx context.Context, maxid int) ([]ReceivedNotifyMessage, error) {
+func MessagesReceivedMessages(ctx context.Context, rpc Invoker, maxid int) ([]ReceivedNotifyMessage, error) {
 	var result ReceivedNotifyMessageVector
 
 	request := &MessagesReceivedMessagesRequest{
 		MaxID: maxid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []ReceivedNotifyMessage(result.Elems), nil

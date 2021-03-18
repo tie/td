@@ -179,10 +179,10 @@ var (
 // PhoneEditGroupCallTitle invokes method phone.editGroupCallTitle#1ca6ac0a returning error if any.
 //
 // See https://core.telegram.org/method/phone.editGroupCallTitle for reference.
-func (c *Client) PhoneEditGroupCallTitle(ctx context.Context, request *PhoneEditGroupCallTitleRequest) (UpdatesClass, error) {
+func PhoneEditGroupCallTitle(ctx context.Context, rpc Invoker, request *PhoneEditGroupCallTitleRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

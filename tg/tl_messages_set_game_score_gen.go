@@ -325,10 +325,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.setGameScore for reference.
 // Can be used by bots.
-func (c *Client) MessagesSetGameScore(ctx context.Context, request *MessagesSetGameScoreRequest) (UpdatesClass, error) {
+func MessagesSetGameScore(ctx context.Context, rpc Invoker, request *MessagesSetGameScoreRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -264,10 +264,10 @@ var (
 //  406 USERPIC_UPLOAD_REQUIRED: You must have a profile picture to publish your geolocation
 //
 // See https://core.telegram.org/method/contacts.getLocated for reference.
-func (c *Client) ContactsGetLocated(ctx context.Context, request *ContactsGetLocatedRequest) (UpdatesClass, error) {
+func ContactsGetLocated(ctx context.Context, rpc Invoker, request *ContactsGetLocatedRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

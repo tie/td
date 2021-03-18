@@ -155,13 +155,13 @@ var (
 // MessagesCheckHistoryImport invokes method messages.checkHistoryImport#43fe19f3 returning error if any.
 //
 // See https://core.telegram.org/method/messages.checkHistoryImport for reference.
-func (c *Client) MessagesCheckHistoryImport(ctx context.Context, importhead string) (*MessagesHistoryImportParsed, error) {
+func MessagesCheckHistoryImport(ctx context.Context, rpc Invoker, importhead string) (*MessagesHistoryImportParsed, error) {
 	var result MessagesHistoryImportParsed
 
 	request := &MessagesCheckHistoryImportRequest{
 		ImportHead: importhead,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

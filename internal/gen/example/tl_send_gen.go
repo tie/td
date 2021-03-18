@@ -155,13 +155,13 @@ var (
 // Send invokes method send#f74488a returning error if any.
 //
 // See https://localhost:80/doc/method/send for reference.
-func (c *Client) Send(ctx context.Context, msg SMS) (*SMS, error) {
+func Send(ctx context.Context, rpc Invoker, msg SMS) (*SMS, error) {
 	var result SMS
 
 	request := &SendRequest{
 		Msg: msg,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

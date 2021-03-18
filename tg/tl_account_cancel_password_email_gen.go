@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/api/srp
 //
 // See https://core.telegram.org/method/account.cancelPasswordEmail for reference.
-func (c *Client) AccountCancelPasswordEmail(ctx context.Context) (bool, error) {
+func AccountCancelPasswordEmail(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &AccountCancelPasswordEmailRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

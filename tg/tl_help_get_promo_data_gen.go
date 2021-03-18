@@ -128,11 +128,11 @@ var (
 //
 // See https://core.telegram.org/method/help.getPromoData for reference.
 // Can be used by bots.
-func (c *Client) HelpGetPromoData(ctx context.Context) (HelpPromoDataClass, error) {
+func HelpGetPromoData(ctx context.Context, rpc Invoker) (HelpPromoDataClass, error) {
 	var result HelpPromoDataBox
 
 	request := &HelpGetPromoDataRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.PromoData, nil

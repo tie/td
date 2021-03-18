@@ -348,10 +348,10 @@ var (
 // MessagesGetExportedChatInvites invokes method messages.getExportedChatInvites#a2b5a3f6 returning error if any.
 //
 // See https://core.telegram.org/method/messages.getExportedChatInvites for reference.
-func (c *Client) MessagesGetExportedChatInvites(ctx context.Context, request *MessagesGetExportedChatInvitesRequest) (*MessagesExportedChatInvites, error) {
+func MessagesGetExportedChatInvites(ctx context.Context, rpc Invoker, request *MessagesGetExportedChatInvitesRequest) (*MessagesExportedChatInvites, error) {
 	var result MessagesExportedChatInvites
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

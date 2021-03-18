@@ -183,13 +183,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getPeerDialogs for reference.
-func (c *Client) MessagesGetPeerDialogs(ctx context.Context, peers []InputDialogPeerClass) (*MessagesPeerDialogs, error) {
+func MessagesGetPeerDialogs(ctx context.Context, rpc Invoker, peers []InputDialogPeerClass) (*MessagesPeerDialogs, error) {
 	var result MessagesPeerDialogs
 
 	request := &MessagesGetPeerDialogsRequest{
 		Peers: peers,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

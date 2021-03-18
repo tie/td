@@ -130,11 +130,11 @@ var (
 //  403 USER_INVALID: Invalid user provided
 //
 // See https://core.telegram.org/method/help.getSupportName for reference.
-func (c *Client) HelpGetSupportName(ctx context.Context) (*HelpSupportName, error) {
+func HelpGetSupportName(ctx context.Context, rpc Invoker) (*HelpSupportName, error) {
 	var result HelpSupportName
 
 	request := &HelpGetSupportNameRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

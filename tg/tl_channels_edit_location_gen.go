@@ -231,10 +231,10 @@ var (
 //  400 MEGAGROUP_REQUIRED: You can only use this method on a supergroup
 //
 // See https://core.telegram.org/method/channels.editLocation for reference.
-func (c *Client) ChannelsEditLocation(ctx context.Context, request *ChannelsEditLocationRequest) (bool, error) {
+func ChannelsEditLocation(ctx context.Context, rpc Invoker, request *ChannelsEditLocationRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

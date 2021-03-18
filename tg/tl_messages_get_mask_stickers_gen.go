@@ -160,13 +160,13 @@ var (
 // Get installed mask stickers
 //
 // See https://core.telegram.org/method/messages.getMaskStickers for reference.
-func (c *Client) MessagesGetMaskStickers(ctx context.Context, hash int) (MessagesAllStickersClass, error) {
+func MessagesGetMaskStickers(ctx context.Context, rpc Invoker, hash int) (MessagesAllStickersClass, error) {
 	var result MessagesAllStickersBox
 
 	request := &MessagesGetMaskStickersRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.AllStickers, nil

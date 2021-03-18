@@ -151,13 +151,13 @@ var (
 )
 
 // ReqPqMulti invokes method req_pq_multi#be7e8ef1 returning error if any.
-func (c *Client) ReqPqMulti(ctx context.Context, nonce bin.Int128) (*ResPQ, error) {
+func ReqPqMulti(ctx context.Context, rpc Invoker, nonce bin.Int128) (*ResPQ, error) {
 	var result ResPQ
 
 	request := &ReqPqMultiRequest{
 		Nonce: nonce,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

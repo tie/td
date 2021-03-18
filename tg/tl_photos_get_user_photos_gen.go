@@ -239,10 +239,10 @@ var (
 //
 // See https://core.telegram.org/method/photos.getUserPhotos for reference.
 // Can be used by bots.
-func (c *Client) PhotosGetUserPhotos(ctx context.Context, request *PhotosGetUserPhotosRequest) (PhotosPhotosClass, error) {
+func PhotosGetUserPhotos(ctx context.Context, rpc Invoker, request *PhotosGetUserPhotosRequest) (PhotosPhotosClass, error) {
 	var result PhotosPhotosBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Photos, nil

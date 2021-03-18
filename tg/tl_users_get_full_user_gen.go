@@ -168,13 +168,13 @@ var (
 //
 // See https://core.telegram.org/method/users.getFullUser for reference.
 // Can be used by bots.
-func (c *Client) UsersGetFullUser(ctx context.Context, id InputUserClass) (*UserFull, error) {
+func UsersGetFullUser(ctx context.Context, rpc Invoker, id InputUserClass) (*UserFull, error) {
 	var result UserFull
 
 	request := &UsersGetFullUserRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

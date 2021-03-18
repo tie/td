@@ -195,10 +195,10 @@ var (
 //  2) https://core.telegram.org/passport/encryption#encryption
 //
 // See https://core.telegram.org/method/account.saveSecureValue for reference.
-func (c *Client) AccountSaveSecureValue(ctx context.Context, request *AccountSaveSecureValueRequest) (*SecureValue, error) {
+func AccountSaveSecureValue(ctx context.Context, rpc Invoker, request *AccountSaveSecureValueRequest) (*SecureValue, error) {
 	var result SecureValue
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

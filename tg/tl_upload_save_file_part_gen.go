@@ -210,10 +210,10 @@ var (
 //
 // See https://core.telegram.org/method/upload.saveFilePart for reference.
 // Can be used by bots.
-func (c *Client) UploadSaveFilePart(ctx context.Context, request *UploadSaveFilePartRequest) (bool, error) {
+func UploadSaveFilePart(ctx context.Context, rpc Invoker, request *UploadSaveFilePartRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

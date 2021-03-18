@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/api/config#client-configuration
 //
 // See https://core.telegram.org/method/help.getAppConfig for reference.
-func (c *Client) HelpGetAppConfig(ctx context.Context) (JSONValueClass, error) {
+func HelpGetAppConfig(ctx context.Context, rpc Invoker) (JSONValueClass, error) {
 	var result JSONValueBox
 
 	request := &HelpGetAppConfigRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.JSONValue, nil

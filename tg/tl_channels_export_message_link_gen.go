@@ -283,10 +283,10 @@ var (
 //  400 MSG_ID_INVALID: Invalid message ID provided
 //
 // See https://core.telegram.org/method/channels.exportMessageLink for reference.
-func (c *Client) ChannelsExportMessageLink(ctx context.Context, request *ChannelsExportMessageLinkRequest) (*ExportedMessageLink, error) {
+func ChannelsExportMessageLink(ctx context.Context, rpc Invoker, request *ChannelsExportMessageLinkRequest) (*ExportedMessageLink, error) {
 	var result ExportedMessageLink
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

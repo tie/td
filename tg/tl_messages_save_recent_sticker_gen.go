@@ -242,10 +242,10 @@ var (
 //  400 STICKER_ID_INVALID: The provided sticker ID is invalid
 //
 // See https://core.telegram.org/method/messages.saveRecentSticker for reference.
-func (c *Client) MessagesSaveRecentSticker(ctx context.Context, request *MessagesSaveRecentStickerRequest) (bool, error) {
+func MessagesSaveRecentSticker(ctx context.Context, rpc Invoker, request *MessagesSaveRecentStickerRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

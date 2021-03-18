@@ -242,10 +242,10 @@ var (
 //  400 CALL_PEER_INVALID: The provided call peer object is invalid
 //
 // See https://core.telegram.org/method/phone.confirmCall for reference.
-func (c *Client) PhoneConfirmCall(ctx context.Context, request *PhoneConfirmCallRequest) (*PhonePhoneCall, error) {
+func PhoneConfirmCall(ctx context.Context, rpc Invoker, request *PhoneConfirmCallRequest) (*PhonePhoneCall, error) {
 	var result PhonePhoneCall
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

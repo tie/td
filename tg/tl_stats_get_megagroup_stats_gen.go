@@ -225,10 +225,10 @@ var (
 //
 // See https://core.telegram.org/method/stats.getMegagroupStats for reference.
 // Can be used by bots.
-func (c *Client) StatsGetMegagroupStats(ctx context.Context, request *StatsGetMegagroupStatsRequest) (*StatsMegagroupStats, error) {
+func StatsGetMegagroupStats(ctx context.Context, rpc Invoker, request *StatsGetMegagroupStatsRequest) (*StatsMegagroupStats, error) {
 	var result StatsMegagroupStats
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

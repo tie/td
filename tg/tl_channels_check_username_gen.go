@@ -200,10 +200,10 @@ var (
 //  400 USERNAME_INVALID: The provided username is not valid
 //
 // See https://core.telegram.org/method/channels.checkUsername for reference.
-func (c *Client) ChannelsCheckUsername(ctx context.Context, request *ChannelsCheckUsernameRequest) (bool, error) {
+func ChannelsCheckUsername(ctx context.Context, rpc Invoker, request *ChannelsCheckUsernameRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

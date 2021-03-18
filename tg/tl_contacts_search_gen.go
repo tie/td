@@ -185,10 +185,10 @@ var (
 //  400 SEARCH_QUERY_EMPTY: The search query is empty
 //
 // See https://core.telegram.org/method/contacts.search for reference.
-func (c *Client) ContactsSearch(ctx context.Context, request *ContactsSearchRequest) (*ContactsFound, error) {
+func ContactsSearch(ctx context.Context, rpc Invoker, request *ContactsSearchRequest) (*ContactsFound, error) {
 	var result ContactsFound
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

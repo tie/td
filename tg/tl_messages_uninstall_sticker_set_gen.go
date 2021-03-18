@@ -165,13 +165,13 @@ var (
 //  400 STICKERSET_INVALID: The provided sticker set is invalid
 //
 // See https://core.telegram.org/method/messages.uninstallStickerSet for reference.
-func (c *Client) MessagesUninstallStickerSet(ctx context.Context, stickerset InputStickerSetClass) (bool, error) {
+func MessagesUninstallStickerSet(ctx context.Context, rpc Invoker, stickerset InputStickerSetClass) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesUninstallStickerSetRequest{
 		Stickerset: stickerset,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

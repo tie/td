@@ -183,13 +183,13 @@ var (
 //  403 CHAT_WRITE_FORBIDDEN: You can't write in this chat
 //
 // See https://core.telegram.org/method/channels.deleteChannel for reference.
-func (c *Client) ChannelsDeleteChannel(ctx context.Context, channel InputChannelClass) (UpdatesClass, error) {
+func ChannelsDeleteChannel(ctx context.Context, rpc Invoker, channel InputChannelClass) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &ChannelsDeleteChannelRequest{
 		Channel: channel,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

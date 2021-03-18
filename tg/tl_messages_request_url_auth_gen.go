@@ -337,10 +337,10 @@ var (
 //  1) https://core.telegram.org/api/url-authorization
 //
 // See https://core.telegram.org/method/messages.requestUrlAuth for reference.
-func (c *Client) MessagesRequestURLAuth(ctx context.Context, request *MessagesRequestURLAuthRequest) (URLAuthResultClass, error) {
+func MessagesRequestURLAuth(ctx context.Context, rpc Invoker, request *MessagesRequestURLAuthRequest) (URLAuthResultClass, error) {
 	var result URLAuthResultBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.UrlAuthResult, nil

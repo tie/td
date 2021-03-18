@@ -171,13 +171,13 @@ var (
 //
 // See https://core.telegram.org/method/messages.getChats for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetChats(ctx context.Context, id []int) (MessagesChatsClass, error) {
+func MessagesGetChats(ctx context.Context, rpc Invoker, id []int) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
 	request := &MessagesGetChatsRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

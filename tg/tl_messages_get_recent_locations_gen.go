@@ -216,10 +216,10 @@ var (
 // Get live location history of a certain user
 //
 // See https://core.telegram.org/method/messages.getRecentLocations for reference.
-func (c *Client) MessagesGetRecentLocations(ctx context.Context, request *MessagesGetRecentLocationsRequest) (MessagesMessagesClass, error) {
+func MessagesGetRecentLocations(ctx context.Context, rpc Invoker, request *MessagesGetRecentLocationsRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

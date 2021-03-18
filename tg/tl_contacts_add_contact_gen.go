@@ -295,10 +295,10 @@ var (
 //  400 MSG_ID_INVALID: Invalid message ID provided
 //
 // See https://core.telegram.org/method/contacts.addContact for reference.
-func (c *Client) ContactsAddContact(ctx context.Context, request *ContactsAddContactRequest) (UpdatesClass, error) {
+func ContactsAddContact(ctx context.Context, rpc Invoker, request *ContactsAddContactRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

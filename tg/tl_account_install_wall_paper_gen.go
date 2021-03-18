@@ -186,10 +186,10 @@ var (
 // Install wallpaper
 //
 // See https://core.telegram.org/method/account.installWallPaper for reference.
-func (c *Client) AccountInstallWallPaper(ctx context.Context, request *AccountInstallWallPaperRequest) (bool, error) {
+func AccountInstallWallPaper(ctx context.Context, rpc Invoker, request *AccountInstallWallPaperRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

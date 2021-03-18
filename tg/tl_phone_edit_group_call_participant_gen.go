@@ -319,10 +319,10 @@ var (
 // PhoneEditGroupCallParticipant invokes method phone.editGroupCallParticipant#d975eb80 returning error if any.
 //
 // See https://core.telegram.org/method/phone.editGroupCallParticipant for reference.
-func (c *Client) PhoneEditGroupCallParticipant(ctx context.Context, request *PhoneEditGroupCallParticipantRequest) (UpdatesClass, error) {
+func PhoneEditGroupCallParticipant(ctx context.Context, rpc Invoker, request *PhoneEditGroupCallParticipantRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

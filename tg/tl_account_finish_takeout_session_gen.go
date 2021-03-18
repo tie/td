@@ -184,10 +184,10 @@ var (
 //  403 TAKEOUT_REQUIRED: A takeout session has to be initialized, first
 //
 // See https://core.telegram.org/method/account.finishTakeoutSession for reference.
-func (c *Client) AccountFinishTakeoutSession(ctx context.Context, request *AccountFinishTakeoutSessionRequest) (bool, error) {
+func AccountFinishTakeoutSession(ctx context.Context, rpc Invoker, request *AccountFinishTakeoutSessionRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

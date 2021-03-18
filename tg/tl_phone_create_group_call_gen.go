@@ -184,10 +184,10 @@ var (
 // PhoneCreateGroupCall invokes method phone.createGroupCall#bd3dabe0 returning error if any.
 //
 // See https://core.telegram.org/method/phone.createGroupCall for reference.
-func (c *Client) PhoneCreateGroupCall(ctx context.Context, request *PhoneCreateGroupCallRequest) (UpdatesClass, error) {
+func PhoneCreateGroupCall(ctx context.Context, rpc Invoker, request *PhoneCreateGroupCallRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

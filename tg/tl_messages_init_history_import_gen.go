@@ -213,10 +213,10 @@ var (
 // MessagesInitHistoryImport invokes method messages.initHistoryImport#34090c3b returning error if any.
 //
 // See https://core.telegram.org/method/messages.initHistoryImport for reference.
-func (c *Client) MessagesInitHistoryImport(ctx context.Context, request *MessagesInitHistoryImportRequest) (*MessagesHistoryImport, error) {
+func MessagesInitHistoryImport(ctx context.Context, rpc Invoker, request *MessagesInitHistoryImportRequest) (*MessagesHistoryImport, error) {
 	var result MessagesHistoryImport
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

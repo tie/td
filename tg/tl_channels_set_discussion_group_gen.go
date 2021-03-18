@@ -215,10 +215,10 @@ var (
 //  400 MEGAGROUP_ID_INVALID: Invalid supergroup ID
 //
 // See https://core.telegram.org/method/channels.setDiscussionGroup for reference.
-func (c *Client) ChannelsSetDiscussionGroup(ctx context.Context, request *ChannelsSetDiscussionGroupRequest) (bool, error) {
+func ChannelsSetDiscussionGroup(ctx context.Context, rpc Invoker, request *ChannelsSetDiscussionGroupRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

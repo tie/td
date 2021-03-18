@@ -166,13 +166,13 @@ var (
 //  420 2FA_CONFIRM_WAIT_X: Since this account is active and protected by a 2FA password, we will delete it in 1 week for security purposes. You can cancel this process at any time, you'll be able to reset your account in X seconds.
 //
 // See https://core.telegram.org/method/account.deleteAccount for reference.
-func (c *Client) AccountDeleteAccount(ctx context.Context, reason string) (bool, error) {
+func AccountDeleteAccount(ctx context.Context, rpc Invoker, reason string) (bool, error) {
 	var result BoolBox
 
 	request := &AccountDeleteAccountRequest{
 		Reason: reason,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

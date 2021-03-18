@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/widgets/login
 //
 // See https://core.telegram.org/method/account.resetWebAuthorizations for reference.
-func (c *Client) AccountResetWebAuthorizations(ctx context.Context) (bool, error) {
+func AccountResetWebAuthorizations(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &AccountResetWebAuthorizationsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

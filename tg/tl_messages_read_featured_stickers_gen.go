@@ -166,13 +166,13 @@ var (
 // Mark new featured stickers as read
 //
 // See https://core.telegram.org/method/messages.readFeaturedStickers for reference.
-func (c *Client) MessagesReadFeaturedStickers(ctx context.Context, id []int64) (bool, error) {
+func MessagesReadFeaturedStickers(ctx context.Context, rpc Invoker, id []int64) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesReadFeaturedStickersRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

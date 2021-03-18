@@ -163,13 +163,13 @@ var (
 //
 // See https://core.telegram.org/method/help.hidePromoData for reference.
 // Can be used by bots.
-func (c *Client) HelpHidePromoData(ctx context.Context, peer InputPeerClass) (bool, error) {
+func HelpHidePromoData(ctx context.Context, rpc Invoker, peer InputPeerClass) (bool, error) {
 	var result BoolBox
 
 	request := &HelpHidePromoDataRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

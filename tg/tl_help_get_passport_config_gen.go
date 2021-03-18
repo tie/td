@@ -166,13 +166,13 @@ var (
 //  1) https://core.telegram.org/passport
 //
 // See https://core.telegram.org/method/help.getPassportConfig for reference.
-func (c *Client) HelpGetPassportConfig(ctx context.Context, hash int) (HelpPassportConfigClass, error) {
+func HelpGetPassportConfig(ctx context.Context, rpc Invoker, hash int) (HelpPassportConfigClass, error) {
 	var result HelpPassportConfigBox
 
 	request := &HelpGetPassportConfigRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.PassportConfig, nil

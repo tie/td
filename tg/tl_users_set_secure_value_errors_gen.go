@@ -217,10 +217,10 @@ var (
 //
 // See https://core.telegram.org/method/users.setSecureValueErrors for reference.
 // Can be used by bots.
-func (c *Client) UsersSetSecureValueErrors(ctx context.Context, request *UsersSetSecureValueErrorsRequest) (bool, error) {
+func UsersSetSecureValueErrors(ctx context.Context, rpc Invoker, request *UsersSetSecureValueErrorsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

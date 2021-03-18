@@ -232,10 +232,10 @@ var (
 //  400 REVOTE_NOT_ALLOWED: You cannot change your vote
 //
 // See https://core.telegram.org/method/messages.sendVote for reference.
-func (c *Client) MessagesSendVote(ctx context.Context, request *MessagesSendVoteRequest) (UpdatesClass, error) {
+func MessagesSendVote(ctx context.Context, rpc Invoker, request *MessagesSendVoteRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

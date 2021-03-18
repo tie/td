@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/widgets/login
 //
 // See https://core.telegram.org/method/account.getWebAuthorizations for reference.
-func (c *Client) AccountGetWebAuthorizations(ctx context.Context) (*AccountWebAuthorizations, error) {
+func AccountGetWebAuthorizations(ctx context.Context, rpc Invoker) (*AccountWebAuthorizations, error) {
 	var result AccountWebAuthorizations
 
 	request := &AccountGetWebAuthorizationsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

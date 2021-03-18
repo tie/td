@@ -288,10 +288,10 @@ var (
 // Apply changes to multiple stickersets
 //
 // See https://core.telegram.org/method/messages.toggleStickerSets for reference.
-func (c *Client) MessagesToggleStickerSets(ctx context.Context, request *MessagesToggleStickerSetsRequest) (bool, error) {
+func MessagesToggleStickerSets(ctx context.Context, rpc Invoker, request *MessagesToggleStickerSetsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

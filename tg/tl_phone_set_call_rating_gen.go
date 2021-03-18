@@ -256,10 +256,10 @@ var (
 //  400 CALL_PEER_INVALID: The provided call peer object is invalid
 //
 // See https://core.telegram.org/method/phone.setCallRating for reference.
-func (c *Client) PhoneSetCallRating(ctx context.Context, request *PhoneSetCallRatingRequest) (UpdatesClass, error) {
+func PhoneSetCallRating(ctx context.Context, rpc Invoker, request *PhoneSetCallRatingRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

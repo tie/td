@@ -184,10 +184,10 @@ var (
 //  400 MSG_WAIT_FAILED: A waiting call returned an error
 //
 // See https://core.telegram.org/method/messages.readEncryptedHistory for reference.
-func (c *Client) MessagesReadEncryptedHistory(ctx context.Context, request *MessagesReadEncryptedHistoryRequest) (bool, error) {
+func MessagesReadEncryptedHistory(ctx context.Context, rpc Invoker, request *MessagesReadEncryptedHistoryRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

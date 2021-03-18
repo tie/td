@@ -186,10 +186,10 @@ var (
 //
 // See https://core.telegram.org/method/bots.sendCustomRequest for reference.
 // Can be used by bots.
-func (c *Client) BotsSendCustomRequest(ctx context.Context, request *BotsSendCustomRequestRequest) (*DataJSON, error) {
+func BotsSendCustomRequest(ctx context.Context, rpc Invoker, request *BotsSendCustomRequestRequest) (*DataJSON, error) {
 	var result DataJSON
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

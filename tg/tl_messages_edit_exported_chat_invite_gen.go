@@ -319,10 +319,10 @@ var (
 // MessagesEditExportedChatInvite invokes method messages.editExportedChatInvite#2e4ffbe returning error if any.
 //
 // See https://core.telegram.org/method/messages.editExportedChatInvite for reference.
-func (c *Client) MessagesEditExportedChatInvite(ctx context.Context, request *MessagesEditExportedChatInviteRequest) (MessagesExportedChatInviteClass, error) {
+func MessagesEditExportedChatInvite(ctx context.Context, rpc Invoker, request *MessagesEditExportedChatInviteRequest) (MessagesExportedChatInviteClass, error) {
 	var result MessagesExportedChatInviteBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.ExportedChatInvite, nil

@@ -279,10 +279,10 @@ var (
 // PhoneGetGroupParticipants invokes method phone.getGroupParticipants#c558d8ab returning error if any.
 //
 // See https://core.telegram.org/method/phone.getGroupParticipants for reference.
-func (c *Client) PhoneGetGroupParticipants(ctx context.Context, request *PhoneGetGroupParticipantsRequest) (*PhoneGroupParticipants, error) {
+func PhoneGetGroupParticipants(ctx context.Context, rpc Invoker, request *PhoneGetGroupParticipantsRequest) (*PhoneGroupParticipants, error) {
 	var result PhoneGroupParticipants
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -151,13 +151,13 @@ var (
 )
 
 // GetFutureSalts invokes method get_future_salts#b921bd04 returning error if any.
-func (c *Client) GetFutureSalts(ctx context.Context, num int) (*FutureSalts, error) {
+func GetFutureSalts(ctx context.Context, rpc Invoker, num int) (*FutureSalts, error) {
 	var result FutureSalts
 
 	request := &GetFutureSaltsRequest{
 		Num: num,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

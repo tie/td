@@ -358,10 +358,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.saveDraft for reference.
-func (c *Client) MessagesSaveDraft(ctx context.Context, request *MessagesSaveDraftRequest) (bool, error) {
+func MessagesSaveDraft(ctx context.Context, rpc Invoker, request *MessagesSaveDraftRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

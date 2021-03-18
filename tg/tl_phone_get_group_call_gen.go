@@ -155,13 +155,13 @@ var (
 // PhoneGetGroupCall invokes method phone.getGroupCall#c7cb017 returning error if any.
 //
 // See https://core.telegram.org/method/phone.getGroupCall for reference.
-func (c *Client) PhoneGetGroupCall(ctx context.Context, call InputGroupCall) (*PhoneGroupCall, error) {
+func PhoneGetGroupCall(ctx context.Context, rpc Invoker, call InputGroupCall) (*PhoneGroupCall, error) {
 	var result PhoneGroupCall
 
 	request := &PhoneGetGroupCallRequest{
 		Call: call,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

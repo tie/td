@@ -325,10 +325,10 @@ var (
 //  400 TOKEN_INVALID: The provided token is invalid
 //
 // See https://core.telegram.org/method/account.registerDevice for reference.
-func (c *Client) AccountRegisterDevice(ctx context.Context, request *AccountRegisterDeviceRequest) (bool, error) {
+func AccountRegisterDevice(ctx context.Context, rpc Invoker, request *AccountRegisterDeviceRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -191,10 +191,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.getInlineGameHighScores for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetInlineGameHighScores(ctx context.Context, request *MessagesGetInlineGameHighScoresRequest) (*MessagesHighScores, error) {
+func MessagesGetInlineGameHighScores(ctx context.Context, rpc Invoker, request *MessagesGetInlineGameHighScoresRequest) (*MessagesHighScores, error) {
 	var result MessagesHighScores
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

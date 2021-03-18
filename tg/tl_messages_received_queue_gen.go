@@ -160,13 +160,13 @@ var (
 //  400 MSG_WAIT_FAILED: A waiting call returned an error
 //
 // See https://core.telegram.org/method/messages.receivedQueue for reference.
-func (c *Client) MessagesReceivedQueue(ctx context.Context, maxqts int) ([]int64, error) {
+func MessagesReceivedQueue(ctx context.Context, rpc Invoker, maxqts int) ([]int64, error) {
 	var result LongVector
 
 	request := &MessagesReceivedQueueRequest{
 		MaxQts: maxqts,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []int64(result.Elems), nil

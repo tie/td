@@ -257,10 +257,10 @@ var (
 //  400 START_PARAM_TOO_LONG: Start parameter is too long
 //
 // See https://core.telegram.org/method/messages.startBot for reference.
-func (c *Client) MessagesStartBot(ctx context.Context, request *MessagesStartBotRequest) (UpdatesClass, error) {
+func MessagesStartBot(ctx context.Context, rpc Invoker, request *MessagesStartBotRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

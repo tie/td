@@ -210,10 +210,10 @@ var (
 // Create and upload a new wallpaper
 //
 // See https://core.telegram.org/method/account.uploadWallPaper for reference.
-func (c *Client) AccountUploadWallPaper(ctx context.Context, request *AccountUploadWallPaperRequest) (WallPaperClass, error) {
+func AccountUploadWallPaper(ctx context.Context, rpc Invoker, request *AccountUploadWallPaperRequest) (WallPaperClass, error) {
 	var result WallPaperBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.WallPaper, nil

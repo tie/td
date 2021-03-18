@@ -210,10 +210,10 @@ var (
 // Install/uninstall wallpaper
 //
 // See https://core.telegram.org/method/account.saveWallPaper for reference.
-func (c *Client) AccountSaveWallPaper(ctx context.Context, request *AccountSaveWallPaperRequest) (bool, error) {
+func AccountSaveWallPaper(ctx context.Context, rpc Invoker, request *AccountSaveWallPaperRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

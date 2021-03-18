@@ -215,10 +215,10 @@ var (
 //  400 PHONE_NUMBER_UNOCCUPIED: The code is valid but no user with the given number is registered
 //
 // See https://core.telegram.org/method/auth.signIn for reference.
-func (c *Client) AuthSignIn(ctx context.Context, request *AuthSignInRequest) (AuthAuthorizationClass, error) {
+func AuthSignIn(ctx context.Context, rpc Invoker, request *AuthSignInRequest) (AuthAuthorizationClass, error) {
 	var result AuthAuthorizationBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Authorization, nil

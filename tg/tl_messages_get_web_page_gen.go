@@ -193,10 +193,10 @@ var (
 //  400 WC_CONVERT_URL_INVALID: WC convert URL invalid
 //
 // See https://core.telegram.org/method/messages.getWebPage for reference.
-func (c *Client) MessagesGetWebPage(ctx context.Context, request *MessagesGetWebPageRequest) (WebPageClass, error) {
+func MessagesGetWebPage(ctx context.Context, rpc Invoker, request *MessagesGetWebPageRequest) (WebPageClass, error) {
 	var result WebPageBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.WebPage, nil

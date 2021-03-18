@@ -184,13 +184,13 @@ var (
 //
 // See https://core.telegram.org/method/users.getUsers for reference.
 // Can be used by bots.
-func (c *Client) UsersGetUsers(ctx context.Context, id []InputUserClass) ([]UserClass, error) {
+func UsersGetUsers(ctx context.Context, rpc Invoker, id []InputUserClass) ([]UserClass, error) {
 	var result UserClassVector
 
 	request := &UsersGetUsersRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []UserClass(result.Elems), nil

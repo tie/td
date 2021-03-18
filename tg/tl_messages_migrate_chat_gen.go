@@ -168,13 +168,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.migrateChat for reference.
-func (c *Client) MessagesMigrateChat(ctx context.Context, chatid int) (UpdatesClass, error) {
+func MessagesMigrateChat(ctx context.Context, rpc Invoker, chatid int) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &MessagesMigrateChatRequest{
 		ChatID: chatid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

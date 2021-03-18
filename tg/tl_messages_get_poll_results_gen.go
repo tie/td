@@ -189,10 +189,10 @@ var (
 //  400 MESSAGE_ID_INVALID: The provided message id is invalid
 //
 // See https://core.telegram.org/method/messages.getPollResults for reference.
-func (c *Client) MessagesGetPollResults(ctx context.Context, request *MessagesGetPollResultsRequest) (UpdatesClass, error) {
+func MessagesGetPollResults(ctx context.Context, rpc Invoker, request *MessagesGetPollResultsRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -192,10 +192,10 @@ var (
 //
 // See https://core.telegram.org/method/upload.getCdnFileHashes for reference.
 // Can be used by bots.
-func (c *Client) UploadGetCDNFileHashes(ctx context.Context, request *UploadGetCDNFileHashesRequest) ([]FileHash, error) {
+func UploadGetCDNFileHashes(ctx context.Context, rpc Invoker, request *UploadGetCDNFileHashesRequest) ([]FileHash, error) {
 	var result FileHashVector
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []FileHash(result.Elems), nil

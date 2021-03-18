@@ -166,13 +166,13 @@ var (
 //  1) https://core.telegram.org/api/folders#peer-folders
 //
 // See https://core.telegram.org/method/folders.deleteFolder for reference.
-func (c *Client) FoldersDeleteFolder(ctx context.Context, folderid int) (UpdatesClass, error) {
+func FoldersDeleteFolder(ctx context.Context, rpc Invoker, folderid int) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &FoldersDeleteFolderRequest{
 		FolderID: folderid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

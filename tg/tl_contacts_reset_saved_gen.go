@@ -127,11 +127,11 @@ var (
 // Delete saved contacts
 //
 // See https://core.telegram.org/method/contacts.resetSaved for reference.
-func (c *Client) ContactsResetSaved(ctx context.Context) (bool, error) {
+func ContactsResetSaved(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &ContactsResetSavedRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

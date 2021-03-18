@@ -206,10 +206,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.editChatAbout for reference.
 // Can be used by bots.
-func (c *Client) MessagesEditChatAbout(ctx context.Context, request *MessagesEditChatAboutRequest) (bool, error) {
+func MessagesEditChatAbout(ctx context.Context, rpc Invoker, request *MessagesEditChatAboutRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

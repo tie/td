@@ -185,10 +185,10 @@ var (
 //
 // See https://core.telegram.org/method/help.getCountriesList for reference.
 // Can be used by bots.
-func (c *Client) HelpGetCountriesList(ctx context.Context, request *HelpGetCountriesListRequest) (HelpCountriesListClass, error) {
+func HelpGetCountriesList(ctx context.Context, rpc Invoker, request *HelpGetCountriesListRequest) (HelpCountriesListClass, error) {
 	var result HelpCountriesListBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.CountriesList, nil

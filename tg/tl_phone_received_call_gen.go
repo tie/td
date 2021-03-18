@@ -161,13 +161,13 @@ var (
 //  400 CALL_PEER_INVALID: The provided call peer object is invalid
 //
 // See https://core.telegram.org/method/phone.receivedCall for reference.
-func (c *Client) PhoneReceivedCall(ctx context.Context, peer InputPhoneCall) (bool, error) {
+func PhoneReceivedCall(ctx context.Context, rpc Invoker, peer InputPhoneCall) (bool, error) {
 	var result BoolBox
 
 	request := &PhoneReceivedCallRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

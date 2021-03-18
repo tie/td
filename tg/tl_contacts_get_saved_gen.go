@@ -130,11 +130,11 @@ var (
 //  403 TAKEOUT_REQUIRED: A takeout session has to be initialized, first
 //
 // See https://core.telegram.org/method/contacts.getSaved for reference.
-func (c *Client) ContactsGetSaved(ctx context.Context) ([]SavedPhoneContact, error) {
+func ContactsGetSaved(ctx context.Context, rpc Invoker) ([]SavedPhoneContact, error) {
 	var result SavedPhoneContactVector
 
 	request := &ContactsGetSavedRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []SavedPhoneContact(result.Elems), nil

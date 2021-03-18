@@ -223,10 +223,10 @@ var (
 //
 // See https://core.telegram.org/method/channels.getMessages for reference.
 // Can be used by bots.
-func (c *Client) ChannelsGetMessages(ctx context.Context, request *ChannelsGetMessagesRequest) (MessagesMessagesClass, error) {
+func ChannelsGetMessages(ctx context.Context, rpc Invoker, request *ChannelsGetMessagesRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

@@ -242,10 +242,10 @@ var (
 //  400 USER_ID_INVALID: The provided user ID is invalid
 //
 // See https://core.telegram.org/method/channels.editCreator for reference.
-func (c *Client) ChannelsEditCreator(ctx context.Context, request *ChannelsEditCreatorRequest) (UpdatesClass, error) {
+func ChannelsEditCreator(ctx context.Context, rpc Invoker, request *ChannelsEditCreatorRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

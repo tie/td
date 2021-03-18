@@ -199,10 +199,10 @@ var (
 //  400 CHAT_NOT_MODIFIED: The pinned message wasn't modified
 //
 // See https://core.telegram.org/method/channels.togglePreHistoryHidden for reference.
-func (c *Client) ChannelsTogglePreHistoryHidden(ctx context.Context, request *ChannelsTogglePreHistoryHiddenRequest) (UpdatesClass, error) {
+func ChannelsTogglePreHistoryHidden(ctx context.Context, rpc Invoker, request *ChannelsTogglePreHistoryHiddenRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

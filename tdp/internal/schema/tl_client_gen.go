@@ -26,18 +26,7 @@ var (
 	_ = tgerr.Error{}
 )
 
-// Invoker can invoke raw MTProto rpc calls.
+// Invoker invokes raw MTProto RPC calls.
 type Invoker interface {
 	InvokeRaw(ctx context.Context, input bin.Encoder, output bin.Decoder) error
-}
-
-// Client implement methods for calling functions from TL schema via Invoker.
-type Client struct {
-	rpc Invoker
-}
-
-func NewClient(invoker Invoker) *Client {
-	return &Client{
-		rpc: invoker,
-	}
 }

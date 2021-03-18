@@ -137,11 +137,11 @@ var (
 //
 // See https://core.telegram.org/method/help.getCdnConfig for reference.
 // Can be used by bots.
-func (c *Client) HelpGetCDNConfig(ctx context.Context) (*CDNConfig, error) {
+func HelpGetCDNConfig(ctx context.Context, rpc Invoker) (*CDNConfig, error) {
 	var result CDNConfig
 
 	request := &HelpGetCDNConfigRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

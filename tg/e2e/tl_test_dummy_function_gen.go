@@ -125,11 +125,11 @@ var (
 // TestDummyFunction invokes method test.dummyFunction#c8357709 returning error if any.
 //
 // See https://core.telegram.org/method/test.dummyFunction for reference.
-func (c *Client) TestDummyFunction(ctx context.Context) (bool, error) {
+func TestDummyFunction(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &TestDummyFunctionRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

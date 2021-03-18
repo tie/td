@@ -215,10 +215,10 @@ var (
 //  403 USER_IS_BLOCKED: You were blocked by this user
 //
 // See https://core.telegram.org/method/messages.sendEncryptedService for reference.
-func (c *Client) MessagesSendEncryptedService(ctx context.Context, request *MessagesSendEncryptedServiceRequest) (MessagesSentEncryptedMessageClass, error) {
+func MessagesSendEncryptedService(ctx context.Context, rpc Invoker, request *MessagesSendEncryptedServiceRequest) (MessagesSentEncryptedMessageClass, error) {
 	var result MessagesSentEncryptedMessageBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.SentEncryptedMessage, nil

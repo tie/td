@@ -158,13 +158,13 @@ var (
 //
 // See https://core.telegram.org/method/account.setGlobalPrivacySettings for reference.
 // Can be used by bots.
-func (c *Client) AccountSetGlobalPrivacySettings(ctx context.Context, settings GlobalPrivacySettings) (*GlobalPrivacySettings, error) {
+func AccountSetGlobalPrivacySettings(ctx context.Context, rpc Invoker, settings GlobalPrivacySettings) (*GlobalPrivacySettings, error) {
 	var result GlobalPrivacySettings
 
 	request := &AccountSetGlobalPrivacySettingsRequest{
 		Settings: settings,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

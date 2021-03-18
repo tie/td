@@ -160,13 +160,13 @@ var (
 // MessagesGetAdminsWithInvites invokes method messages.getAdminsWithInvites#3920e6ef returning error if any.
 //
 // See https://core.telegram.org/method/messages.getAdminsWithInvites for reference.
-func (c *Client) MessagesGetAdminsWithInvites(ctx context.Context, peer InputPeerClass) (*MessagesChatAdminsWithInvites, error) {
+func MessagesGetAdminsWithInvites(ctx context.Context, rpc Invoker, peer InputPeerClass) (*MessagesChatAdminsWithInvites, error) {
 	var result MessagesChatAdminsWithInvites
 
 	request := &MessagesGetAdminsWithInvitesRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

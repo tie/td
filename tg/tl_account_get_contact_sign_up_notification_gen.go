@@ -127,11 +127,11 @@ var (
 // Whether the user will receive notifications when contacts sign up
 //
 // See https://core.telegram.org/method/account.getContactSignUpNotification for reference.
-func (c *Client) AccountGetContactSignUpNotification(ctx context.Context) (bool, error) {
+func AccountGetContactSignUpNotification(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &AccountGetContactSignUpNotificationRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

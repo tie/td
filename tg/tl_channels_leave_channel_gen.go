@@ -185,13 +185,13 @@ var (
 //
 // See https://core.telegram.org/method/channels.leaveChannel for reference.
 // Can be used by bots.
-func (c *Client) ChannelsLeaveChannel(ctx context.Context, channel InputChannelClass) (UpdatesClass, error) {
+func ChannelsLeaveChannel(ctx context.Context, rpc Invoker, channel InputChannelClass) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &ChannelsLeaveChannelRequest{
 		Channel: channel,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

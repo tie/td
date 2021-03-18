@@ -609,10 +609,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.sendMedia for reference.
 // Can be used by bots.
-func (c *Client) MessagesSendMedia(ctx context.Context, request *MessagesSendMediaRequest) (UpdatesClass, error) {
+func MessagesSendMedia(ctx context.Context, rpc Invoker, request *MessagesSendMediaRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -184,10 +184,10 @@ var (
 // Get stickers by emoji
 //
 // See https://core.telegram.org/method/messages.getStickers for reference.
-func (c *Client) MessagesGetStickers(ctx context.Context, request *MessagesGetStickersRequest) (MessagesStickersClass, error) {
+func MessagesGetStickers(ctx context.Context, rpc Invoker, request *MessagesGetStickersRequest) (MessagesStickersClass, error) {
 	var result MessagesStickersBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Stickers, nil

@@ -173,13 +173,13 @@ var (
 //  400 CONTACT_REQ_MISSING: Missing contact request
 //
 // See https://core.telegram.org/method/contacts.acceptContact for reference.
-func (c *Client) ContactsAcceptContact(ctx context.Context, id InputUserClass) (UpdatesClass, error) {
+func ContactsAcceptContact(ctx context.Context, rpc Invoker, id InputUserClass) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &ContactsAcceptContactRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

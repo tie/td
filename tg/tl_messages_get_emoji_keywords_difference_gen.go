@@ -181,10 +181,10 @@ var (
 // Get changed emoji keywords
 //
 // See https://core.telegram.org/method/messages.getEmojiKeywordsDifference for reference.
-func (c *Client) MessagesGetEmojiKeywordsDifference(ctx context.Context, request *MessagesGetEmojiKeywordsDifferenceRequest) (*EmojiKeywordsDifference, error) {
+func MessagesGetEmojiKeywordsDifference(ctx context.Context, rpc Invoker, request *MessagesGetEmojiKeywordsDifferenceRequest) (*EmojiKeywordsDifference, error) {
 	var result EmojiKeywordsDifference
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -396,10 +396,10 @@ var (
 // Update theme
 //
 // See https://core.telegram.org/method/account.updateTheme for reference.
-func (c *Client) AccountUpdateTheme(ctx context.Context, request *AccountUpdateThemeRequest) (*Theme, error) {
+func AccountUpdateTheme(ctx context.Context, rpc Invoker, request *AccountUpdateThemeRequest) (*Theme, error) {
 	var result Theme
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

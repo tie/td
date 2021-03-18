@@ -509,10 +509,10 @@ var (
 //  400 YOU_BLOCKED_USER: You blocked this user
 //
 // See https://core.telegram.org/method/messages.sendInlineBotResult for reference.
-func (c *Client) MessagesSendInlineBotResult(ctx context.Context, request *MessagesSendInlineBotResultRequest) (UpdatesClass, error) {
+func MessagesSendInlineBotResult(ctx context.Context, rpc Invoker, request *MessagesSendInlineBotResultRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/api/drafts
 //
 // See https://core.telegram.org/method/messages.clearAllDrafts for reference.
-func (c *Client) MessagesClearAllDrafts(ctx context.Context) (bool, error) {
+func MessagesClearAllDrafts(ctx context.Context, rpc Invoker) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesClearAllDraftsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

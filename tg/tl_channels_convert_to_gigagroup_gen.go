@@ -165,13 +165,13 @@ var (
 // ChannelsConvertToGigagroup invokes method channels.convertToGigagroup#b290c69 returning error if any.
 //
 // See https://core.telegram.org/method/channels.convertToGigagroup for reference.
-func (c *Client) ChannelsConvertToGigagroup(ctx context.Context, channel InputChannelClass) (UpdatesClass, error) {
+func ChannelsConvertToGigagroup(ctx context.Context, rpc Invoker, channel InputChannelClass) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &ChannelsConvertToGigagroupRequest{
 		Channel: channel,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

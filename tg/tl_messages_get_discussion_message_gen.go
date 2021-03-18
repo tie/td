@@ -198,10 +198,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.getDiscussionMessage for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetDiscussionMessage(ctx context.Context, request *MessagesGetDiscussionMessageRequest) (*MessagesDiscussionMessage, error) {
+func MessagesGetDiscussionMessage(ctx context.Context, rpc Invoker, request *MessagesGetDiscussionMessageRequest) (*MessagesDiscussionMessage, error) {
 	var result MessagesDiscussionMessage
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

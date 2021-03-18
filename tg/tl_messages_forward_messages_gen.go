@@ -444,10 +444,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.forwardMessages for reference.
 // Can be used by bots.
-func (c *Client) MessagesForwardMessages(ctx context.Context, request *MessagesForwardMessagesRequest) (UpdatesClass, error) {
+func MessagesForwardMessages(ctx context.Context, rpc Invoker, request *MessagesForwardMessagesRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

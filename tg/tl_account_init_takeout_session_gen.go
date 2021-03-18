@@ -398,10 +398,10 @@ var (
 //  420 TAKEOUT_INIT_DELAY_X: Wait X seconds before initing takeout
 //
 // See https://core.telegram.org/method/account.initTakeoutSession for reference.
-func (c *Client) AccountInitTakeoutSession(ctx context.Context, request *AccountInitTakeoutSessionRequest) (*AccountTakeout, error) {
+func AccountInitTakeoutSession(ctx context.Context, rpc Invoker, request *AccountInitTakeoutSessionRequest) (*AccountTakeout, error) {
 	var result AccountTakeout
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -155,13 +155,13 @@ var (
 // Ping invokes method ping#ce73048f returning error if any.
 //
 // See https://localhost:80/doc/constructor/ping for reference.
-func (c *Client) Ping(ctx context.Context, id int32) error {
+func Ping(ctx context.Context, rpc Invoker, id int32) error {
 	var ok Ok
 
 	request := &PingRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &ok); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &ok); err != nil {
 		return err
 	}
 	return nil

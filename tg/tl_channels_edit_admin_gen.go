@@ -277,10 +277,10 @@ var (
 //
 // See https://core.telegram.org/method/channels.editAdmin for reference.
 // Can be used by bots.
-func (c *Client) ChannelsEditAdmin(ctx context.Context, request *ChannelsEditAdminRequest) (UpdatesClass, error) {
+func ChannelsEditAdmin(ctx context.Context, rpc Invoker, request *ChannelsEditAdminRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

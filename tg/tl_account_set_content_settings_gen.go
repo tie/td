@@ -181,10 +181,10 @@ var (
 // Set sensitive content settings (for viewing or hiding NSFW content)
 //
 // See https://core.telegram.org/method/account.setContentSettings for reference.
-func (c *Client) AccountSetContentSettings(ctx context.Context, request *AccountSetContentSettingsRequest) (bool, error) {
+func AccountSetContentSettings(ctx context.Context, rpc Invoker, request *AccountSetContentSettingsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

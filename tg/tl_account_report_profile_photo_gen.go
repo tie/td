@@ -247,10 +247,10 @@ var (
 // AccountReportProfilePhoto invokes method account.reportProfilePhoto#fa8cc6f5 returning error if any.
 //
 // See https://core.telegram.org/method/account.reportProfilePhoto for reference.
-func (c *Client) AccountReportProfilePhoto(ctx context.Context, request *AccountReportProfilePhotoRequest) (bool, error) {
+func AccountReportProfilePhoto(ctx context.Context, rpc Invoker, request *AccountReportProfilePhotoRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

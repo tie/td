@@ -163,13 +163,13 @@ var (
 //  1) https://core.telegram.org/api/top-rating
 //
 // See https://core.telegram.org/method/contacts.toggleTopPeers for reference.
-func (c *Client) ContactsToggleTopPeers(ctx context.Context, enabled bool) (bool, error) {
+func ContactsToggleTopPeers(ctx context.Context, rpc Invoker, enabled bool) (bool, error) {
 	var result BoolBox
 
 	request := &ContactsToggleTopPeersRequest{
 		Enabled: enabled,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

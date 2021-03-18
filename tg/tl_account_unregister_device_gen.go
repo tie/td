@@ -220,10 +220,10 @@ var (
 //  400 TOKEN_INVALID: The provided token is invalid
 //
 // See https://core.telegram.org/method/account.unregisterDevice for reference.
-func (c *Client) AccountUnregisterDevice(ctx context.Context, request *AccountUnregisterDeviceRequest) (bool, error) {
+func AccountUnregisterDevice(ctx context.Context, rpc Invoker, request *AccountUnregisterDeviceRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

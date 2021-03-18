@@ -133,11 +133,11 @@ var (
 //  1) https://core.telegram.org/api/drafts
 //
 // See https://core.telegram.org/method/messages.getAllDrafts for reference.
-func (c *Client) MessagesGetAllDrafts(ctx context.Context) (UpdatesClass, error) {
+func MessagesGetAllDrafts(ctx context.Context, rpc Invoker) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &MessagesGetAllDraftsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

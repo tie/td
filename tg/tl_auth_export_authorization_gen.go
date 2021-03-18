@@ -161,13 +161,13 @@ var (
 //
 // See https://core.telegram.org/method/auth.exportAuthorization for reference.
 // Can be used by bots.
-func (c *Client) AuthExportAuthorization(ctx context.Context, dcid int) (*AuthExportedAuthorization, error) {
+func AuthExportAuthorization(ctx context.Context, rpc Invoker, dcid int) (*AuthExportedAuthorization, error) {
 	var result AuthExportedAuthorization
 
 	request := &AuthExportAuthorizationRequest{
 		DCID: dcid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

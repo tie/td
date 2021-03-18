@@ -174,13 +174,13 @@ var (
 //
 // See https://core.telegram.org/method/channels.getFullChannel for reference.
 // Can be used by bots.
-func (c *Client) ChannelsGetFullChannel(ctx context.Context, channel InputChannelClass) (*MessagesChatFull, error) {
+func ChannelsGetFullChannel(ctx context.Context, rpc Invoker, channel InputChannelClass) (*MessagesChatFull, error) {
 	var result MessagesChatFull
 
 	request := &ChannelsGetFullChannelRequest{
 		Channel: channel,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -213,10 +213,10 @@ var (
 //  400 ENCRYPTION_ALREADY_DECLINED: The secret chat was already declined
 //
 // See https://core.telegram.org/method/messages.acceptEncryption for reference.
-func (c *Client) MessagesAcceptEncryption(ctx context.Context, request *MessagesAcceptEncryptionRequest) (EncryptedChatClass, error) {
+func MessagesAcceptEncryption(ctx context.Context, rpc Invoker, request *MessagesAcceptEncryptionRequest) (EncryptedChatClass, error) {
 	var result EncryptedChatBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.EncryptedChat, nil

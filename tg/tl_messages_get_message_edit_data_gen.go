@@ -192,10 +192,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getMessageEditData for reference.
-func (c *Client) MessagesGetMessageEditData(ctx context.Context, request *MessagesGetMessageEditDataRequest) (*MessagesMessageEditData, error) {
+func MessagesGetMessageEditData(ctx context.Context, rpc Invoker, request *MessagesGetMessageEditDataRequest) (*MessagesMessageEditData, error) {
 	var result MessagesMessageEditData
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

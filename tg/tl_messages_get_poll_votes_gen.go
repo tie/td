@@ -325,10 +325,10 @@ var (
 //  403 POLL_VOTE_REQUIRED: Cast a vote in the poll before calling this method
 //
 // See https://core.telegram.org/method/messages.getPollVotes for reference.
-func (c *Client) MessagesGetPollVotes(ctx context.Context, request *MessagesGetPollVotesRequest) (*MessagesVotesList, error) {
+func MessagesGetPollVotes(ctx context.Context, rpc Invoker, request *MessagesGetPollVotesRequest) (*MessagesVotesList, error) {
 	var result MessagesVotesList
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

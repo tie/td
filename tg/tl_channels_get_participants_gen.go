@@ -290,10 +290,10 @@ var (
 //
 // See https://core.telegram.org/method/channels.getParticipants for reference.
 // Can be used by bots.
-func (c *Client) ChannelsGetParticipants(ctx context.Context, request *ChannelsGetParticipantsRequest) (ChannelsChannelParticipantsClass, error) {
+func ChannelsGetParticipants(ctx context.Context, rpc Invoker, request *ChannelsGetParticipantsRequest) (ChannelsChannelParticipantsClass, error) {
 	var result ChannelsChannelParticipantsBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.ChannelParticipants, nil

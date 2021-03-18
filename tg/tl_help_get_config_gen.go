@@ -141,11 +141,11 @@ var (
 //
 // See https://core.telegram.org/method/help.getConfig for reference.
 // Can be used by bots.
-func (c *Client) HelpGetConfig(ctx context.Context) (*Config, error) {
+func HelpGetConfig(ctx context.Context, rpc Invoker) (*Config, error) {
 	var result Config
 
 	request := &HelpGetConfigRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -187,10 +187,10 @@ var (
 //  400 RANDOM_LENGTH_INVALID: Random length invalid
 //
 // See https://core.telegram.org/method/messages.getDhConfig for reference.
-func (c *Client) MessagesGetDhConfig(ctx context.Context, request *MessagesGetDhConfigRequest) (MessagesDhConfigClass, error) {
+func MessagesGetDhConfig(ctx context.Context, rpc Invoker, request *MessagesGetDhConfigRequest) (MessagesDhConfigClass, error) {
 	var result MessagesDhConfigBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.DhConfig, nil

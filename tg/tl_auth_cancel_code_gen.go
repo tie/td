@@ -188,10 +188,10 @@ var (
 //  400 PHONE_NUMBER_INVALID: The phone number is invalid
 //
 // See https://core.telegram.org/method/auth.cancelCode for reference.
-func (c *Client) AuthCancelCode(ctx context.Context, request *AuthCancelCodeRequest) (bool, error) {
+func AuthCancelCode(ctx context.Context, rpc Invoker, request *AuthCancelCodeRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

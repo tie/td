@@ -160,13 +160,13 @@ var (
 //  400 CHAT_ID_INVALID: The provided chat id is invalid
 //
 // See https://core.telegram.org/method/messages.reportEncryptedSpam for reference.
-func (c *Client) MessagesReportEncryptedSpam(ctx context.Context, peer InputEncryptedChat) (bool, error) {
+func MessagesReportEncryptedSpam(ctx context.Context, rpc Invoker, peer InputEncryptedChat) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesReportEncryptedSpamRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

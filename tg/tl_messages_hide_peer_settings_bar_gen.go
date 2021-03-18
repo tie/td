@@ -168,13 +168,13 @@ var (
 //  1) https://core.telegram.org/constructor/peerSettings
 //
 // See https://core.telegram.org/method/messages.hidePeerSettingsBar for reference.
-func (c *Client) MessagesHidePeerSettingsBar(ctx context.Context, peer InputPeerClass) (bool, error) {
+func MessagesHidePeerSettingsBar(ctx context.Context, rpc Invoker, peer InputPeerClass) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesHidePeerSettingsBarRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

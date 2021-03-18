@@ -165,13 +165,13 @@ var (
 //  403 USER_INVALID: Invalid user provided
 //
 // See https://core.telegram.org/method/help.getUserInfo for reference.
-func (c *Client) HelpGetUserInfo(ctx context.Context, userid InputUserClass) (HelpUserInfoClass, error) {
+func HelpGetUserInfo(ctx context.Context, rpc Invoker, userid InputUserClass) (HelpUserInfoClass, error) {
 	var result HelpUserInfoBox
 
 	request := &HelpGetUserInfoRequest{
 		UserID: userid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.UserInfo, nil

@@ -233,10 +233,10 @@ var (
 //  400 CHANNELS_ADMIN_PUBLIC_TOO_MUCH: Returned if the check_limit flag is set and the user has reached the limit of public channels/supergroups
 //
 // See https://core.telegram.org/method/channels.getAdminedPublicChannels for reference.
-func (c *Client) ChannelsGetAdminedPublicChannels(ctx context.Context, request *ChannelsGetAdminedPublicChannelsRequest) (MessagesChatsClass, error) {
+func ChannelsGetAdminedPublicChannels(ctx context.Context, rpc Invoker, request *ChannelsGetAdminedPublicChannelsRequest) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

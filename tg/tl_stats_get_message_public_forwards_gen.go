@@ -317,10 +317,10 @@ var (
 //
 // See https://core.telegram.org/method/stats.getMessagePublicForwards for reference.
 // Can be used by bots.
-func (c *Client) StatsGetMessagePublicForwards(ctx context.Context, request *StatsGetMessagePublicForwardsRequest) (MessagesMessagesClass, error) {
+func StatsGetMessagePublicForwards(ctx context.Context, rpc Invoker, request *StatsGetMessagePublicForwardsRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

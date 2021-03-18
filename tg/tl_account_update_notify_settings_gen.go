@@ -192,10 +192,10 @@ var (
 //  400 SETTINGS_INVALID: Invalid settings were provided
 //
 // See https://core.telegram.org/method/account.updateNotifySettings for reference.
-func (c *Client) AccountUpdateNotifySettings(ctx context.Context, request *AccountUpdateNotifySettingsRequest) (bool, error) {
+func AccountUpdateNotifySettings(ctx context.Context, rpc Invoker, request *AccountUpdateNotifySettingsRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

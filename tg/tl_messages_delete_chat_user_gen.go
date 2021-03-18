@@ -239,10 +239,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.deleteChatUser for reference.
 // Can be used by bots.
-func (c *Client) MessagesDeleteChatUser(ctx context.Context, request *MessagesDeleteChatUserRequest) (UpdatesClass, error) {
+func MessagesDeleteChatUser(ctx context.Context, rpc Invoker, request *MessagesDeleteChatUserRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

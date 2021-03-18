@@ -155,13 +155,13 @@ var (
 // PhoneDiscardGroupCall invokes method phone.discardGroupCall#7a777135 returning error if any.
 //
 // See https://core.telegram.org/method/phone.discardGroupCall for reference.
-func (c *Client) PhoneDiscardGroupCall(ctx context.Context, call InputGroupCall) (UpdatesClass, error) {
+func PhoneDiscardGroupCall(ctx context.Context, rpc Invoker, call InputGroupCall) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &PhoneDiscardGroupCallRequest{
 		Call: call,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

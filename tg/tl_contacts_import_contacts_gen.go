@@ -176,13 +176,13 @@ var (
 //  1) https://core.telegram.org/method/contacts.addContact
 //
 // See https://core.telegram.org/method/contacts.importContacts for reference.
-func (c *Client) ContactsImportContacts(ctx context.Context, contacts []InputPhoneContact) (*ContactsImportedContacts, error) {
+func ContactsImportContacts(ctx context.Context, rpc Invoker, contacts []InputPhoneContact) (*ContactsImportedContacts, error) {
 	var result ContactsImportedContacts
 
 	request := &ContactsImportContactsRequest{
 		Contacts: contacts,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

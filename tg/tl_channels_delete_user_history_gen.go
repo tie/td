@@ -213,10 +213,10 @@ var (
 //  400 USER_ID_INVALID: The provided user ID is invalid
 //
 // See https://core.telegram.org/method/channels.deleteUserHistory for reference.
-func (c *Client) ChannelsDeleteUserHistory(ctx context.Context, request *ChannelsDeleteUserHistoryRequest) (*MessagesAffectedHistory, error) {
+func ChannelsDeleteUserHistory(ctx context.Context, rpc Invoker, request *ChannelsDeleteUserHistoryRequest) (*MessagesAffectedHistory, error) {
 	var result MessagesAffectedHistory
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

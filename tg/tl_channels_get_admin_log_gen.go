@@ -413,10 +413,10 @@ var (
 //  400 MSG_ID_INVALID: Invalid message ID provided
 //
 // See https://core.telegram.org/method/channels.getAdminLog for reference.
-func (c *Client) ChannelsGetAdminLog(ctx context.Context, request *ChannelsGetAdminLogRequest) (*ChannelsAdminLogResults, error) {
+func ChannelsGetAdminLog(ctx context.Context, rpc Invoker, request *ChannelsGetAdminLogRequest) (*ChannelsAdminLogResults, error) {
 	var result ChannelsAdminLogResults
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

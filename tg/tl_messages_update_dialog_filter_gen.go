@@ -233,10 +233,10 @@ var (
 //  400 FILTER_ID_INVALID: The specified filter ID is invalid
 //
 // See https://core.telegram.org/method/messages.updateDialogFilter for reference.
-func (c *Client) MessagesUpdateDialogFilter(ctx context.Context, request *MessagesUpdateDialogFilterRequest) (bool, error) {
+func MessagesUpdateDialogFilter(ctx context.Context, rpc Invoker, request *MessagesUpdateDialogFilterRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -190,10 +190,10 @@ var (
 //
 // See https://core.telegram.org/method/upload.getFileHashes for reference.
 // Can be used by bots.
-func (c *Client) UploadGetFileHashes(ctx context.Context, request *UploadGetFileHashesRequest) ([]FileHash, error) {
+func UploadGetFileHashes(ctx context.Context, rpc Invoker, request *UploadGetFileHashesRequest) ([]FileHash, error) {
 	var result FileHashVector
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []FileHash(result.Elems), nil

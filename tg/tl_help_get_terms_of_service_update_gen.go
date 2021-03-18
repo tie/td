@@ -127,11 +127,11 @@ var (
 // Look for updates of telegram's terms of service
 //
 // See https://core.telegram.org/method/help.getTermsOfServiceUpdate for reference.
-func (c *Client) HelpGetTermsOfServiceUpdate(ctx context.Context) (HelpTermsOfServiceUpdateClass, error) {
+func HelpGetTermsOfServiceUpdate(ctx context.Context, rpc Invoker) (HelpTermsOfServiceUpdateClass, error) {
 	var result HelpTermsOfServiceUpdateBox
 
 	request := &HelpGetTermsOfServiceUpdateRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.TermsOfServiceUpdate, nil

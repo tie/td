@@ -232,10 +232,10 @@ var (
 // Internal use
 //
 // See https://core.telegram.org/method/help.editUserInfo for reference.
-func (c *Client) HelpEditUserInfo(ctx context.Context, request *HelpEditUserInfoRequest) (HelpUserInfoClass, error) {
+func HelpEditUserInfo(ctx context.Context, rpc Invoker, request *HelpEditUserInfoRequest) (HelpUserInfoClass, error) {
 	var result HelpUserInfoBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.UserInfo, nil

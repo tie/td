@@ -415,10 +415,10 @@ var (
 //  400 SEARCH_QUERY_EMPTY: The search query is empty
 //
 // See https://core.telegram.org/method/messages.searchGlobal for reference.
-func (c *Client) MessagesSearchGlobal(ctx context.Context, request *MessagesSearchGlobalRequest) (MessagesMessagesClass, error) {
+func MessagesSearchGlobal(ctx context.Context, rpc Invoker, request *MessagesSearchGlobalRequest) (MessagesMessagesClass, error) {
 	var result MessagesMessagesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Messages, nil

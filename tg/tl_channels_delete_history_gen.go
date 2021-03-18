@@ -204,10 +204,10 @@ var (
 //  400 CHANNEL_PRIVATE: You haven't joined this channel/supergroup
 //
 // See https://core.telegram.org/method/channels.deleteHistory for reference.
-func (c *Client) ChannelsDeleteHistory(ctx context.Context, request *ChannelsDeleteHistoryRequest) (bool, error) {
+func ChannelsDeleteHistory(ctx context.Context, rpc Invoker, request *ChannelsDeleteHistoryRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -169,13 +169,13 @@ var (
 //
 // See https://core.telegram.org/method/bots.setBotCommands for reference.
 // Can be used by bots.
-func (c *Client) BotsSetBotCommands(ctx context.Context, commands []BotCommand) (bool, error) {
+func BotsSetBotCommands(ctx context.Context, rpc Invoker, commands []BotCommand) (bool, error) {
 	var result BoolBox
 
 	request := &BotsSetBotCommandsRequest{
 		Commands: commands,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

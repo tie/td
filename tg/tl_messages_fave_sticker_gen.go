@@ -194,10 +194,10 @@ var (
 //  400 STICKER_ID_INVALID: The provided sticker ID is invalid
 //
 // See https://core.telegram.org/method/messages.faveSticker for reference.
-func (c *Client) MessagesFaveSticker(ctx context.Context, request *MessagesFaveStickerRequest) (bool, error) {
+func MessagesFaveSticker(ctx context.Context, rpc Invoker, request *MessagesFaveStickerRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

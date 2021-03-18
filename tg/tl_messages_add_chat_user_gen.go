@@ -222,10 +222,10 @@ var (
 //  403 USER_PRIVACY_RESTRICTED: The user's privacy settings do not allow you to do this
 //
 // See https://core.telegram.org/method/messages.addChatUser for reference.
-func (c *Client) MessagesAddChatUser(ctx context.Context, request *MessagesAddChatUserRequest) (UpdatesClass, error) {
+func MessagesAddChatUser(ctx context.Context, rpc Invoker, request *MessagesAddChatUserRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

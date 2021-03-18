@@ -208,10 +208,10 @@ var (
 //  400 LANG_PACK_INVALID: The provided language pack is invalid
 //
 // See https://core.telegram.org/method/langpack.getDifference for reference.
-func (c *Client) LangpackGetDifference(ctx context.Context, request *LangpackGetDifferenceRequest) (*LangPackDifference, error) {
+func LangpackGetDifference(ctx context.Context, rpc Invoker, request *LangpackGetDifferenceRequest) (*LangPackDifference, error) {
 	var result LangPackDifference
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

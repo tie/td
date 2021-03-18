@@ -214,10 +214,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.uploadMedia for reference.
 // Can be used by bots.
-func (c *Client) MessagesUploadMedia(ctx context.Context, request *MessagesUploadMediaRequest) (MessageMediaClass, error) {
+func MessagesUploadMedia(ctx context.Context, rpc Invoker, request *MessagesUploadMediaRequest) (MessageMediaClass, error) {
 	var result MessageMediaBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.MessageMedia, nil

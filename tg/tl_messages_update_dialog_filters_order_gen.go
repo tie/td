@@ -175,13 +175,13 @@ var (
 //  1) https://core.telegram.org/api/folders
 //
 // See https://core.telegram.org/method/messages.updateDialogFiltersOrder for reference.
-func (c *Client) MessagesUpdateDialogFiltersOrder(ctx context.Context, order []int) (bool, error) {
+func MessagesUpdateDialogFiltersOrder(ctx context.Context, rpc Invoker, order []int) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesUpdateDialogFiltersOrderRequest{
 		Order: order,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

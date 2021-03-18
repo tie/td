@@ -231,10 +231,10 @@ var (
 //  400 GRAPH_OUTDATED_RELOAD: The graph is outdated, please get a new async token using stats.getBroadcastStats
 //
 // See https://core.telegram.org/method/stats.loadAsyncGraph for reference.
-func (c *Client) StatsLoadAsyncGraph(ctx context.Context, request *StatsLoadAsyncGraphRequest) (StatsGraphClass, error) {
+func StatsLoadAsyncGraph(ctx context.Context, rpc Invoker, request *StatsLoadAsyncGraphRequest) (StatsGraphClass, error) {
 	var result StatsGraphBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.StatsGraph, nil

@@ -172,13 +172,13 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.reportSpam for reference.
-func (c *Client) MessagesReportSpam(ctx context.Context, peer InputPeerClass) (bool, error) {
+func MessagesReportSpam(ctx context.Context, rpc Invoker, peer InputPeerClass) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesReportSpamRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

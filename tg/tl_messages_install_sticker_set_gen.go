@@ -189,10 +189,10 @@ var (
 //  400 STICKERSET_INVALID: The provided sticker set is invalid
 //
 // See https://core.telegram.org/method/messages.installStickerSet for reference.
-func (c *Client) MessagesInstallStickerSet(ctx context.Context, request *MessagesInstallStickerSetRequest) (MessagesStickerSetInstallResultClass, error) {
+func MessagesInstallStickerSet(ctx context.Context, rpc Invoker, request *MessagesInstallStickerSetRequest) (MessagesStickerSetInstallResultClass, error) {
 	var result MessagesStickerSetInstallResultBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.StickerSetInstallResult, nil

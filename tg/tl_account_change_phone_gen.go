@@ -215,10 +215,10 @@ var (
 //  400 PHONE_NUMBER_INVALID: The phone number is invalid
 //
 // See https://core.telegram.org/method/account.changePhone for reference.
-func (c *Client) AccountChangePhone(ctx context.Context, request *AccountChangePhoneRequest) (UserClass, error) {
+func AccountChangePhone(ctx context.Context, rpc Invoker, request *AccountChangePhoneRequest) (UserClass, error) {
 	var result UserBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.User, nil

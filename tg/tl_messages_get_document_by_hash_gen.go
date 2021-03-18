@@ -209,10 +209,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.getDocumentByHash for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetDocumentByHash(ctx context.Context, request *MessagesGetDocumentByHashRequest) (DocumentClass, error) {
+func MessagesGetDocumentByHash(ctx context.Context, rpc Invoker, request *MessagesGetDocumentByHashRequest) (DocumentClass, error) {
 	var result DocumentBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Document, nil

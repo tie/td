@@ -194,10 +194,10 @@ var (
 //  400 GIF_ID_INVALID: The provided GIF ID is invalid
 //
 // See https://core.telegram.org/method/messages.saveGif for reference.
-func (c *Client) MessagesSaveGif(ctx context.Context, request *MessagesSaveGifRequest) (bool, error) {
+func MessagesSaveGif(ctx context.Context, rpc Invoker, request *MessagesSaveGifRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

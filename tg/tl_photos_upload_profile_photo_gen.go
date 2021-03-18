@@ -309,10 +309,10 @@ var (
 //  400 VIDEO_FILE_INVALID: The specified video file is invalid
 //
 // See https://core.telegram.org/method/photos.uploadProfilePhoto for reference.
-func (c *Client) PhotosUploadProfilePhoto(ctx context.Context, request *PhotosUploadProfilePhotoRequest) (*PhotosPhoto, error) {
+func PhotosUploadProfilePhoto(ctx context.Context, rpc Invoker, request *PhotosUploadProfilePhotoRequest) (*PhotosPhoto, error) {
 	var result PhotosPhoto
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

@@ -211,10 +211,10 @@ var (
 // Method for fetching previously featured stickers
 //
 // See https://core.telegram.org/method/messages.getOldFeaturedStickers for reference.
-func (c *Client) MessagesGetOldFeaturedStickers(ctx context.Context, request *MessagesGetOldFeaturedStickersRequest) (MessagesFeaturedStickersClass, error) {
+func MessagesGetOldFeaturedStickers(ctx context.Context, rpc Invoker, request *MessagesGetOldFeaturedStickersRequest) (MessagesFeaturedStickersClass, error) {
 	var result MessagesFeaturedStickersBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.FeaturedStickers, nil

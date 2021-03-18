@@ -216,10 +216,10 @@ var (
 //
 // See https://core.telegram.org/method/channels.deleteMessages for reference.
 // Can be used by bots.
-func (c *Client) ChannelsDeleteMessages(ctx context.Context, request *ChannelsDeleteMessagesRequest) (*MessagesAffectedMessages, error) {
+func ChannelsDeleteMessages(ctx context.Context, rpc Invoker, request *ChannelsDeleteMessagesRequest) (*MessagesAffectedMessages, error) {
 	var result MessagesAffectedMessages
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

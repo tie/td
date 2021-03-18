@@ -195,10 +195,10 @@ var (
 // Delete scheduled messages
 //
 // See https://core.telegram.org/method/messages.deleteScheduledMessages for reference.
-func (c *Client) MessagesDeleteScheduledMessages(ctx context.Context, request *MessagesDeleteScheduledMessagesRequest) (UpdatesClass, error) {
+func MessagesDeleteScheduledMessages(ctx context.Context, rpc Invoker, request *MessagesDeleteScheduledMessagesRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

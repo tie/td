@@ -371,10 +371,10 @@ var (
 //  400 OFFSET_PEER_ID_INVALID: The provided offset peer is invalid
 //
 // See https://core.telegram.org/method/messages.getDialogs for reference.
-func (c *Client) MessagesGetDialogs(ctx context.Context, request *MessagesGetDialogsRequest) (MessagesDialogsClass, error) {
+func MessagesGetDialogs(ctx context.Context, rpc Invoker, request *MessagesGetDialogsRequest) (MessagesDialogsClass, error) {
 	var result MessagesDialogsBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Dialogs, nil

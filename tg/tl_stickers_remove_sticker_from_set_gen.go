@@ -172,13 +172,13 @@ var (
 //
 // See https://core.telegram.org/method/stickers.removeStickerFromSet for reference.
 // Can be used by bots.
-func (c *Client) StickersRemoveStickerFromSet(ctx context.Context, sticker InputDocumentClass) (*MessagesStickerSet, error) {
+func StickersRemoveStickerFromSet(ctx context.Context, rpc Invoker, sticker InputDocumentClass) (*MessagesStickerSet, error) {
 	var result MessagesStickerSet
 
 	request := &StickersRemoveStickerFromSetRequest{
 		Sticker: sticker,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

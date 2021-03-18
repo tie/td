@@ -179,10 +179,10 @@ var (
 // PhoneCheckGroupCall invokes method phone.checkGroupCall#b74a7bea returning error if any.
 //
 // See https://core.telegram.org/method/phone.checkGroupCall for reference.
-func (c *Client) PhoneCheckGroupCall(ctx context.Context, request *PhoneCheckGroupCallRequest) (bool, error) {
+func PhoneCheckGroupCall(ctx context.Context, rpc Invoker, request *PhoneCheckGroupCallRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

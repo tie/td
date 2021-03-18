@@ -211,10 +211,10 @@ var (
 //  1) https://core.telegram.org/method/messages.search
 //
 // See https://core.telegram.org/method/messages.getSearchCounters for reference.
-func (c *Client) MessagesGetSearchCounters(ctx context.Context, request *MessagesGetSearchCountersRequest) ([]MessagesSearchCounter, error) {
+func MessagesGetSearchCounters(ctx context.Context, rpc Invoker, request *MessagesGetSearchCountersRequest) ([]MessagesSearchCounter, error) {
 	var result MessagesSearchCounterVector
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []MessagesSearchCounter(result.Elems), nil

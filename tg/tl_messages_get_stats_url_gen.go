@@ -237,10 +237,10 @@ var (
 //  400 PEER_ID_INVALID: The provided peer id is invalid
 //
 // See https://core.telegram.org/method/messages.getStatsURL for reference.
-func (c *Client) MessagesGetStatsURL(ctx context.Context, request *MessagesGetStatsURLRequest) (*StatsURL, error) {
+func MessagesGetStatsURL(ctx context.Context, rpc Invoker, request *MessagesGetStatsURLRequest) (*StatsURL, error) {
 	var result StatsURL
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

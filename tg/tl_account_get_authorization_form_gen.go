@@ -205,10 +205,10 @@ var (
 // Returns a Telegram Passport authorization form for sharing data with a service
 //
 // See https://core.telegram.org/method/account.getAuthorizationForm for reference.
-func (c *Client) AccountGetAuthorizationForm(ctx context.Context, request *AccountGetAuthorizationFormRequest) (*AccountAuthorizationForm, error) {
+func AccountGetAuthorizationForm(ctx context.Context, rpc Invoker, request *AccountGetAuthorizationFormRequest) (*AccountAuthorizationForm, error) {
 	var result AccountAuthorizationForm
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

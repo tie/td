@@ -188,13 +188,13 @@ var (
 //
 // See https://core.telegram.org/method/channels.getChannels for reference.
 // Can be used by bots.
-func (c *Client) ChannelsGetChannels(ctx context.Context, id []InputChannelClass) (MessagesChatsClass, error) {
+func ChannelsGetChannels(ctx context.Context, rpc Invoker, id []InputChannelClass) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
 	request := &ChannelsGetChannelsRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

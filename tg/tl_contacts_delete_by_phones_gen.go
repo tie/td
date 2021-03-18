@@ -166,13 +166,13 @@ var (
 // Delete contacts by phone number
 //
 // See https://core.telegram.org/method/contacts.deleteByPhones for reference.
-func (c *Client) ContactsDeleteByPhones(ctx context.Context, phones []string) (bool, error) {
+func ContactsDeleteByPhones(ctx context.Context, rpc Invoker, phones []string) (bool, error) {
 	var result BoolBox
 
 	request := &ContactsDeleteByPhonesRequest{
 		Phones: phones,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

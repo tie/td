@@ -240,10 +240,10 @@ var (
 //
 // See https://core.telegram.org/method/channels.editBanned for reference.
 // Can be used by bots.
-func (c *Client) ChannelsEditBanned(ctx context.Context, request *ChannelsEditBannedRequest) (UpdatesClass, error) {
+func ChannelsEditBanned(ctx context.Context, rpc Invoker, request *ChannelsEditBannedRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

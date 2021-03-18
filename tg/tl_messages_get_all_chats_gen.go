@@ -166,13 +166,13 @@ var (
 // Get all chats, channels and supergroups
 //
 // See https://core.telegram.org/method/messages.getAllChats for reference.
-func (c *Client) MessagesGetAllChats(ctx context.Context, exceptids []int) (MessagesChatsClass, error) {
+func MessagesGetAllChats(ctx context.Context, rpc Invoker, exceptids []int) (MessagesChatsClass, error) {
 	var result MessagesChatsBox
 
 	request := &MessagesGetAllChatsRequest{
 		ExceptIDs: exceptids,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Chats, nil

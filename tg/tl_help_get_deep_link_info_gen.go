@@ -157,13 +157,13 @@ var (
 // Get info about a t.me link
 //
 // See https://core.telegram.org/method/help.getDeepLinkInfo for reference.
-func (c *Client) HelpGetDeepLinkInfo(ctx context.Context, path string) (HelpDeepLinkInfoClass, error) {
+func HelpGetDeepLinkInfo(ctx context.Context, rpc Invoker, path string) (HelpDeepLinkInfoClass, error) {
 	var result HelpDeepLinkInfoBox
 
 	request := &HelpGetDeepLinkInfoRequest{
 		Path: path,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.DeepLinkInfo, nil

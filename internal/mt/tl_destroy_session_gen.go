@@ -151,13 +151,13 @@ var (
 )
 
 // DestroySession invokes method destroy_session#e7512126 returning error if any.
-func (c *Client) DestroySession(ctx context.Context, sessionid int64) (DestroySessionResClass, error) {
+func DestroySession(ctx context.Context, rpc Invoker, sessionid int64) (DestroySessionResClass, error) {
 	var result DestroySessionResBox
 
 	request := &DestroySessionRequest{
 		SessionID: sessionid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.DestroySessionRes, nil

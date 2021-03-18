@@ -160,13 +160,13 @@ var (
 //  400 MESSAGE_ID_INVALID: The provided message id is invalid
 //
 // See https://core.telegram.org/method/payments.getPaymentReceipt for reference.
-func (c *Client) PaymentsGetPaymentReceipt(ctx context.Context, msgid int) (*PaymentsPaymentReceipt, error) {
+func PaymentsGetPaymentReceipt(ctx context.Context, rpc Invoker, msgid int) (*PaymentsPaymentReceipt, error) {
 	var result PaymentsPaymentReceipt
 
 	request := &PaymentsGetPaymentReceiptRequest{
 		MsgID: msgid,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

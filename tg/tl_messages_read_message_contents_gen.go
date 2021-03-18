@@ -166,13 +166,13 @@ var (
 // Notifies the sender about the recipient having listened a voice message or watched a video.
 //
 // See https://core.telegram.org/method/messages.readMessageContents for reference.
-func (c *Client) MessagesReadMessageContents(ctx context.Context, id []int) (*MessagesAffectedMessages, error) {
+func MessagesReadMessageContents(ctx context.Context, rpc Invoker, id []int) (*MessagesAffectedMessages, error) {
 	var result MessagesAffectedMessages
 
 	request := &MessagesReadMessageContentsRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

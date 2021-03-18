@@ -245,10 +245,10 @@ var (
 // PhoneToggleGroupCallSettings invokes method phone.toggleGroupCallSettings#74bbb43d returning error if any.
 //
 // See https://core.telegram.org/method/phone.toggleGroupCallSettings for reference.
-func (c *Client) PhoneToggleGroupCallSettings(ctx context.Context, request *PhoneToggleGroupCallSettingsRequest) (UpdatesClass, error) {
+func PhoneToggleGroupCallSettings(ctx context.Context, rpc Invoker, request *PhoneToggleGroupCallSettingsRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

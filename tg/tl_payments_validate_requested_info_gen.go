@@ -232,10 +232,10 @@ var (
 //  400 MESSAGE_ID_INVALID: The provided message id is invalid
 //
 // See https://core.telegram.org/method/payments.validateRequestedInfo for reference.
-func (c *Client) PaymentsValidateRequestedInfo(ctx context.Context, request *PaymentsValidateRequestedInfoRequest) (*PaymentsValidatedRequestedInfo, error) {
+func PaymentsValidateRequestedInfo(ctx context.Context, rpc Invoker, request *PaymentsValidateRequestedInfoRequest) (*PaymentsValidatedRequestedInfo, error) {
 	var result PaymentsValidatedRequestedInfo
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

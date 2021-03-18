@@ -167,13 +167,13 @@ var (
 //
 // See https://core.telegram.org/method/auth.dropTempAuthKeys for reference.
 // Can be used by bots.
-func (c *Client) AuthDropTempAuthKeys(ctx context.Context, exceptauthkeys []int64) (bool, error) {
+func AuthDropTempAuthKeys(ctx context.Context, rpc Invoker, exceptauthkeys []int64) (bool, error) {
 	var result BoolBox
 
 	request := &AuthDropTempAuthKeysRequest{
 		ExceptAuthKeys: exceptauthkeys,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

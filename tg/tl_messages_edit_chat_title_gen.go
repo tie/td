@@ -188,10 +188,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.editChatTitle for reference.
 // Can be used by bots.
-func (c *Client) MessagesEditChatTitle(ctx context.Context, request *MessagesEditChatTitleRequest) (UpdatesClass, error) {
+func MessagesEditChatTitle(ctx context.Context, rpc Invoker, request *MessagesEditChatTitleRequest) (UpdatesClass, error) {
 	var result UpdatesBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

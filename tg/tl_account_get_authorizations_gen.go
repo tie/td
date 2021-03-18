@@ -127,11 +127,11 @@ var (
 // Get logged-in sessions
 //
 // See https://core.telegram.org/method/account.getAuthorizations for reference.
-func (c *Client) AccountGetAuthorizations(ctx context.Context) (*AccountAuthorizations, error) {
+func AccountGetAuthorizations(ctx context.Context, rpc Invoker) (*AccountAuthorizations, error) {
 	var result AccountAuthorizations
 
 	request := &AccountGetAuthorizationsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

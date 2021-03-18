@@ -264,10 +264,10 @@ var (
 // Sends a Telegram Passport authorization form, effectively sharing data with the service
 //
 // See https://core.telegram.org/method/account.acceptAuthorization for reference.
-func (c *Client) AccountAcceptAuthorization(ctx context.Context, request *AccountAcceptAuthorizationRequest) (bool, error) {
+func AccountAcceptAuthorization(ctx context.Context, rpc Invoker, request *AccountAcceptAuthorizationRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -127,11 +127,11 @@ var (
 // Get inactive channels and supergroups
 //
 // See https://core.telegram.org/method/channels.getInactiveChannels for reference.
-func (c *Client) ChannelsGetInactiveChannels(ctx context.Context) (*MessagesInactiveChats, error) {
+func ChannelsGetInactiveChannels(ctx context.Context, rpc Invoker) (*MessagesInactiveChats, error) {
 	var result MessagesInactiveChats
 
 	request := &ChannelsGetInactiveChannelsRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

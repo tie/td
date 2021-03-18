@@ -213,10 +213,10 @@ var (
 // Clear saved payment information
 //
 // See https://core.telegram.org/method/payments.clearSavedInfo for reference.
-func (c *Client) PaymentsClearSavedInfo(ctx context.Context, request *PaymentsClearSavedInfoRequest) (bool, error) {
+func PaymentsClearSavedInfo(ctx context.Context, rpc Invoker, request *PaymentsClearSavedInfoRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

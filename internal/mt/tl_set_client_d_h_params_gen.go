@@ -199,10 +199,10 @@ var (
 )
 
 // SetClientDHParams invokes method set_client_DH_params#f5045f1f returning error if any.
-func (c *Client) SetClientDHParams(ctx context.Context, request *SetClientDHParamsRequest) (SetClientDHParamsAnswerClass, error) {
+func SetClientDHParams(ctx context.Context, rpc Invoker, request *SetClientDHParamsRequest) (SetClientDHParamsAnswerClass, error) {
 	var result SetClientDHParamsAnswerBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Set_client_DH_params_answer, nil

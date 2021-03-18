@@ -201,10 +201,10 @@ var (
 //
 // See https://core.telegram.org/method/channels.setStickers for reference.
 // Can be used by bots.
-func (c *Client) ChannelsSetStickers(ctx context.Context, request *ChannelsSetStickersRequest) (bool, error) {
+func ChannelsSetStickers(ctx context.Context, rpc Invoker, request *ChannelsSetStickersRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

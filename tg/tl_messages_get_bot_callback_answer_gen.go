@@ -351,10 +351,10 @@ var (
 //  -503 Timeout: Timeout while fetching data
 //
 // See https://core.telegram.org/method/messages.getBotCallbackAnswer for reference.
-func (c *Client) MessagesGetBotCallbackAnswer(ctx context.Context, request *MessagesGetBotCallbackAnswerRequest) (*MessagesBotCallbackAnswer, error) {
+func MessagesGetBotCallbackAnswer(ctx context.Context, rpc Invoker, request *MessagesGetBotCallbackAnswerRequest) (*MessagesBotCallbackAnswer, error) {
 	var result MessagesBotCallbackAnswer
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

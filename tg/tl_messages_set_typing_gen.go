@@ -278,10 +278,10 @@ var (
 //
 // See https://core.telegram.org/method/messages.setTyping for reference.
 // Can be used by bots.
-func (c *Client) MessagesSetTyping(ctx context.Context, request *MessagesSetTypingRequest) (bool, error) {
+func MessagesSetTyping(ctx context.Context, rpc Invoker, request *MessagesSetTypingRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

@@ -167,13 +167,13 @@ var (
 //  2) https://core.telegram.org/constructor/updateServiceNotification
 //
 // See https://core.telegram.org/method/help.getAppChangelog for reference.
-func (c *Client) HelpGetAppChangelog(ctx context.Context, prevappversion string) (UpdatesClass, error) {
+func HelpGetAppChangelog(ctx context.Context, rpc Invoker, prevappversion string) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &HelpGetAppChangelogRequest{
 		PrevAppVersion: prevappversion,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

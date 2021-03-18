@@ -195,10 +195,10 @@ var (
 //  400 TMP_PASSWORD_DISABLED: The temporary password is disabled
 //
 // See https://core.telegram.org/method/account.getTmpPassword for reference.
-func (c *Client) AccountGetTmpPassword(ctx context.Context, request *AccountGetTmpPasswordRequest) (*AccountTmpPassword, error) {
+func AccountGetTmpPassword(ctx context.Context, rpc Invoker, request *AccountGetTmpPasswordRequest) (*AccountTmpPassword, error) {
 	var result AccountTmpPassword
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

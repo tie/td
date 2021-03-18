@@ -163,13 +163,13 @@ var (
 //  1) https://core.telegram.org/passport
 //
 // See https://core.telegram.org/method/account.sendVerifyEmailCode for reference.
-func (c *Client) AccountSendVerifyEmailCode(ctx context.Context, email string) (*AccountSentEmailCode, error) {
+func AccountSendVerifyEmailCode(ctx context.Context, rpc Invoker, email string) (*AccountSentEmailCode, error) {
 	var result AccountSentEmailCode
 
 	request := &AccountSendVerifyEmailCodeRequest{
 		Email: email,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

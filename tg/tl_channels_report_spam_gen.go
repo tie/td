@@ -235,10 +235,10 @@ var (
 //  400 USER_ID_INVALID: The provided user ID is invalid
 //
 // See https://core.telegram.org/method/channels.reportSpam for reference.
-func (c *Client) ChannelsReportSpam(ctx context.Context, request *ChannelsReportSpamRequest) (bool, error) {
+func ChannelsReportSpam(ctx context.Context, rpc Invoker, request *ChannelsReportSpamRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)

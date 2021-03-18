@@ -180,13 +180,13 @@ var (
 //  400 USER_CHANNELS_TOO_MUCH: One of the users you tried to add is already in too many channels/supergroups
 //
 // See https://core.telegram.org/method/channels.joinChannel for reference.
-func (c *Client) ChannelsJoinChannel(ctx context.Context, channel InputChannelClass) (UpdatesClass, error) {
+func ChannelsJoinChannel(ctx context.Context, rpc Invoker, channel InputChannelClass) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &ChannelsJoinChannelRequest{
 		Channel: channel,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

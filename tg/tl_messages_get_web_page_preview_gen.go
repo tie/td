@@ -246,10 +246,10 @@ var (
 //  400 MESSAGE_EMPTY: The provided message is empty
 //
 // See https://core.telegram.org/method/messages.getWebPagePreview for reference.
-func (c *Client) MessagesGetWebPagePreview(ctx context.Context, request *MessagesGetWebPagePreviewRequest) (MessageMediaClass, error) {
+func MessagesGetWebPagePreview(ctx context.Context, rpc Invoker, request *MessagesGetWebPagePreviewRequest) (MessageMediaClass, error) {
 	var result MessageMediaBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.MessageMedia, nil

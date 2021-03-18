@@ -176,13 +176,13 @@ var (
 // Deletes several contacts from the list.
 //
 // See https://core.telegram.org/method/contacts.deleteContacts for reference.
-func (c *Client) ContactsDeleteContacts(ctx context.Context, id []InputUserClass) (UpdatesClass, error) {
+func ContactsDeleteContacts(ctx context.Context, rpc Invoker, id []InputUserClass) (UpdatesClass, error) {
 	var result UpdatesBox
 
 	request := &ContactsDeleteContactsRequest{
 		ID: id,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return result.Updates, nil

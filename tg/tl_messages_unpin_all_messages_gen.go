@@ -169,13 +169,13 @@ var (
 //
 // See https://core.telegram.org/method/messages.unpinAllMessages for reference.
 // Can be used by bots.
-func (c *Client) MessagesUnpinAllMessages(ctx context.Context, peer InputPeerClass) (*MessagesAffectedHistory, error) {
+func MessagesUnpinAllMessages(ctx context.Context, rpc Invoker, peer InputPeerClass) (*MessagesAffectedHistory, error) {
 	var result MessagesAffectedHistory
 
 	request := &MessagesUnpinAllMessagesRequest{
 		Peer: peer,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

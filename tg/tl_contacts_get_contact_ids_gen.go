@@ -160,13 +160,13 @@ var (
 // Get contact by telegram IDs
 //
 // See https://core.telegram.org/method/contacts.getContactIDs for reference.
-func (c *Client) ContactsGetContactIDs(ctx context.Context, hash int) ([]int, error) {
+func ContactsGetContactIDs(ctx context.Context, rpc Invoker, hash int) ([]int, error) {
 	var result IntVector
 
 	request := &ContactsGetContactIDsRequest{
 		Hash: hash,
 	}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return []int(result.Elems), nil

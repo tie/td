@@ -138,11 +138,11 @@ var (
 //  400 PASSWORD_EMPTY: The provided password is empty
 //
 // See https://core.telegram.org/method/auth.requestPasswordRecovery for reference.
-func (c *Client) AuthRequestPasswordRecovery(ctx context.Context) (*AuthPasswordRecovery, error) {
+func AuthRequestPasswordRecovery(ctx context.Context, rpc Invoker) (*AuthPasswordRecovery, error) {
 	var result AuthPasswordRecovery
 
 	request := &AuthRequestPasswordRecoveryRequest{}
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

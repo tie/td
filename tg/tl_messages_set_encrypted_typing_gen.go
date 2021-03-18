@@ -188,10 +188,10 @@ var (
 //  400 CHAT_ID_INVALID: The provided chat id is invalid
 //
 // See https://core.telegram.org/method/messages.setEncryptedTyping for reference.
-func (c *Client) MessagesSetEncryptedTyping(ctx context.Context, request *MessagesSetEncryptedTypingRequest) (bool, error) {
+func MessagesSetEncryptedTyping(ctx context.Context, rpc Invoker, request *MessagesSetEncryptedTypingRequest) (bool, error) {
 	var result BoolBox
 
-	if err := c.rpc.InvokeRaw(ctx, request, &result); err != nil {
+	if err := rpc.InvokeRaw(ctx, request, &result); err != nil {
 		return false, err
 	}
 	_, ok := result.Bool.(*BoolTrue)
