@@ -3,6 +3,7 @@ package mtproto
 import (
 	"fmt"
 
+	"code.cloudfoundry.org/bytefmt"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
@@ -21,6 +22,25 @@ func (l logType) MarshalLogObject(e zapcore.ObjectEncoder) error {
 		e.AddString("type_name", l.Name)
 	}
 	return nil
+}
+
+type logSize struct {
+	Size uint64
+}
+
+func (l logSize) MarshalLogObject(e zapcore.ObjectEncoder) error {
+	e.AddUint64("size_bytes", l.Size)
+	// Don’t print small sizes (like 88B). That’s confusing for humans.
+	if l.Size >= bytefmt.KILOBYTE {
+		e.AddString("size_human", bytefmt.ByteSize(l.Size)+"iB") // IEC
+	}
+	return nil
+}
+
+func (c *Conn) logWithBuffer(b *bin.Buffer) *zap.Logger {
+	return c.logWithType(b).With(zap.Inline(logSize{
+		Size: uint64(b.Len()),
+	}))
 }
 
 func (c *Conn) logWithType(b *bin.Buffer) *zap.Logger {
