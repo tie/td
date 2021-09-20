@@ -29,19 +29,19 @@ var (
 	_ = tgerr.Error{}
 )
 
-// AuthImportAuthorizationRequest represents TL type `auth.importAuthorization#e3ef9613`.
+// AuthImportAuthorizationRequest represents TL type `auth.importAuthorization#a57a7dad`.
 // Logs in a user using a key transmitted from his native data-centre.
 //
 // See https://core.telegram.org/method/auth.importAuthorization for reference.
 type AuthImportAuthorizationRequest struct {
 	// User ID
-	ID int
+	ID int64
 	// Authorization key
 	Bytes []byte
 }
 
 // AuthImportAuthorizationRequestTypeID is TL type id of AuthImportAuthorizationRequest.
-const AuthImportAuthorizationRequestTypeID = 0xe3ef9613
+const AuthImportAuthorizationRequestTypeID = 0xa57a7dad
 
 func (i *AuthImportAuthorizationRequest) Zero() bool {
 	if i == nil {
@@ -68,7 +68,7 @@ func (i *AuthImportAuthorizationRequest) String() string {
 
 // FillFrom fills AuthImportAuthorizationRequest from given interface.
 func (i *AuthImportAuthorizationRequest) FillFrom(from interface {
-	GetID() (value int)
+	GetID() (value int64)
 	GetBytes() (value []byte)
 }) {
 	i.ID = from.GetID()
@@ -113,7 +113,7 @@ func (i *AuthImportAuthorizationRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (i *AuthImportAuthorizationRequest) Encode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode auth.importAuthorization#e3ef9613 as nil")
+		return fmt.Errorf("can't encode auth.importAuthorization#a57a7dad as nil")
 	}
 	b.PutID(AuthImportAuthorizationRequestTypeID)
 	return i.EncodeBare(b)
@@ -122,15 +122,15 @@ func (i *AuthImportAuthorizationRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (i *AuthImportAuthorizationRequest) EncodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode auth.importAuthorization#e3ef9613 as nil")
+		return fmt.Errorf("can't encode auth.importAuthorization#a57a7dad as nil")
 	}
-	b.PutInt(i.ID)
+	b.PutLong(i.ID)
 	b.PutBytes(i.Bytes)
 	return nil
 }
 
 // GetID returns value of ID field.
-func (i *AuthImportAuthorizationRequest) GetID() (value int) {
+func (i *AuthImportAuthorizationRequest) GetID() (value int64) {
 	return i.ID
 }
 
@@ -142,10 +142,10 @@ func (i *AuthImportAuthorizationRequest) GetBytes() (value []byte) {
 // Decode implements bin.Decoder.
 func (i *AuthImportAuthorizationRequest) Decode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode auth.importAuthorization#e3ef9613 to nil")
+		return fmt.Errorf("can't decode auth.importAuthorization#a57a7dad to nil")
 	}
 	if err := b.ConsumeID(AuthImportAuthorizationRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode auth.importAuthorization#e3ef9613: %w", err)
+		return fmt.Errorf("unable to decode auth.importAuthorization#a57a7dad: %w", err)
 	}
 	return i.DecodeBare(b)
 }
@@ -153,19 +153,19 @@ func (i *AuthImportAuthorizationRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (i *AuthImportAuthorizationRequest) DecodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode auth.importAuthorization#e3ef9613 to nil")
+		return fmt.Errorf("can't decode auth.importAuthorization#a57a7dad to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode auth.importAuthorization#e3ef9613: field id: %w", err)
+			return fmt.Errorf("unable to decode auth.importAuthorization#a57a7dad: field id: %w", err)
 		}
 		i.ID = value
 	}
 	{
 		value, err := b.Bytes()
 		if err != nil {
-			return fmt.Errorf("unable to decode auth.importAuthorization#e3ef9613: field bytes: %w", err)
+			return fmt.Errorf("unable to decode auth.importAuthorization#a57a7dad: field bytes: %w", err)
 		}
 		i.Bytes = value
 	}
@@ -180,7 +180,7 @@ var (
 	_ bin.BareDecoder = &AuthImportAuthorizationRequest{}
 )
 
-// AuthImportAuthorization invokes method auth.importAuthorization#e3ef9613 returning error if any.
+// AuthImportAuthorization invokes method auth.importAuthorization#a57a7dad returning error if any.
 // Logs in a user using a key transmitted from his native data-centre.
 //
 // Possible errors:

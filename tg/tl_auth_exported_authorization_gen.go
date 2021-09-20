@@ -29,19 +29,19 @@ var (
 	_ = tgerr.Error{}
 )
 
-// AuthExportedAuthorization represents TL type `auth.exportedAuthorization#df969c2d`.
+// AuthExportedAuthorization represents TL type `auth.exportedAuthorization#b434e2b8`.
 // Data for copying of authorization between data centres.
 //
 // See https://core.telegram.org/constructor/auth.exportedAuthorization for reference.
 type AuthExportedAuthorization struct {
 	// current user identifier
-	ID int
+	ID int64
 	// authorizes key
 	Bytes []byte
 }
 
 // AuthExportedAuthorizationTypeID is TL type id of AuthExportedAuthorization.
-const AuthExportedAuthorizationTypeID = 0xdf969c2d
+const AuthExportedAuthorizationTypeID = 0xb434e2b8
 
 func (e *AuthExportedAuthorization) Zero() bool {
 	if e == nil {
@@ -68,7 +68,7 @@ func (e *AuthExportedAuthorization) String() string {
 
 // FillFrom fills AuthExportedAuthorization from given interface.
 func (e *AuthExportedAuthorization) FillFrom(from interface {
-	GetID() (value int)
+	GetID() (value int64)
 	GetBytes() (value []byte)
 }) {
 	e.ID = from.GetID()
@@ -113,7 +113,7 @@ func (e *AuthExportedAuthorization) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (e *AuthExportedAuthorization) Encode(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't encode auth.exportedAuthorization#df969c2d as nil")
+		return fmt.Errorf("can't encode auth.exportedAuthorization#b434e2b8 as nil")
 	}
 	b.PutID(AuthExportedAuthorizationTypeID)
 	return e.EncodeBare(b)
@@ -122,15 +122,15 @@ func (e *AuthExportedAuthorization) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (e *AuthExportedAuthorization) EncodeBare(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't encode auth.exportedAuthorization#df969c2d as nil")
+		return fmt.Errorf("can't encode auth.exportedAuthorization#b434e2b8 as nil")
 	}
-	b.PutInt(e.ID)
+	b.PutLong(e.ID)
 	b.PutBytes(e.Bytes)
 	return nil
 }
 
 // GetID returns value of ID field.
-func (e *AuthExportedAuthorization) GetID() (value int) {
+func (e *AuthExportedAuthorization) GetID() (value int64) {
 	return e.ID
 }
 
@@ -142,10 +142,10 @@ func (e *AuthExportedAuthorization) GetBytes() (value []byte) {
 // Decode implements bin.Decoder.
 func (e *AuthExportedAuthorization) Decode(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't decode auth.exportedAuthorization#df969c2d to nil")
+		return fmt.Errorf("can't decode auth.exportedAuthorization#b434e2b8 to nil")
 	}
 	if err := b.ConsumeID(AuthExportedAuthorizationTypeID); err != nil {
-		return fmt.Errorf("unable to decode auth.exportedAuthorization#df969c2d: %w", err)
+		return fmt.Errorf("unable to decode auth.exportedAuthorization#b434e2b8: %w", err)
 	}
 	return e.DecodeBare(b)
 }
@@ -153,19 +153,19 @@ func (e *AuthExportedAuthorization) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (e *AuthExportedAuthorization) DecodeBare(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't decode auth.exportedAuthorization#df969c2d to nil")
+		return fmt.Errorf("can't decode auth.exportedAuthorization#b434e2b8 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode auth.exportedAuthorization#df969c2d: field id: %w", err)
+			return fmt.Errorf("unable to decode auth.exportedAuthorization#b434e2b8: field id: %w", err)
 		}
 		e.ID = value
 	}
 	{
 		value, err := b.Bytes()
 		if err != nil {
-			return fmt.Errorf("unable to decode auth.exportedAuthorization#df969c2d: field bytes: %w", err)
+			return fmt.Errorf("unable to decode auth.exportedAuthorization#b434e2b8: field bytes: %w", err)
 		}
 		e.Bytes = value
 	}

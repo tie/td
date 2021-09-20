@@ -233,13 +233,13 @@ var (
 	_ InputUserClass = &InputUserSelf{}
 )
 
-// InputUser represents TL type `inputUser#d8292816`.
+// InputUser represents TL type `inputUser#f21158c6`.
 // Defines a user for further interaction.
 //
 // See https://core.telegram.org/constructor/inputUser for reference.
 type InputUser struct {
 	// User identifier
-	UserID int
+	UserID int64
 	// access_hash value from the user¹ constructor
 	//
 	// Links:
@@ -248,7 +248,7 @@ type InputUser struct {
 }
 
 // InputUserTypeID is TL type id of InputUser.
-const InputUserTypeID = 0xd8292816
+const InputUserTypeID = 0xf21158c6
 
 func (i *InputUser) Zero() bool {
 	if i == nil {
@@ -275,7 +275,7 @@ func (i *InputUser) String() string {
 
 // FillFrom fills InputUser from given interface.
 func (i *InputUser) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetAccessHash() (value int64)
 }) {
 	i.UserID = from.GetUserID()
@@ -320,7 +320,7 @@ func (i *InputUser) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (i *InputUser) Encode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputUser#d8292816 as nil")
+		return fmt.Errorf("can't encode inputUser#f21158c6 as nil")
 	}
 	b.PutID(InputUserTypeID)
 	return i.EncodeBare(b)
@@ -329,15 +329,15 @@ func (i *InputUser) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (i *InputUser) EncodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputUser#d8292816 as nil")
+		return fmt.Errorf("can't encode inputUser#f21158c6 as nil")
 	}
-	b.PutInt(i.UserID)
+	b.PutLong(i.UserID)
 	b.PutLong(i.AccessHash)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (i *InputUser) GetUserID() (value int) {
+func (i *InputUser) GetUserID() (value int64) {
 	return i.UserID
 }
 
@@ -349,10 +349,10 @@ func (i *InputUser) GetAccessHash() (value int64) {
 // Decode implements bin.Decoder.
 func (i *InputUser) Decode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputUser#d8292816 to nil")
+		return fmt.Errorf("can't decode inputUser#f21158c6 to nil")
 	}
 	if err := b.ConsumeID(InputUserTypeID); err != nil {
-		return fmt.Errorf("unable to decode inputUser#d8292816: %w", err)
+		return fmt.Errorf("unable to decode inputUser#f21158c6: %w", err)
 	}
 	return i.DecodeBare(b)
 }
@@ -360,19 +360,19 @@ func (i *InputUser) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (i *InputUser) DecodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputUser#d8292816 to nil")
+		return fmt.Errorf("can't decode inputUser#f21158c6 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode inputUser#d8292816: field user_id: %w", err)
+			return fmt.Errorf("unable to decode inputUser#f21158c6: field user_id: %w", err)
 		}
 		i.UserID = value
 	}
 	{
 		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode inputUser#d8292816: field access_hash: %w", err)
+			return fmt.Errorf("unable to decode inputUser#f21158c6: field access_hash: %w", err)
 		}
 		i.AccessHash = value
 	}
@@ -392,7 +392,7 @@ var (
 	_ InputUserClass = &InputUser{}
 )
 
-// InputUserFromMessage represents TL type `inputUserFromMessage#2d117597`.
+// InputUserFromMessage represents TL type `inputUserFromMessage#1da448e2`.
 // Defines a min¹ user that was seen in a certain message of a certain chat.
 //
 // Links:
@@ -405,11 +405,11 @@ type InputUserFromMessage struct {
 	// The message ID
 	MsgID int
 	// The identifier of the user that was seen
-	UserID int
+	UserID int64
 }
 
 // InputUserFromMessageTypeID is TL type id of InputUserFromMessage.
-const InputUserFromMessageTypeID = 0x2d117597
+const InputUserFromMessageTypeID = 0x1da448e2
 
 func (i *InputUserFromMessage) Zero() bool {
 	if i == nil {
@@ -441,7 +441,7 @@ func (i *InputUserFromMessage) String() string {
 func (i *InputUserFromMessage) FillFrom(from interface {
 	GetPeer() (value InputPeerClass)
 	GetMsgID() (value int)
-	GetUserID() (value int)
+	GetUserID() (value int64)
 }) {
 	i.Peer = from.GetPeer()
 	i.MsgID = from.GetMsgID()
@@ -490,7 +490,7 @@ func (i *InputUserFromMessage) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (i *InputUserFromMessage) Encode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputUserFromMessage#2d117597 as nil")
+		return fmt.Errorf("can't encode inputUserFromMessage#1da448e2 as nil")
 	}
 	b.PutID(InputUserFromMessageTypeID)
 	return i.EncodeBare(b)
@@ -499,16 +499,16 @@ func (i *InputUserFromMessage) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (i *InputUserFromMessage) EncodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputUserFromMessage#2d117597 as nil")
+		return fmt.Errorf("can't encode inputUserFromMessage#1da448e2 as nil")
 	}
 	if i.Peer == nil {
-		return fmt.Errorf("unable to encode inputUserFromMessage#2d117597: field peer is nil")
+		return fmt.Errorf("unable to encode inputUserFromMessage#1da448e2: field peer is nil")
 	}
 	if err := i.Peer.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode inputUserFromMessage#2d117597: field peer: %w", err)
+		return fmt.Errorf("unable to encode inputUserFromMessage#1da448e2: field peer: %w", err)
 	}
 	b.PutInt(i.MsgID)
-	b.PutInt(i.UserID)
+	b.PutLong(i.UserID)
 	return nil
 }
 
@@ -523,17 +523,17 @@ func (i *InputUserFromMessage) GetMsgID() (value int) {
 }
 
 // GetUserID returns value of UserID field.
-func (i *InputUserFromMessage) GetUserID() (value int) {
+func (i *InputUserFromMessage) GetUserID() (value int64) {
 	return i.UserID
 }
 
 // Decode implements bin.Decoder.
 func (i *InputUserFromMessage) Decode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputUserFromMessage#2d117597 to nil")
+		return fmt.Errorf("can't decode inputUserFromMessage#1da448e2 to nil")
 	}
 	if err := b.ConsumeID(InputUserFromMessageTypeID); err != nil {
-		return fmt.Errorf("unable to decode inputUserFromMessage#2d117597: %w", err)
+		return fmt.Errorf("unable to decode inputUserFromMessage#1da448e2: %w", err)
 	}
 	return i.DecodeBare(b)
 }
@@ -541,26 +541,26 @@ func (i *InputUserFromMessage) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (i *InputUserFromMessage) DecodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputUserFromMessage#2d117597 to nil")
+		return fmt.Errorf("can't decode inputUserFromMessage#1da448e2 to nil")
 	}
 	{
 		value, err := DecodeInputPeer(b)
 		if err != nil {
-			return fmt.Errorf("unable to decode inputUserFromMessage#2d117597: field peer: %w", err)
+			return fmt.Errorf("unable to decode inputUserFromMessage#1da448e2: field peer: %w", err)
 		}
 		i.Peer = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode inputUserFromMessage#2d117597: field msg_id: %w", err)
+			return fmt.Errorf("unable to decode inputUserFromMessage#1da448e2: field msg_id: %w", err)
 		}
 		i.MsgID = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode inputUserFromMessage#2d117597: field user_id: %w", err)
+			return fmt.Errorf("unable to decode inputUserFromMessage#1da448e2: field user_id: %w", err)
 		}
 		i.UserID = value
 	}
@@ -592,8 +592,8 @@ var (
 //  switch v := g.(type) {
 //  case *tg.InputUserEmpty: // inputUserEmpty#b98886cf
 //  case *tg.InputUserSelf: // inputUserSelf#f7c1b13f
-//  case *tg.InputUser: // inputUser#d8292816
-//  case *tg.InputUserFromMessage: // inputUserFromMessage#2d117597
+//  case *tg.InputUser: // inputUser#f21158c6
+//  case *tg.InputUserFromMessage: // inputUserFromMessage#1da448e2
 //  default: panic(v)
 //  }
 type InputUserClass interface {
@@ -637,14 +637,14 @@ func DecodeInputUser(buf *bin.Buffer) (InputUserClass, error) {
 		}
 		return &v, nil
 	case InputUserTypeID:
-		// Decoding inputUser#d8292816.
+		// Decoding inputUser#f21158c6.
 		v := InputUser{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode InputUserClass: %w", err)
 		}
 		return &v, nil
 	case InputUserFromMessageTypeID:
-		// Decoding inputUserFromMessage#2d117597.
+		// Decoding inputUserFromMessage#1da448e2.
 		v := InputUserFromMessage{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode InputUserClass: %w", err)

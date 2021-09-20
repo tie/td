@@ -29,19 +29,19 @@ var (
 	_ = tgerr.Error{}
 )
 
-// MessagesEditChatTitleRequest represents TL type `messages.editChatTitle#dc452855`.
+// MessagesEditChatTitleRequest represents TL type `messages.editChatTitle#73783ffd`.
 // Chanages chat name and sends a service message on it.
 //
 // See https://core.telegram.org/method/messages.editChatTitle for reference.
 type MessagesEditChatTitleRequest struct {
 	// Chat ID
-	ChatID int
+	ChatID int64
 	// New chat name, different from the old one
 	Title string
 }
 
 // MessagesEditChatTitleRequestTypeID is TL type id of MessagesEditChatTitleRequest.
-const MessagesEditChatTitleRequestTypeID = 0xdc452855
+const MessagesEditChatTitleRequestTypeID = 0x73783ffd
 
 func (e *MessagesEditChatTitleRequest) Zero() bool {
 	if e == nil {
@@ -68,7 +68,7 @@ func (e *MessagesEditChatTitleRequest) String() string {
 
 // FillFrom fills MessagesEditChatTitleRequest from given interface.
 func (e *MessagesEditChatTitleRequest) FillFrom(from interface {
-	GetChatID() (value int)
+	GetChatID() (value int64)
 	GetTitle() (value string)
 }) {
 	e.ChatID = from.GetChatID()
@@ -113,7 +113,7 @@ func (e *MessagesEditChatTitleRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (e *MessagesEditChatTitleRequest) Encode(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't encode messages.editChatTitle#dc452855 as nil")
+		return fmt.Errorf("can't encode messages.editChatTitle#73783ffd as nil")
 	}
 	b.PutID(MessagesEditChatTitleRequestTypeID)
 	return e.EncodeBare(b)
@@ -122,15 +122,15 @@ func (e *MessagesEditChatTitleRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (e *MessagesEditChatTitleRequest) EncodeBare(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't encode messages.editChatTitle#dc452855 as nil")
+		return fmt.Errorf("can't encode messages.editChatTitle#73783ffd as nil")
 	}
-	b.PutInt(e.ChatID)
+	b.PutLong(e.ChatID)
 	b.PutString(e.Title)
 	return nil
 }
 
 // GetChatID returns value of ChatID field.
-func (e *MessagesEditChatTitleRequest) GetChatID() (value int) {
+func (e *MessagesEditChatTitleRequest) GetChatID() (value int64) {
 	return e.ChatID
 }
 
@@ -142,10 +142,10 @@ func (e *MessagesEditChatTitleRequest) GetTitle() (value string) {
 // Decode implements bin.Decoder.
 func (e *MessagesEditChatTitleRequest) Decode(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't decode messages.editChatTitle#dc452855 to nil")
+		return fmt.Errorf("can't decode messages.editChatTitle#73783ffd to nil")
 	}
 	if err := b.ConsumeID(MessagesEditChatTitleRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode messages.editChatTitle#dc452855: %w", err)
+		return fmt.Errorf("unable to decode messages.editChatTitle#73783ffd: %w", err)
 	}
 	return e.DecodeBare(b)
 }
@@ -153,19 +153,19 @@ func (e *MessagesEditChatTitleRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (e *MessagesEditChatTitleRequest) DecodeBare(b *bin.Buffer) error {
 	if e == nil {
-		return fmt.Errorf("can't decode messages.editChatTitle#dc452855 to nil")
+		return fmt.Errorf("can't decode messages.editChatTitle#73783ffd to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.editChatTitle#dc452855: field chat_id: %w", err)
+			return fmt.Errorf("unable to decode messages.editChatTitle#73783ffd: field chat_id: %w", err)
 		}
 		e.ChatID = value
 	}
 	{
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.editChatTitle#dc452855: field title: %w", err)
+			return fmt.Errorf("unable to decode messages.editChatTitle#73783ffd: field title: %w", err)
 		}
 		e.Title = value
 	}
@@ -180,7 +180,7 @@ var (
 	_ bin.BareDecoder = &MessagesEditChatTitleRequest{}
 )
 
-// MessagesEditChatTitle invokes method messages.editChatTitle#dc452855 returning error if any.
+// MessagesEditChatTitle invokes method messages.editChatTitle#73783ffd returning error if any.
 // Chanages chat name and sends a service message on it.
 //
 // Possible errors:

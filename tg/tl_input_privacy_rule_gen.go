@@ -739,17 +739,17 @@ var (
 	_ InputPrivacyRuleClass = &InputPrivacyValueDisallowUsers{}
 )
 
-// InputPrivacyValueAllowChatParticipants represents TL type `inputPrivacyValueAllowChatParticipants#4c81c1ba`.
+// InputPrivacyValueAllowChatParticipants represents TL type `inputPrivacyValueAllowChatParticipants#840649cf`.
 // Allow only participants of certain chats
 //
 // See https://core.telegram.org/constructor/inputPrivacyValueAllowChatParticipants for reference.
 type InputPrivacyValueAllowChatParticipants struct {
 	// Allowed chat IDs
-	Chats []int
+	Chats []int64
 }
 
 // InputPrivacyValueAllowChatParticipantsTypeID is TL type id of InputPrivacyValueAllowChatParticipants.
-const InputPrivacyValueAllowChatParticipantsTypeID = 0x4c81c1ba
+const InputPrivacyValueAllowChatParticipantsTypeID = 0x840649cf
 
 func (i *InputPrivacyValueAllowChatParticipants) Zero() bool {
 	if i == nil {
@@ -773,7 +773,7 @@ func (i *InputPrivacyValueAllowChatParticipants) String() string {
 
 // FillFrom fills InputPrivacyValueAllowChatParticipants from given interface.
 func (i *InputPrivacyValueAllowChatParticipants) FillFrom(from interface {
-	GetChats() (value []int)
+	GetChats() (value []int64)
 }) {
 	i.Chats = from.GetChats()
 }
@@ -812,7 +812,7 @@ func (i *InputPrivacyValueAllowChatParticipants) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (i *InputPrivacyValueAllowChatParticipants) Encode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputPrivacyValueAllowChatParticipants#4c81c1ba as nil")
+		return fmt.Errorf("can't encode inputPrivacyValueAllowChatParticipants#840649cf as nil")
 	}
 	b.PutID(InputPrivacyValueAllowChatParticipantsTypeID)
 	return i.EncodeBare(b)
@@ -821,27 +821,27 @@ func (i *InputPrivacyValueAllowChatParticipants) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (i *InputPrivacyValueAllowChatParticipants) EncodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputPrivacyValueAllowChatParticipants#4c81c1ba as nil")
+		return fmt.Errorf("can't encode inputPrivacyValueAllowChatParticipants#840649cf as nil")
 	}
 	b.PutVectorHeader(len(i.Chats))
 	for _, v := range i.Chats {
-		b.PutInt(v)
+		b.PutLong(v)
 	}
 	return nil
 }
 
 // GetChats returns value of Chats field.
-func (i *InputPrivacyValueAllowChatParticipants) GetChats() (value []int) {
+func (i *InputPrivacyValueAllowChatParticipants) GetChats() (value []int64) {
 	return i.Chats
 }
 
 // Decode implements bin.Decoder.
 func (i *InputPrivacyValueAllowChatParticipants) Decode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputPrivacyValueAllowChatParticipants#4c81c1ba to nil")
+		return fmt.Errorf("can't decode inputPrivacyValueAllowChatParticipants#840649cf to nil")
 	}
 	if err := b.ConsumeID(InputPrivacyValueAllowChatParticipantsTypeID); err != nil {
-		return fmt.Errorf("unable to decode inputPrivacyValueAllowChatParticipants#4c81c1ba: %w", err)
+		return fmt.Errorf("unable to decode inputPrivacyValueAllowChatParticipants#840649cf: %w", err)
 	}
 	return i.DecodeBare(b)
 }
@@ -849,17 +849,17 @@ func (i *InputPrivacyValueAllowChatParticipants) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (i *InputPrivacyValueAllowChatParticipants) DecodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputPrivacyValueAllowChatParticipants#4c81c1ba to nil")
+		return fmt.Errorf("can't decode inputPrivacyValueAllowChatParticipants#840649cf to nil")
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode inputPrivacyValueAllowChatParticipants#4c81c1ba: field chats: %w", err)
+			return fmt.Errorf("unable to decode inputPrivacyValueAllowChatParticipants#840649cf: field chats: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
-			value, err := b.Int()
+			value, err := b.Long()
 			if err != nil {
-				return fmt.Errorf("unable to decode inputPrivacyValueAllowChatParticipants#4c81c1ba: field chats: %w", err)
+				return fmt.Errorf("unable to decode inputPrivacyValueAllowChatParticipants#840649cf: field chats: %w", err)
 			}
 			i.Chats = append(i.Chats, value)
 		}
@@ -880,17 +880,17 @@ var (
 	_ InputPrivacyRuleClass = &InputPrivacyValueAllowChatParticipants{}
 )
 
-// InputPrivacyValueDisallowChatParticipants represents TL type `inputPrivacyValueDisallowChatParticipants#d82363af`.
+// InputPrivacyValueDisallowChatParticipants represents TL type `inputPrivacyValueDisallowChatParticipants#e94f0f86`.
 // Disallow only participants of certain chats
 //
 // See https://core.telegram.org/constructor/inputPrivacyValueDisallowChatParticipants for reference.
 type InputPrivacyValueDisallowChatParticipants struct {
 	// Disallowed chat IDs
-	Chats []int
+	Chats []int64
 }
 
 // InputPrivacyValueDisallowChatParticipantsTypeID is TL type id of InputPrivacyValueDisallowChatParticipants.
-const InputPrivacyValueDisallowChatParticipantsTypeID = 0xd82363af
+const InputPrivacyValueDisallowChatParticipantsTypeID = 0xe94f0f86
 
 func (i *InputPrivacyValueDisallowChatParticipants) Zero() bool {
 	if i == nil {
@@ -914,7 +914,7 @@ func (i *InputPrivacyValueDisallowChatParticipants) String() string {
 
 // FillFrom fills InputPrivacyValueDisallowChatParticipants from given interface.
 func (i *InputPrivacyValueDisallowChatParticipants) FillFrom(from interface {
-	GetChats() (value []int)
+	GetChats() (value []int64)
 }) {
 	i.Chats = from.GetChats()
 }
@@ -953,7 +953,7 @@ func (i *InputPrivacyValueDisallowChatParticipants) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (i *InputPrivacyValueDisallowChatParticipants) Encode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputPrivacyValueDisallowChatParticipants#d82363af as nil")
+		return fmt.Errorf("can't encode inputPrivacyValueDisallowChatParticipants#e94f0f86 as nil")
 	}
 	b.PutID(InputPrivacyValueDisallowChatParticipantsTypeID)
 	return i.EncodeBare(b)
@@ -962,27 +962,27 @@ func (i *InputPrivacyValueDisallowChatParticipants) Encode(b *bin.Buffer) error 
 // EncodeBare implements bin.BareEncoder.
 func (i *InputPrivacyValueDisallowChatParticipants) EncodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't encode inputPrivacyValueDisallowChatParticipants#d82363af as nil")
+		return fmt.Errorf("can't encode inputPrivacyValueDisallowChatParticipants#e94f0f86 as nil")
 	}
 	b.PutVectorHeader(len(i.Chats))
 	for _, v := range i.Chats {
-		b.PutInt(v)
+		b.PutLong(v)
 	}
 	return nil
 }
 
 // GetChats returns value of Chats field.
-func (i *InputPrivacyValueDisallowChatParticipants) GetChats() (value []int) {
+func (i *InputPrivacyValueDisallowChatParticipants) GetChats() (value []int64) {
 	return i.Chats
 }
 
 // Decode implements bin.Decoder.
 func (i *InputPrivacyValueDisallowChatParticipants) Decode(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputPrivacyValueDisallowChatParticipants#d82363af to nil")
+		return fmt.Errorf("can't decode inputPrivacyValueDisallowChatParticipants#e94f0f86 to nil")
 	}
 	if err := b.ConsumeID(InputPrivacyValueDisallowChatParticipantsTypeID); err != nil {
-		return fmt.Errorf("unable to decode inputPrivacyValueDisallowChatParticipants#d82363af: %w", err)
+		return fmt.Errorf("unable to decode inputPrivacyValueDisallowChatParticipants#e94f0f86: %w", err)
 	}
 	return i.DecodeBare(b)
 }
@@ -990,17 +990,17 @@ func (i *InputPrivacyValueDisallowChatParticipants) Decode(b *bin.Buffer) error 
 // DecodeBare implements bin.BareDecoder.
 func (i *InputPrivacyValueDisallowChatParticipants) DecodeBare(b *bin.Buffer) error {
 	if i == nil {
-		return fmt.Errorf("can't decode inputPrivacyValueDisallowChatParticipants#d82363af to nil")
+		return fmt.Errorf("can't decode inputPrivacyValueDisallowChatParticipants#e94f0f86 to nil")
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode inputPrivacyValueDisallowChatParticipants#d82363af: field chats: %w", err)
+			return fmt.Errorf("unable to decode inputPrivacyValueDisallowChatParticipants#e94f0f86: field chats: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
-			value, err := b.Int()
+			value, err := b.Long()
 			if err != nil {
-				return fmt.Errorf("unable to decode inputPrivacyValueDisallowChatParticipants#d82363af: field chats: %w", err)
+				return fmt.Errorf("unable to decode inputPrivacyValueDisallowChatParticipants#e94f0f86: field chats: %w", err)
 			}
 			i.Chats = append(i.Chats, value)
 		}
@@ -1037,8 +1037,8 @@ var (
 //  case *tg.InputPrivacyValueDisallowContacts: // inputPrivacyValueDisallowContacts#ba52007
 //  case *tg.InputPrivacyValueDisallowAll: // inputPrivacyValueDisallowAll#d66b66c9
 //  case *tg.InputPrivacyValueDisallowUsers: // inputPrivacyValueDisallowUsers#90110467
-//  case *tg.InputPrivacyValueAllowChatParticipants: // inputPrivacyValueAllowChatParticipants#4c81c1ba
-//  case *tg.InputPrivacyValueDisallowChatParticipants: // inputPrivacyValueDisallowChatParticipants#d82363af
+//  case *tg.InputPrivacyValueAllowChatParticipants: // inputPrivacyValueAllowChatParticipants#840649cf
+//  case *tg.InputPrivacyValueDisallowChatParticipants: // inputPrivacyValueDisallowChatParticipants#e94f0f86
 //  default: panic(v)
 //  }
 type InputPrivacyRuleClass interface {
@@ -1110,14 +1110,14 @@ func DecodeInputPrivacyRule(buf *bin.Buffer) (InputPrivacyRuleClass, error) {
 		}
 		return &v, nil
 	case InputPrivacyValueAllowChatParticipantsTypeID:
-		// Decoding inputPrivacyValueAllowChatParticipants#4c81c1ba.
+		// Decoding inputPrivacyValueAllowChatParticipants#840649cf.
 		v := InputPrivacyValueAllowChatParticipants{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode InputPrivacyRuleClass: %w", err)
 		}
 		return &v, nil
 	case InputPrivacyValueDisallowChatParticipantsTypeID:
-		// Decoding inputPrivacyValueDisallowChatParticipants#d82363af.
+		// Decoding inputPrivacyValueDisallowChatParticipants#e94f0f86.
 		v := InputPrivacyValueDisallowChatParticipants{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode InputPrivacyRuleClass: %w", err)

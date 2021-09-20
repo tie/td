@@ -196,10 +196,609 @@ func (i *InputBotInlineMessageID) DecodeBare(b *bin.Buffer) error {
 	return nil
 }
 
+// construct implements constructor of InputBotInlineMessageIDClass.
+func (i InputBotInlineMessageID) construct() InputBotInlineMessageIDClass { return &i }
+
 // Ensuring interfaces in compile-time for InputBotInlineMessageID.
 var (
 	_ bin.Encoder     = &InputBotInlineMessageID{}
 	_ bin.Decoder     = &InputBotInlineMessageID{}
 	_ bin.BareEncoder = &InputBotInlineMessageID{}
 	_ bin.BareDecoder = &InputBotInlineMessageID{}
+
+	_ InputBotInlineMessageIDClass = &InputBotInlineMessageID{}
 )
+
+// InputBotInlineMessageID64 represents TL type `inputBotInlineMessageID64#b6d915d7`.
+//
+// See https://core.telegram.org/constructor/inputBotInlineMessageID64 for reference.
+type InputBotInlineMessageID64 struct {
+	// DCID field of InputBotInlineMessageID64.
+	DCID int
+	// OwnerID field of InputBotInlineMessageID64.
+	OwnerID int64
+	// ID field of InputBotInlineMessageID64.
+	ID int
+	// AccessHash field of InputBotInlineMessageID64.
+	AccessHash int64
+}
+
+// InputBotInlineMessageID64TypeID is TL type id of InputBotInlineMessageID64.
+const InputBotInlineMessageID64TypeID = 0xb6d915d7
+
+func (i *InputBotInlineMessageID64) Zero() bool {
+	if i == nil {
+		return true
+	}
+	if !(i.DCID == 0) {
+		return false
+	}
+	if !(i.OwnerID == 0) {
+		return false
+	}
+	if !(i.ID == 0) {
+		return false
+	}
+	if !(i.AccessHash == 0) {
+		return false
+	}
+
+	return true
+}
+
+// String implements fmt.Stringer.
+func (i *InputBotInlineMessageID64) String() string {
+	if i == nil {
+		return "InputBotInlineMessageID64(nil)"
+	}
+	type Alias InputBotInlineMessageID64
+	return fmt.Sprintf("InputBotInlineMessageID64%+v", Alias(*i))
+}
+
+// FillFrom fills InputBotInlineMessageID64 from given interface.
+func (i *InputBotInlineMessageID64) FillFrom(from interface {
+	GetDCID() (value int)
+	GetOwnerID() (value int64)
+	GetID() (value int)
+	GetAccessHash() (value int64)
+}) {
+	i.DCID = from.GetDCID()
+	i.OwnerID = from.GetOwnerID()
+	i.ID = from.GetID()
+	i.AccessHash = from.GetAccessHash()
+}
+
+// TypeID returns type id in TL schema.
+//
+// See https://core.telegram.org/mtproto/TL-tl#remarks.
+func (*InputBotInlineMessageID64) TypeID() uint32 {
+	return InputBotInlineMessageID64TypeID
+}
+
+// TypeName returns name of type in TL schema.
+func (*InputBotInlineMessageID64) TypeName() string {
+	return "inputBotInlineMessageID64"
+}
+
+// TypeInfo returns info about TL type.
+func (i *InputBotInlineMessageID64) TypeInfo() tdp.Type {
+	typ := tdp.Type{
+		Name: "inputBotInlineMessageID64",
+		ID:   InputBotInlineMessageID64TypeID,
+	}
+	if i == nil {
+		typ.Null = true
+		return typ
+	}
+	typ.Fields = []tdp.Field{
+		{
+			Name:       "DCID",
+			SchemaName: "dc_id",
+		},
+		{
+			Name:       "OwnerID",
+			SchemaName: "owner_id",
+		},
+		{
+			Name:       "ID",
+			SchemaName: "id",
+		},
+		{
+			Name:       "AccessHash",
+			SchemaName: "access_hash",
+		},
+	}
+	return typ
+}
+
+// Encode implements bin.Encoder.
+func (i *InputBotInlineMessageID64) Encode(b *bin.Buffer) error {
+	if i == nil {
+		return fmt.Errorf("can't encode inputBotInlineMessageID64#b6d915d7 as nil")
+	}
+	b.PutID(InputBotInlineMessageID64TypeID)
+	return i.EncodeBare(b)
+}
+
+// EncodeBare implements bin.BareEncoder.
+func (i *InputBotInlineMessageID64) EncodeBare(b *bin.Buffer) error {
+	if i == nil {
+		return fmt.Errorf("can't encode inputBotInlineMessageID64#b6d915d7 as nil")
+	}
+	b.PutInt(i.DCID)
+	b.PutLong(i.OwnerID)
+	b.PutInt(i.ID)
+	b.PutLong(i.AccessHash)
+	return nil
+}
+
+// GetDCID returns value of DCID field.
+func (i *InputBotInlineMessageID64) GetDCID() (value int) {
+	return i.DCID
+}
+
+// GetOwnerID returns value of OwnerID field.
+func (i *InputBotInlineMessageID64) GetOwnerID() (value int64) {
+	return i.OwnerID
+}
+
+// GetID returns value of ID field.
+func (i *InputBotInlineMessageID64) GetID() (value int) {
+	return i.ID
+}
+
+// GetAccessHash returns value of AccessHash field.
+func (i *InputBotInlineMessageID64) GetAccessHash() (value int64) {
+	return i.AccessHash
+}
+
+// Decode implements bin.Decoder.
+func (i *InputBotInlineMessageID64) Decode(b *bin.Buffer) error {
+	if i == nil {
+		return fmt.Errorf("can't decode inputBotInlineMessageID64#b6d915d7 to nil")
+	}
+	if err := b.ConsumeID(InputBotInlineMessageID64TypeID); err != nil {
+		return fmt.Errorf("unable to decode inputBotInlineMessageID64#b6d915d7: %w", err)
+	}
+	return i.DecodeBare(b)
+}
+
+// DecodeBare implements bin.BareDecoder.
+func (i *InputBotInlineMessageID64) DecodeBare(b *bin.Buffer) error {
+	if i == nil {
+		return fmt.Errorf("can't decode inputBotInlineMessageID64#b6d915d7 to nil")
+	}
+	{
+		value, err := b.Int()
+		if err != nil {
+			return fmt.Errorf("unable to decode inputBotInlineMessageID64#b6d915d7: field dc_id: %w", err)
+		}
+		i.DCID = value
+	}
+	{
+		value, err := b.Long()
+		if err != nil {
+			return fmt.Errorf("unable to decode inputBotInlineMessageID64#b6d915d7: field owner_id: %w", err)
+		}
+		i.OwnerID = value
+	}
+	{
+		value, err := b.Int()
+		if err != nil {
+			return fmt.Errorf("unable to decode inputBotInlineMessageID64#b6d915d7: field id: %w", err)
+		}
+		i.ID = value
+	}
+	{
+		value, err := b.Long()
+		if err != nil {
+			return fmt.Errorf("unable to decode inputBotInlineMessageID64#b6d915d7: field access_hash: %w", err)
+		}
+		i.AccessHash = value
+	}
+	return nil
+}
+
+// construct implements constructor of InputBotInlineMessageIDClass.
+func (i InputBotInlineMessageID64) construct() InputBotInlineMessageIDClass { return &i }
+
+// Ensuring interfaces in compile-time for InputBotInlineMessageID64.
+var (
+	_ bin.Encoder     = &InputBotInlineMessageID64{}
+	_ bin.Decoder     = &InputBotInlineMessageID64{}
+	_ bin.BareEncoder = &InputBotInlineMessageID64{}
+	_ bin.BareDecoder = &InputBotInlineMessageID64{}
+
+	_ InputBotInlineMessageIDClass = &InputBotInlineMessageID64{}
+)
+
+// InputBotInlineMessageIDClass represents InputBotInlineMessageID generic type.
+//
+// See https://core.telegram.org/type/InputBotInlineMessageID for reference.
+//
+// Example:
+//  g, err := tg.DecodeInputBotInlineMessageID(buf)
+//  if err != nil {
+//      panic(err)
+//  }
+//  switch v := g.(type) {
+//  case *tg.InputBotInlineMessageID: // inputBotInlineMessageID#890c3d89
+//  case *tg.InputBotInlineMessageID64: // inputBotInlineMessageID64#b6d915d7
+//  default: panic(v)
+//  }
+type InputBotInlineMessageIDClass interface {
+	bin.Encoder
+	bin.Decoder
+	bin.BareEncoder
+	bin.BareDecoder
+	construct() InputBotInlineMessageIDClass
+
+	// TypeID returns type id in TL schema.
+	//
+	// See https://core.telegram.org/mtproto/TL-tl#remarks.
+	TypeID() uint32
+	// TypeName returns name of type in TL schema.
+	TypeName() string
+	// String implements fmt.Stringer.
+	String() string
+	// Zero returns true if current object has a zero value.
+	Zero() bool
+
+	// DC ID to use when working with this inline message
+	GetDCID() (value int)
+
+	// Access hash of message
+	GetAccessHash() (value int64)
+}
+
+// DecodeInputBotInlineMessageID implements binary de-serialization for InputBotInlineMessageIDClass.
+func DecodeInputBotInlineMessageID(buf *bin.Buffer) (InputBotInlineMessageIDClass, error) {
+	id, err := buf.PeekID()
+	if err != nil {
+		return nil, err
+	}
+	switch id {
+	case InputBotInlineMessageIDTypeID:
+		// Decoding inputBotInlineMessageID#890c3d89.
+		v := InputBotInlineMessageID{}
+		if err := v.Decode(buf); err != nil {
+			return nil, fmt.Errorf("unable to decode InputBotInlineMessageIDClass: %w", err)
+		}
+		return &v, nil
+	case InputBotInlineMessageID64TypeID:
+		// Decoding inputBotInlineMessageID64#b6d915d7.
+		v := InputBotInlineMessageID64{}
+		if err := v.Decode(buf); err != nil {
+			return nil, fmt.Errorf("unable to decode InputBotInlineMessageIDClass: %w", err)
+		}
+		return &v, nil
+	default:
+		return nil, fmt.Errorf("unable to decode InputBotInlineMessageIDClass: %w", bin.NewUnexpectedID(id))
+	}
+}
+
+// InputBotInlineMessageID boxes the InputBotInlineMessageIDClass providing a helper.
+type InputBotInlineMessageIDBox struct {
+	InputBotInlineMessageID InputBotInlineMessageIDClass
+}
+
+// Decode implements bin.Decoder for InputBotInlineMessageIDBox.
+func (b *InputBotInlineMessageIDBox) Decode(buf *bin.Buffer) error {
+	if b == nil {
+		return fmt.Errorf("unable to decode InputBotInlineMessageIDBox to nil")
+	}
+	v, err := DecodeInputBotInlineMessageID(buf)
+	if err != nil {
+		return fmt.Errorf("unable to decode boxed value: %w", err)
+	}
+	b.InputBotInlineMessageID = v
+	return nil
+}
+
+// Encode implements bin.Encode for InputBotInlineMessageIDBox.
+func (b *InputBotInlineMessageIDBox) Encode(buf *bin.Buffer) error {
+	if b == nil || b.InputBotInlineMessageID == nil {
+		return fmt.Errorf("unable to encode InputBotInlineMessageIDClass as nil")
+	}
+	return b.InputBotInlineMessageID.Encode(buf)
+}
+
+// InputBotInlineMessageIDClassArray is adapter for slice of InputBotInlineMessageIDClass.
+type InputBotInlineMessageIDClassArray []InputBotInlineMessageIDClass
+
+// Sort sorts slice of InputBotInlineMessageIDClass.
+func (s InputBotInlineMessageIDClassArray) Sort(less func(a, b InputBotInlineMessageIDClass) bool) InputBotInlineMessageIDClassArray {
+	sort.Slice(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// SortStable sorts slice of InputBotInlineMessageIDClass.
+func (s InputBotInlineMessageIDClassArray) SortStable(less func(a, b InputBotInlineMessageIDClass) bool) InputBotInlineMessageIDClassArray {
+	sort.SliceStable(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// Retain filters in-place slice of InputBotInlineMessageIDClass.
+func (s InputBotInlineMessageIDClassArray) Retain(keep func(x InputBotInlineMessageIDClass) bool) InputBotInlineMessageIDClassArray {
+	n := 0
+	for _, x := range s {
+		if keep(x) {
+			s[n] = x
+			n++
+		}
+	}
+	s = s[:n]
+
+	return s
+}
+
+// First returns first element of slice (if exists).
+func (s InputBotInlineMessageIDClassArray) First() (v InputBotInlineMessageIDClass, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[0], true
+}
+
+// Last returns last element of slice (if exists).
+func (s InputBotInlineMessageIDClassArray) Last() (v InputBotInlineMessageIDClass, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[len(s)-1], true
+}
+
+// PopFirst returns first element of slice (if exists) and deletes it.
+func (s *InputBotInlineMessageIDClassArray) PopFirst() (v InputBotInlineMessageIDClass, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[0]
+
+	// Delete by index from SliceTricks.
+	copy(a[0:], a[1:])
+	var zero InputBotInlineMessageIDClass
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// Pop returns last element of slice (if exists) and deletes it.
+func (s *InputBotInlineMessageIDClassArray) Pop() (v InputBotInlineMessageIDClass, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[len(a)-1]
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// AsInputBotInlineMessageID returns copy with only InputBotInlineMessageID constructors.
+func (s InputBotInlineMessageIDClassArray) AsInputBotInlineMessageID() (to InputBotInlineMessageIDArray) {
+	for _, elem := range s {
+		value, ok := elem.(*InputBotInlineMessageID)
+		if !ok {
+			continue
+		}
+		to = append(to, *value)
+	}
+
+	return to
+}
+
+// AsInputBotInlineMessageID64 returns copy with only InputBotInlineMessageID64 constructors.
+func (s InputBotInlineMessageIDClassArray) AsInputBotInlineMessageID64() (to InputBotInlineMessageID64Array) {
+	for _, elem := range s {
+		value, ok := elem.(*InputBotInlineMessageID64)
+		if !ok {
+			continue
+		}
+		to = append(to, *value)
+	}
+
+	return to
+}
+
+// InputBotInlineMessageIDArray is adapter for slice of InputBotInlineMessageID.
+type InputBotInlineMessageIDArray []InputBotInlineMessageID
+
+// Sort sorts slice of InputBotInlineMessageID.
+func (s InputBotInlineMessageIDArray) Sort(less func(a, b InputBotInlineMessageID) bool) InputBotInlineMessageIDArray {
+	sort.Slice(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// SortStable sorts slice of InputBotInlineMessageID.
+func (s InputBotInlineMessageIDArray) SortStable(less func(a, b InputBotInlineMessageID) bool) InputBotInlineMessageIDArray {
+	sort.SliceStable(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// Retain filters in-place slice of InputBotInlineMessageID.
+func (s InputBotInlineMessageIDArray) Retain(keep func(x InputBotInlineMessageID) bool) InputBotInlineMessageIDArray {
+	n := 0
+	for _, x := range s {
+		if keep(x) {
+			s[n] = x
+			n++
+		}
+	}
+	s = s[:n]
+
+	return s
+}
+
+// First returns first element of slice (if exists).
+func (s InputBotInlineMessageIDArray) First() (v InputBotInlineMessageID, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[0], true
+}
+
+// Last returns last element of slice (if exists).
+func (s InputBotInlineMessageIDArray) Last() (v InputBotInlineMessageID, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[len(s)-1], true
+}
+
+// PopFirst returns first element of slice (if exists) and deletes it.
+func (s *InputBotInlineMessageIDArray) PopFirst() (v InputBotInlineMessageID, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[0]
+
+	// Delete by index from SliceTricks.
+	copy(a[0:], a[1:])
+	var zero InputBotInlineMessageID
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// Pop returns last element of slice (if exists) and deletes it.
+func (s *InputBotInlineMessageIDArray) Pop() (v InputBotInlineMessageID, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[len(a)-1]
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// InputBotInlineMessageID64Array is adapter for slice of InputBotInlineMessageID64.
+type InputBotInlineMessageID64Array []InputBotInlineMessageID64
+
+// Sort sorts slice of InputBotInlineMessageID64.
+func (s InputBotInlineMessageID64Array) Sort(less func(a, b InputBotInlineMessageID64) bool) InputBotInlineMessageID64Array {
+	sort.Slice(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// SortStable sorts slice of InputBotInlineMessageID64.
+func (s InputBotInlineMessageID64Array) SortStable(less func(a, b InputBotInlineMessageID64) bool) InputBotInlineMessageID64Array {
+	sort.SliceStable(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// Retain filters in-place slice of InputBotInlineMessageID64.
+func (s InputBotInlineMessageID64Array) Retain(keep func(x InputBotInlineMessageID64) bool) InputBotInlineMessageID64Array {
+	n := 0
+	for _, x := range s {
+		if keep(x) {
+			s[n] = x
+			n++
+		}
+	}
+	s = s[:n]
+
+	return s
+}
+
+// First returns first element of slice (if exists).
+func (s InputBotInlineMessageID64Array) First() (v InputBotInlineMessageID64, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[0], true
+}
+
+// Last returns last element of slice (if exists).
+func (s InputBotInlineMessageID64Array) Last() (v InputBotInlineMessageID64, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[len(s)-1], true
+}
+
+// PopFirst returns first element of slice (if exists) and deletes it.
+func (s *InputBotInlineMessageID64Array) PopFirst() (v InputBotInlineMessageID64, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[0]
+
+	// Delete by index from SliceTricks.
+	copy(a[0:], a[1:])
+	var zero InputBotInlineMessageID64
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// Pop returns last element of slice (if exists) and deletes it.
+func (s *InputBotInlineMessageID64Array) Pop() (v InputBotInlineMessageID64, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[len(a)-1]
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// SortByID sorts slice of InputBotInlineMessageID64 by ID.
+func (s InputBotInlineMessageID64Array) SortByID() InputBotInlineMessageID64Array {
+	return s.Sort(func(a, b InputBotInlineMessageID64) bool {
+		return a.GetID() < b.GetID()
+	})
+}
+
+// SortStableByID sorts slice of InputBotInlineMessageID64 by ID.
+func (s InputBotInlineMessageID64Array) SortStableByID() InputBotInlineMessageID64Array {
+	return s.SortStable(func(a, b InputBotInlineMessageID64) bool {
+		return a.GetID() < b.GetID()
+	})
+}
+
+// FillMap fills constructors to given map.
+func (s InputBotInlineMessageID64Array) FillMap(to map[int]InputBotInlineMessageID64) {
+	for _, value := range s {
+		to[value.GetID()] = value
+	}
+}
+
+// ToMap collects constructors to map.
+func (s InputBotInlineMessageID64Array) ToMap() map[int]InputBotInlineMessageID64 {
+	r := make(map[int]InputBotInlineMessageID64, len(s))
+	s.FillMap(r)
+	return r
+}

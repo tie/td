@@ -29,13 +29,13 @@ var (
 	_ = tgerr.Error{}
 )
 
-// StatsGroupTopPoster represents TL type `statsGroupTopPoster#18f3d0f7`.
+// StatsGroupTopPoster represents TL type `statsGroupTopPoster#9d04af9b`.
 // Information about an active user in a supergroup
 //
 // See https://core.telegram.org/constructor/statsGroupTopPoster for reference.
 type StatsGroupTopPoster struct {
 	// User ID
-	UserID int
+	UserID int64
 	// Number of messages for statistics¹ period in consideration
 	//
 	// Links:
@@ -46,7 +46,7 @@ type StatsGroupTopPoster struct {
 }
 
 // StatsGroupTopPosterTypeID is TL type id of StatsGroupTopPoster.
-const StatsGroupTopPosterTypeID = 0x18f3d0f7
+const StatsGroupTopPosterTypeID = 0x9d04af9b
 
 func (s *StatsGroupTopPoster) Zero() bool {
 	if s == nil {
@@ -76,7 +76,7 @@ func (s *StatsGroupTopPoster) String() string {
 
 // FillFrom fills StatsGroupTopPoster from given interface.
 func (s *StatsGroupTopPoster) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetMessages() (value int)
 	GetAvgChars() (value int)
 }) {
@@ -127,7 +127,7 @@ func (s *StatsGroupTopPoster) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (s *StatsGroupTopPoster) Encode(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't encode statsGroupTopPoster#18f3d0f7 as nil")
+		return fmt.Errorf("can't encode statsGroupTopPoster#9d04af9b as nil")
 	}
 	b.PutID(StatsGroupTopPosterTypeID)
 	return s.EncodeBare(b)
@@ -136,16 +136,16 @@ func (s *StatsGroupTopPoster) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (s *StatsGroupTopPoster) EncodeBare(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't encode statsGroupTopPoster#18f3d0f7 as nil")
+		return fmt.Errorf("can't encode statsGroupTopPoster#9d04af9b as nil")
 	}
-	b.PutInt(s.UserID)
+	b.PutLong(s.UserID)
 	b.PutInt(s.Messages)
 	b.PutInt(s.AvgChars)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (s *StatsGroupTopPoster) GetUserID() (value int) {
+func (s *StatsGroupTopPoster) GetUserID() (value int64) {
 	return s.UserID
 }
 
@@ -162,10 +162,10 @@ func (s *StatsGroupTopPoster) GetAvgChars() (value int) {
 // Decode implements bin.Decoder.
 func (s *StatsGroupTopPoster) Decode(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't decode statsGroupTopPoster#18f3d0f7 to nil")
+		return fmt.Errorf("can't decode statsGroupTopPoster#9d04af9b to nil")
 	}
 	if err := b.ConsumeID(StatsGroupTopPosterTypeID); err != nil {
-		return fmt.Errorf("unable to decode statsGroupTopPoster#18f3d0f7: %w", err)
+		return fmt.Errorf("unable to decode statsGroupTopPoster#9d04af9b: %w", err)
 	}
 	return s.DecodeBare(b)
 }
@@ -173,26 +173,26 @@ func (s *StatsGroupTopPoster) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (s *StatsGroupTopPoster) DecodeBare(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't decode statsGroupTopPoster#18f3d0f7 to nil")
+		return fmt.Errorf("can't decode statsGroupTopPoster#9d04af9b to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode statsGroupTopPoster#18f3d0f7: field user_id: %w", err)
+			return fmt.Errorf("unable to decode statsGroupTopPoster#9d04af9b: field user_id: %w", err)
 		}
 		s.UserID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode statsGroupTopPoster#18f3d0f7: field messages: %w", err)
+			return fmt.Errorf("unable to decode statsGroupTopPoster#9d04af9b: field messages: %w", err)
 		}
 		s.Messages = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode statsGroupTopPoster#18f3d0f7: field avg_chars: %w", err)
+			return fmt.Errorf("unable to decode statsGroupTopPoster#9d04af9b: field avg_chars: %w", err)
 		}
 		s.AvgChars = value
 	}

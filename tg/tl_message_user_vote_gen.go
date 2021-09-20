@@ -29,13 +29,13 @@ var (
 	_ = tgerr.Error{}
 )
 
-// MessageUserVote represents TL type `messageUserVote#a28e5559`.
+// MessageUserVote represents TL type `messageUserVote#34d247b4`.
 // How a user voted in a poll
 //
 // See https://core.telegram.org/constructor/messageUserVote for reference.
 type MessageUserVote struct {
 	// User ID
-	UserID int
+	UserID int64
 	// The option chosen by the user
 	Option []byte
 	// When did the user cast the vote
@@ -43,7 +43,7 @@ type MessageUserVote struct {
 }
 
 // MessageUserVoteTypeID is TL type id of MessageUserVote.
-const MessageUserVoteTypeID = 0xa28e5559
+const MessageUserVoteTypeID = 0x34d247b4
 
 func (m *MessageUserVote) Zero() bool {
 	if m == nil {
@@ -73,7 +73,7 @@ func (m *MessageUserVote) String() string {
 
 // FillFrom fills MessageUserVote from given interface.
 func (m *MessageUserVote) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetOption() (value []byte)
 	GetDate() (value int)
 }) {
@@ -124,7 +124,7 @@ func (m *MessageUserVote) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageUserVote) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageUserVote#a28e5559 as nil")
+		return fmt.Errorf("can't encode messageUserVote#34d247b4 as nil")
 	}
 	b.PutID(MessageUserVoteTypeID)
 	return m.EncodeBare(b)
@@ -133,16 +133,16 @@ func (m *MessageUserVote) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageUserVote) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageUserVote#a28e5559 as nil")
+		return fmt.Errorf("can't encode messageUserVote#34d247b4 as nil")
 	}
-	b.PutInt(m.UserID)
+	b.PutLong(m.UserID)
 	b.PutBytes(m.Option)
 	b.PutInt(m.Date)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (m *MessageUserVote) GetUserID() (value int) {
+func (m *MessageUserVote) GetUserID() (value int64) {
 	return m.UserID
 }
 
@@ -159,10 +159,10 @@ func (m *MessageUserVote) GetDate() (value int) {
 // Decode implements bin.Decoder.
 func (m *MessageUserVote) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageUserVote#a28e5559 to nil")
+		return fmt.Errorf("can't decode messageUserVote#34d247b4 to nil")
 	}
 	if err := b.ConsumeID(MessageUserVoteTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageUserVote#a28e5559: %w", err)
+		return fmt.Errorf("unable to decode messageUserVote#34d247b4: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -170,26 +170,26 @@ func (m *MessageUserVote) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageUserVote) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageUserVote#a28e5559 to nil")
+		return fmt.Errorf("can't decode messageUserVote#34d247b4 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVote#a28e5559: field user_id: %w", err)
+			return fmt.Errorf("unable to decode messageUserVote#34d247b4: field user_id: %w", err)
 		}
 		m.UserID = value
 	}
 	{
 		value, err := b.Bytes()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVote#a28e5559: field option: %w", err)
+			return fmt.Errorf("unable to decode messageUserVote#34d247b4: field option: %w", err)
 		}
 		m.Option = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVote#a28e5559: field date: %w", err)
+			return fmt.Errorf("unable to decode messageUserVote#34d247b4: field date: %w", err)
 		}
 		m.Date = value
 	}
@@ -209,7 +209,7 @@ var (
 	_ MessageUserVoteClass = &MessageUserVote{}
 )
 
-// MessageUserVoteInputOption represents TL type `messageUserVoteInputOption#36377430`.
+// MessageUserVoteInputOption represents TL type `messageUserVoteInputOption#3ca5b0ec`.
 // How a user voted in a poll (reduced constructor, returned if an option was provided to
 // messages.getPollVotes¹)
 //
@@ -219,13 +219,13 @@ var (
 // See https://core.telegram.org/constructor/messageUserVoteInputOption for reference.
 type MessageUserVoteInputOption struct {
 	// The user that voted for the queried option
-	UserID int
+	UserID int64
 	// When did the user cast the vote
 	Date int
 }
 
 // MessageUserVoteInputOptionTypeID is TL type id of MessageUserVoteInputOption.
-const MessageUserVoteInputOptionTypeID = 0x36377430
+const MessageUserVoteInputOptionTypeID = 0x3ca5b0ec
 
 func (m *MessageUserVoteInputOption) Zero() bool {
 	if m == nil {
@@ -252,7 +252,7 @@ func (m *MessageUserVoteInputOption) String() string {
 
 // FillFrom fills MessageUserVoteInputOption from given interface.
 func (m *MessageUserVoteInputOption) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetDate() (value int)
 }) {
 	m.UserID = from.GetUserID()
@@ -297,7 +297,7 @@ func (m *MessageUserVoteInputOption) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageUserVoteInputOption) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageUserVoteInputOption#36377430 as nil")
+		return fmt.Errorf("can't encode messageUserVoteInputOption#3ca5b0ec as nil")
 	}
 	b.PutID(MessageUserVoteInputOptionTypeID)
 	return m.EncodeBare(b)
@@ -306,15 +306,15 @@ func (m *MessageUserVoteInputOption) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageUserVoteInputOption) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageUserVoteInputOption#36377430 as nil")
+		return fmt.Errorf("can't encode messageUserVoteInputOption#3ca5b0ec as nil")
 	}
-	b.PutInt(m.UserID)
+	b.PutLong(m.UserID)
 	b.PutInt(m.Date)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (m *MessageUserVoteInputOption) GetUserID() (value int) {
+func (m *MessageUserVoteInputOption) GetUserID() (value int64) {
 	return m.UserID
 }
 
@@ -326,10 +326,10 @@ func (m *MessageUserVoteInputOption) GetDate() (value int) {
 // Decode implements bin.Decoder.
 func (m *MessageUserVoteInputOption) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageUserVoteInputOption#36377430 to nil")
+		return fmt.Errorf("can't decode messageUserVoteInputOption#3ca5b0ec to nil")
 	}
 	if err := b.ConsumeID(MessageUserVoteInputOptionTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageUserVoteInputOption#36377430: %w", err)
+		return fmt.Errorf("unable to decode messageUserVoteInputOption#3ca5b0ec: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -337,19 +337,19 @@ func (m *MessageUserVoteInputOption) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageUserVoteInputOption) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageUserVoteInputOption#36377430 to nil")
+		return fmt.Errorf("can't decode messageUserVoteInputOption#3ca5b0ec to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVoteInputOption#36377430: field user_id: %w", err)
+			return fmt.Errorf("unable to decode messageUserVoteInputOption#3ca5b0ec: field user_id: %w", err)
 		}
 		m.UserID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVoteInputOption#36377430: field date: %w", err)
+			return fmt.Errorf("unable to decode messageUserVoteInputOption#3ca5b0ec: field date: %w", err)
 		}
 		m.Date = value
 	}
@@ -369,13 +369,13 @@ var (
 	_ MessageUserVoteClass = &MessageUserVoteInputOption{}
 )
 
-// MessageUserVoteMultiple represents TL type `messageUserVoteMultiple#e8fe0de`.
+// MessageUserVoteMultiple represents TL type `messageUserVoteMultiple#8a65e557`.
 // How a user voted in a multiple-choice poll
 //
 // See https://core.telegram.org/constructor/messageUserVoteMultiple for reference.
 type MessageUserVoteMultiple struct {
 	// User ID
-	UserID int
+	UserID int64
 	// Options chosen by the user
 	Options [][]byte
 	// When did the user cast their votes
@@ -383,7 +383,7 @@ type MessageUserVoteMultiple struct {
 }
 
 // MessageUserVoteMultipleTypeID is TL type id of MessageUserVoteMultiple.
-const MessageUserVoteMultipleTypeID = 0xe8fe0de
+const MessageUserVoteMultipleTypeID = 0x8a65e557
 
 func (m *MessageUserVoteMultiple) Zero() bool {
 	if m == nil {
@@ -413,7 +413,7 @@ func (m *MessageUserVoteMultiple) String() string {
 
 // FillFrom fills MessageUserVoteMultiple from given interface.
 func (m *MessageUserVoteMultiple) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetOptions() (value [][]byte)
 	GetDate() (value int)
 }) {
@@ -464,7 +464,7 @@ func (m *MessageUserVoteMultiple) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageUserVoteMultiple) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageUserVoteMultiple#e8fe0de as nil")
+		return fmt.Errorf("can't encode messageUserVoteMultiple#8a65e557 as nil")
 	}
 	b.PutID(MessageUserVoteMultipleTypeID)
 	return m.EncodeBare(b)
@@ -473,9 +473,9 @@ func (m *MessageUserVoteMultiple) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageUserVoteMultiple) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageUserVoteMultiple#e8fe0de as nil")
+		return fmt.Errorf("can't encode messageUserVoteMultiple#8a65e557 as nil")
 	}
-	b.PutInt(m.UserID)
+	b.PutLong(m.UserID)
 	b.PutVectorHeader(len(m.Options))
 	for _, v := range m.Options {
 		b.PutBytes(v)
@@ -485,7 +485,7 @@ func (m *MessageUserVoteMultiple) EncodeBare(b *bin.Buffer) error {
 }
 
 // GetUserID returns value of UserID field.
-func (m *MessageUserVoteMultiple) GetUserID() (value int) {
+func (m *MessageUserVoteMultiple) GetUserID() (value int64) {
 	return m.UserID
 }
 
@@ -502,10 +502,10 @@ func (m *MessageUserVoteMultiple) GetDate() (value int) {
 // Decode implements bin.Decoder.
 func (m *MessageUserVoteMultiple) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageUserVoteMultiple#e8fe0de to nil")
+		return fmt.Errorf("can't decode messageUserVoteMultiple#8a65e557 to nil")
 	}
 	if err := b.ConsumeID(MessageUserVoteMultipleTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageUserVoteMultiple#e8fe0de: %w", err)
+		return fmt.Errorf("unable to decode messageUserVoteMultiple#8a65e557: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -513,24 +513,24 @@ func (m *MessageUserVoteMultiple) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageUserVoteMultiple) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageUserVoteMultiple#e8fe0de to nil")
+		return fmt.Errorf("can't decode messageUserVoteMultiple#8a65e557 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVoteMultiple#e8fe0de: field user_id: %w", err)
+			return fmt.Errorf("unable to decode messageUserVoteMultiple#8a65e557: field user_id: %w", err)
 		}
 		m.UserID = value
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVoteMultiple#e8fe0de: field options: %w", err)
+			return fmt.Errorf("unable to decode messageUserVoteMultiple#8a65e557: field options: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
 			value, err := b.Bytes()
 			if err != nil {
-				return fmt.Errorf("unable to decode messageUserVoteMultiple#e8fe0de: field options: %w", err)
+				return fmt.Errorf("unable to decode messageUserVoteMultiple#8a65e557: field options: %w", err)
 			}
 			m.Options = append(m.Options, value)
 		}
@@ -538,7 +538,7 @@ func (m *MessageUserVoteMultiple) DecodeBare(b *bin.Buffer) error {
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageUserVoteMultiple#e8fe0de: field date: %w", err)
+			return fmt.Errorf("unable to decode messageUserVoteMultiple#8a65e557: field date: %w", err)
 		}
 		m.Date = value
 	}
@@ -568,9 +568,9 @@ var (
 //      panic(err)
 //  }
 //  switch v := g.(type) {
-//  case *tg.MessageUserVote: // messageUserVote#a28e5559
-//  case *tg.MessageUserVoteInputOption: // messageUserVoteInputOption#36377430
-//  case *tg.MessageUserVoteMultiple: // messageUserVoteMultiple#e8fe0de
+//  case *tg.MessageUserVote: // messageUserVote#34d247b4
+//  case *tg.MessageUserVoteInputOption: // messageUserVoteInputOption#3ca5b0ec
+//  case *tg.MessageUserVoteMultiple: // messageUserVoteMultiple#8a65e557
 //  default: panic(v)
 //  }
 type MessageUserVoteClass interface {
@@ -592,7 +592,7 @@ type MessageUserVoteClass interface {
 	Zero() bool
 
 	// User ID
-	GetUserID() (value int)
+	GetUserID() (value int64)
 
 	// When did the user cast the vote
 	GetDate() (value int)
@@ -606,21 +606,21 @@ func DecodeMessageUserVote(buf *bin.Buffer) (MessageUserVoteClass, error) {
 	}
 	switch id {
 	case MessageUserVoteTypeID:
-		// Decoding messageUserVote#a28e5559.
+		// Decoding messageUserVote#34d247b4.
 		v := MessageUserVote{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageUserVoteClass: %w", err)
 		}
 		return &v, nil
 	case MessageUserVoteInputOptionTypeID:
-		// Decoding messageUserVoteInputOption#36377430.
+		// Decoding messageUserVoteInputOption#3ca5b0ec.
 		v := MessageUserVoteInputOption{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageUserVoteClass: %w", err)
 		}
 		return &v, nil
 	case MessageUserVoteMultipleTypeID:
-		// Decoding messageUserVoteMultiple#e8fe0de.
+		// Decoding messageUserVoteMultiple#8a65e557.
 		v := MessageUserVoteMultiple{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageUserVoteClass: %w", err)

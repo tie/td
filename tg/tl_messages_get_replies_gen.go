@@ -29,7 +29,7 @@ var (
 	_ = tgerr.Error{}
 )
 
-// MessagesGetRepliesRequest represents TL type `messages.getReplies#24b581ba`.
+// MessagesGetRepliesRequest represents TL type `messages.getReplies#22ddd30c`.
 // Get messages in a reply thread
 //
 // See https://core.telegram.org/method/messages.getReplies for reference.
@@ -68,11 +68,11 @@ type MessagesGetRepliesRequest struct {
 	//
 	// Links:
 	//  1) https://core.telegram.org/api/offsets#hash-generation
-	Hash int
+	Hash int64
 }
 
 // MessagesGetRepliesRequestTypeID is TL type id of MessagesGetRepliesRequest.
-const MessagesGetRepliesRequestTypeID = 0x24b581ba
+const MessagesGetRepliesRequestTypeID = 0x22ddd30c
 
 func (g *MessagesGetRepliesRequest) Zero() bool {
 	if g == nil {
@@ -128,7 +128,7 @@ func (g *MessagesGetRepliesRequest) FillFrom(from interface {
 	GetLimit() (value int)
 	GetMaxID() (value int)
 	GetMinID() (value int)
-	GetHash() (value int)
+	GetHash() (value int64)
 }) {
 	g.Peer = from.GetPeer()
 	g.MsgID = from.GetMsgID()
@@ -207,7 +207,7 @@ func (g *MessagesGetRepliesRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (g *MessagesGetRepliesRequest) Encode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode messages.getReplies#24b581ba as nil")
+		return fmt.Errorf("can't encode messages.getReplies#22ddd30c as nil")
 	}
 	b.PutID(MessagesGetRepliesRequestTypeID)
 	return g.EncodeBare(b)
@@ -216,13 +216,13 @@ func (g *MessagesGetRepliesRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (g *MessagesGetRepliesRequest) EncodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode messages.getReplies#24b581ba as nil")
+		return fmt.Errorf("can't encode messages.getReplies#22ddd30c as nil")
 	}
 	if g.Peer == nil {
-		return fmt.Errorf("unable to encode messages.getReplies#24b581ba: field peer is nil")
+		return fmt.Errorf("unable to encode messages.getReplies#22ddd30c: field peer is nil")
 	}
 	if err := g.Peer.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode messages.getReplies#24b581ba: field peer: %w", err)
+		return fmt.Errorf("unable to encode messages.getReplies#22ddd30c: field peer: %w", err)
 	}
 	b.PutInt(g.MsgID)
 	b.PutInt(g.OffsetID)
@@ -231,7 +231,7 @@ func (g *MessagesGetRepliesRequest) EncodeBare(b *bin.Buffer) error {
 	b.PutInt(g.Limit)
 	b.PutInt(g.MaxID)
 	b.PutInt(g.MinID)
-	b.PutInt(g.Hash)
+	b.PutLong(g.Hash)
 	return nil
 }
 
@@ -276,17 +276,17 @@ func (g *MessagesGetRepliesRequest) GetMinID() (value int) {
 }
 
 // GetHash returns value of Hash field.
-func (g *MessagesGetRepliesRequest) GetHash() (value int) {
+func (g *MessagesGetRepliesRequest) GetHash() (value int64) {
 	return g.Hash
 }
 
 // Decode implements bin.Decoder.
 func (g *MessagesGetRepliesRequest) Decode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode messages.getReplies#24b581ba to nil")
+		return fmt.Errorf("can't decode messages.getReplies#22ddd30c to nil")
 	}
 	if err := b.ConsumeID(MessagesGetRepliesRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode messages.getReplies#24b581ba: %w", err)
+		return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: %w", err)
 	}
 	return g.DecodeBare(b)
 }
@@ -294,68 +294,68 @@ func (g *MessagesGetRepliesRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (g *MessagesGetRepliesRequest) DecodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode messages.getReplies#24b581ba to nil")
+		return fmt.Errorf("can't decode messages.getReplies#22ddd30c to nil")
 	}
 	{
 		value, err := DecodeInputPeer(b)
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field peer: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field peer: %w", err)
 		}
 		g.Peer = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field msg_id: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field msg_id: %w", err)
 		}
 		g.MsgID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field offset_id: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field offset_id: %w", err)
 		}
 		g.OffsetID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field offset_date: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field offset_date: %w", err)
 		}
 		g.OffsetDate = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field add_offset: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field add_offset: %w", err)
 		}
 		g.AddOffset = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field limit: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field limit: %w", err)
 		}
 		g.Limit = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field max_id: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field max_id: %w", err)
 		}
 		g.MaxID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field min_id: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field min_id: %w", err)
 		}
 		g.MinID = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getReplies#24b581ba: field hash: %w", err)
+			return fmt.Errorf("unable to decode messages.getReplies#22ddd30c: field hash: %w", err)
 		}
 		g.Hash = value
 	}
@@ -370,7 +370,7 @@ var (
 	_ bin.BareDecoder = &MessagesGetRepliesRequest{}
 )
 
-// MessagesGetReplies invokes method messages.getReplies#24b581ba returning error if any.
+// MessagesGetReplies invokes method messages.getReplies#22ddd30c returning error if any.
 // Get messages in a reply thread
 //
 // See https://core.telegram.org/method/messages.getReplies for reference.

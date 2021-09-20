@@ -29,19 +29,19 @@ var (
 	_ = tgerr.Error{}
 )
 
-// ChannelParticipant represents TL type `channelParticipant#15ebac1d`.
+// ChannelParticipant represents TL type `channelParticipant#c00c07c0`.
 // Channel/supergroup participant
 //
 // See https://core.telegram.org/constructor/channelParticipant for reference.
 type ChannelParticipant struct {
 	// Pariticipant user ID
-	UserID int
+	UserID int64
 	// Date joined
 	Date int
 }
 
 // ChannelParticipantTypeID is TL type id of ChannelParticipant.
-const ChannelParticipantTypeID = 0x15ebac1d
+const ChannelParticipantTypeID = 0xc00c07c0
 
 func (c *ChannelParticipant) Zero() bool {
 	if c == nil {
@@ -68,7 +68,7 @@ func (c *ChannelParticipant) String() string {
 
 // FillFrom fills ChannelParticipant from given interface.
 func (c *ChannelParticipant) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetDate() (value int)
 }) {
 	c.UserID = from.GetUserID()
@@ -113,7 +113,7 @@ func (c *ChannelParticipant) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (c *ChannelParticipant) Encode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipant#15ebac1d as nil")
+		return fmt.Errorf("can't encode channelParticipant#c00c07c0 as nil")
 	}
 	b.PutID(ChannelParticipantTypeID)
 	return c.EncodeBare(b)
@@ -122,15 +122,15 @@ func (c *ChannelParticipant) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (c *ChannelParticipant) EncodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipant#15ebac1d as nil")
+		return fmt.Errorf("can't encode channelParticipant#c00c07c0 as nil")
 	}
-	b.PutInt(c.UserID)
+	b.PutLong(c.UserID)
 	b.PutInt(c.Date)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (c *ChannelParticipant) GetUserID() (value int) {
+func (c *ChannelParticipant) GetUserID() (value int64) {
 	return c.UserID
 }
 
@@ -142,10 +142,10 @@ func (c *ChannelParticipant) GetDate() (value int) {
 // Decode implements bin.Decoder.
 func (c *ChannelParticipant) Decode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipant#15ebac1d to nil")
+		return fmt.Errorf("can't decode channelParticipant#c00c07c0 to nil")
 	}
 	if err := b.ConsumeID(ChannelParticipantTypeID); err != nil {
-		return fmt.Errorf("unable to decode channelParticipant#15ebac1d: %w", err)
+		return fmt.Errorf("unable to decode channelParticipant#c00c07c0: %w", err)
 	}
 	return c.DecodeBare(b)
 }
@@ -153,19 +153,19 @@ func (c *ChannelParticipant) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (c *ChannelParticipant) DecodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipant#15ebac1d to nil")
+		return fmt.Errorf("can't decode channelParticipant#c00c07c0 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipant#15ebac1d: field user_id: %w", err)
+			return fmt.Errorf("unable to decode channelParticipant#c00c07c0: field user_id: %w", err)
 		}
 		c.UserID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipant#15ebac1d: field date: %w", err)
+			return fmt.Errorf("unable to decode channelParticipant#c00c07c0: field date: %w", err)
 		}
 		c.Date = value
 	}
@@ -185,21 +185,21 @@ var (
 	_ ChannelParticipantClass = &ChannelParticipant{}
 )
 
-// ChannelParticipantSelf represents TL type `channelParticipantSelf#a3289a6d`.
+// ChannelParticipantSelf represents TL type `channelParticipantSelf#28a8bc67`.
 // Myself
 //
 // See https://core.telegram.org/constructor/channelParticipantSelf for reference.
 type ChannelParticipantSelf struct {
 	// User ID
-	UserID int
+	UserID int64
 	// User that invited me to the channel/supergroup
-	InviterID int
+	InviterID int64
 	// When did I join the channel/supergroup
 	Date int
 }
 
 // ChannelParticipantSelfTypeID is TL type id of ChannelParticipantSelf.
-const ChannelParticipantSelfTypeID = 0xa3289a6d
+const ChannelParticipantSelfTypeID = 0x28a8bc67
 
 func (c *ChannelParticipantSelf) Zero() bool {
 	if c == nil {
@@ -229,8 +229,8 @@ func (c *ChannelParticipantSelf) String() string {
 
 // FillFrom fills ChannelParticipantSelf from given interface.
 func (c *ChannelParticipantSelf) FillFrom(from interface {
-	GetUserID() (value int)
-	GetInviterID() (value int)
+	GetUserID() (value int64)
+	GetInviterID() (value int64)
 	GetDate() (value int)
 }) {
 	c.UserID = from.GetUserID()
@@ -280,7 +280,7 @@ func (c *ChannelParticipantSelf) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (c *ChannelParticipantSelf) Encode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantSelf#a3289a6d as nil")
+		return fmt.Errorf("can't encode channelParticipantSelf#28a8bc67 as nil")
 	}
 	b.PutID(ChannelParticipantSelfTypeID)
 	return c.EncodeBare(b)
@@ -289,21 +289,21 @@ func (c *ChannelParticipantSelf) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (c *ChannelParticipantSelf) EncodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantSelf#a3289a6d as nil")
+		return fmt.Errorf("can't encode channelParticipantSelf#28a8bc67 as nil")
 	}
-	b.PutInt(c.UserID)
-	b.PutInt(c.InviterID)
+	b.PutLong(c.UserID)
+	b.PutLong(c.InviterID)
 	b.PutInt(c.Date)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (c *ChannelParticipantSelf) GetUserID() (value int) {
+func (c *ChannelParticipantSelf) GetUserID() (value int64) {
 	return c.UserID
 }
 
 // GetInviterID returns value of InviterID field.
-func (c *ChannelParticipantSelf) GetInviterID() (value int) {
+func (c *ChannelParticipantSelf) GetInviterID() (value int64) {
 	return c.InviterID
 }
 
@@ -315,10 +315,10 @@ func (c *ChannelParticipantSelf) GetDate() (value int) {
 // Decode implements bin.Decoder.
 func (c *ChannelParticipantSelf) Decode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantSelf#a3289a6d to nil")
+		return fmt.Errorf("can't decode channelParticipantSelf#28a8bc67 to nil")
 	}
 	if err := b.ConsumeID(ChannelParticipantSelfTypeID); err != nil {
-		return fmt.Errorf("unable to decode channelParticipantSelf#a3289a6d: %w", err)
+		return fmt.Errorf("unable to decode channelParticipantSelf#28a8bc67: %w", err)
 	}
 	return c.DecodeBare(b)
 }
@@ -326,26 +326,26 @@ func (c *ChannelParticipantSelf) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (c *ChannelParticipantSelf) DecodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantSelf#a3289a6d to nil")
+		return fmt.Errorf("can't decode channelParticipantSelf#28a8bc67 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantSelf#a3289a6d: field user_id: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantSelf#28a8bc67: field user_id: %w", err)
 		}
 		c.UserID = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantSelf#a3289a6d: field inviter_id: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantSelf#28a8bc67: field inviter_id: %w", err)
 		}
 		c.InviterID = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantSelf#a3289a6d: field date: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantSelf#28a8bc67: field date: %w", err)
 		}
 		c.Date = value
 	}
@@ -365,7 +365,7 @@ var (
 	_ ChannelParticipantClass = &ChannelParticipantSelf{}
 )
 
-// ChannelParticipantCreator represents TL type `channelParticipantCreator#447dca4b`.
+// ChannelParticipantCreator represents TL type `channelParticipantCreator#2fe601d3`.
 // Channel/supergroup creator
 //
 // See https://core.telegram.org/constructor/channelParticipantCreator for reference.
@@ -376,7 +376,7 @@ type ChannelParticipantCreator struct {
 	//  1) https://core.telegram.org/mtproto/TL-combinators#conditional-fields
 	Flags bin.Fields
 	// User ID
-	UserID int
+	UserID int64
 	// Creator admin rights
 	AdminRights ChatAdminRights
 	// The role (rank) of the group creator in the group: just an arbitrary string, admin by
@@ -387,7 +387,7 @@ type ChannelParticipantCreator struct {
 }
 
 // ChannelParticipantCreatorTypeID is TL type id of ChannelParticipantCreator.
-const ChannelParticipantCreatorTypeID = 0x447dca4b
+const ChannelParticipantCreatorTypeID = 0x2fe601d3
 
 func (c *ChannelParticipantCreator) Zero() bool {
 	if c == nil {
@@ -420,7 +420,7 @@ func (c *ChannelParticipantCreator) String() string {
 
 // FillFrom fills ChannelParticipantCreator from given interface.
 func (c *ChannelParticipantCreator) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 	GetAdminRights() (value ChatAdminRights)
 	GetRank() (value string, ok bool)
 }) {
@@ -475,7 +475,7 @@ func (c *ChannelParticipantCreator) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (c *ChannelParticipantCreator) Encode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantCreator#447dca4b as nil")
+		return fmt.Errorf("can't encode channelParticipantCreator#2fe601d3 as nil")
 	}
 	b.PutID(ChannelParticipantCreatorTypeID)
 	return c.EncodeBare(b)
@@ -484,17 +484,17 @@ func (c *ChannelParticipantCreator) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (c *ChannelParticipantCreator) EncodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantCreator#447dca4b as nil")
+		return fmt.Errorf("can't encode channelParticipantCreator#2fe601d3 as nil")
 	}
 	if !(c.Rank == "") {
 		c.Flags.Set(0)
 	}
 	if err := c.Flags.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantCreator#447dca4b: field flags: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantCreator#2fe601d3: field flags: %w", err)
 	}
-	b.PutInt(c.UserID)
+	b.PutLong(c.UserID)
 	if err := c.AdminRights.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantCreator#447dca4b: field admin_rights: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantCreator#2fe601d3: field admin_rights: %w", err)
 	}
 	if c.Flags.Has(0) {
 		b.PutString(c.Rank)
@@ -503,7 +503,7 @@ func (c *ChannelParticipantCreator) EncodeBare(b *bin.Buffer) error {
 }
 
 // GetUserID returns value of UserID field.
-func (c *ChannelParticipantCreator) GetUserID() (value int) {
+func (c *ChannelParticipantCreator) GetUserID() (value int64) {
 	return c.UserID
 }
 
@@ -530,10 +530,10 @@ func (c *ChannelParticipantCreator) GetRank() (value string, ok bool) {
 // Decode implements bin.Decoder.
 func (c *ChannelParticipantCreator) Decode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantCreator#447dca4b to nil")
+		return fmt.Errorf("can't decode channelParticipantCreator#2fe601d3 to nil")
 	}
 	if err := b.ConsumeID(ChannelParticipantCreatorTypeID); err != nil {
-		return fmt.Errorf("unable to decode channelParticipantCreator#447dca4b: %w", err)
+		return fmt.Errorf("unable to decode channelParticipantCreator#2fe601d3: %w", err)
 	}
 	return c.DecodeBare(b)
 }
@@ -541,29 +541,29 @@ func (c *ChannelParticipantCreator) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (c *ChannelParticipantCreator) DecodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantCreator#447dca4b to nil")
+		return fmt.Errorf("can't decode channelParticipantCreator#2fe601d3 to nil")
 	}
 	{
 		if err := c.Flags.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode channelParticipantCreator#447dca4b: field flags: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantCreator#2fe601d3: field flags: %w", err)
 		}
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantCreator#447dca4b: field user_id: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantCreator#2fe601d3: field user_id: %w", err)
 		}
 		c.UserID = value
 	}
 	{
 		if err := c.AdminRights.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode channelParticipantCreator#447dca4b: field admin_rights: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantCreator#2fe601d3: field admin_rights: %w", err)
 		}
 	}
 	if c.Flags.Has(0) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantCreator#447dca4b: field rank: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantCreator#2fe601d3: field rank: %w", err)
 		}
 		c.Rank = value
 	}
@@ -583,7 +583,7 @@ var (
 	_ ChannelParticipantClass = &ChannelParticipantCreator{}
 )
 
-// ChannelParticipantAdmin represents TL type `channelParticipantAdmin#ccbebbaf`.
+// ChannelParticipantAdmin represents TL type `channelParticipantAdmin#34c3bb53`.
 // Admin
 //
 // See https://core.telegram.org/constructor/channelParticipantAdmin for reference.
@@ -598,13 +598,13 @@ type ChannelParticipantAdmin struct {
 	// Is this the current user
 	Self bool
 	// Admin user ID
-	UserID int
+	UserID int64
 	// User that invited the admin to the channel/group
 	//
 	// Use SetInviterID and GetInviterID helpers.
-	InviterID int
+	InviterID int64
 	// User that promoted the user to admin
-	PromotedBy int
+	PromotedBy int64
 	// When did the user join
 	Date int
 	// Admin rights¹
@@ -619,7 +619,7 @@ type ChannelParticipantAdmin struct {
 }
 
 // ChannelParticipantAdminTypeID is TL type id of ChannelParticipantAdmin.
-const ChannelParticipantAdminTypeID = 0xccbebbaf
+const ChannelParticipantAdminTypeID = 0x34c3bb53
 
 func (c *ChannelParticipantAdmin) Zero() bool {
 	if c == nil {
@@ -669,9 +669,9 @@ func (c *ChannelParticipantAdmin) String() string {
 func (c *ChannelParticipantAdmin) FillFrom(from interface {
 	GetCanEdit() (value bool)
 	GetSelf() (value bool)
-	GetUserID() (value int)
-	GetInviterID() (value int, ok bool)
-	GetPromotedBy() (value int)
+	GetUserID() (value int64)
+	GetInviterID() (value int64, ok bool)
+	GetPromotedBy() (value int64)
 	GetDate() (value int)
 	GetAdminRights() (value ChatAdminRights)
 	GetRank() (value string, ok bool)
@@ -758,7 +758,7 @@ func (c *ChannelParticipantAdmin) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (c *ChannelParticipantAdmin) Encode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantAdmin#ccbebbaf as nil")
+		return fmt.Errorf("can't encode channelParticipantAdmin#34c3bb53 as nil")
 	}
 	b.PutID(ChannelParticipantAdminTypeID)
 	return c.EncodeBare(b)
@@ -767,7 +767,7 @@ func (c *ChannelParticipantAdmin) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (c *ChannelParticipantAdmin) EncodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantAdmin#ccbebbaf as nil")
+		return fmt.Errorf("can't encode channelParticipantAdmin#34c3bb53 as nil")
 	}
 	if !(c.CanEdit == false) {
 		c.Flags.Set(0)
@@ -782,16 +782,16 @@ func (c *ChannelParticipantAdmin) EncodeBare(b *bin.Buffer) error {
 		c.Flags.Set(2)
 	}
 	if err := c.Flags.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantAdmin#ccbebbaf: field flags: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantAdmin#34c3bb53: field flags: %w", err)
 	}
-	b.PutInt(c.UserID)
+	b.PutLong(c.UserID)
 	if c.Flags.Has(1) {
-		b.PutInt(c.InviterID)
+		b.PutLong(c.InviterID)
 	}
-	b.PutInt(c.PromotedBy)
+	b.PutLong(c.PromotedBy)
 	b.PutInt(c.Date)
 	if err := c.AdminRights.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantAdmin#ccbebbaf: field admin_rights: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantAdmin#34c3bb53: field admin_rights: %w", err)
 	}
 	if c.Flags.Has(2) {
 		b.PutString(c.Rank)
@@ -832,19 +832,19 @@ func (c *ChannelParticipantAdmin) GetSelf() (value bool) {
 }
 
 // GetUserID returns value of UserID field.
-func (c *ChannelParticipantAdmin) GetUserID() (value int) {
+func (c *ChannelParticipantAdmin) GetUserID() (value int64) {
 	return c.UserID
 }
 
 // SetInviterID sets value of InviterID conditional field.
-func (c *ChannelParticipantAdmin) SetInviterID(value int) {
+func (c *ChannelParticipantAdmin) SetInviterID(value int64) {
 	c.Flags.Set(1)
 	c.InviterID = value
 }
 
 // GetInviterID returns value of InviterID conditional field and
 // boolean which is true if field was set.
-func (c *ChannelParticipantAdmin) GetInviterID() (value int, ok bool) {
+func (c *ChannelParticipantAdmin) GetInviterID() (value int64, ok bool) {
 	if !c.Flags.Has(1) {
 		return value, false
 	}
@@ -852,7 +852,7 @@ func (c *ChannelParticipantAdmin) GetInviterID() (value int, ok bool) {
 }
 
 // GetPromotedBy returns value of PromotedBy field.
-func (c *ChannelParticipantAdmin) GetPromotedBy() (value int) {
+func (c *ChannelParticipantAdmin) GetPromotedBy() (value int64) {
 	return c.PromotedBy
 }
 
@@ -884,10 +884,10 @@ func (c *ChannelParticipantAdmin) GetRank() (value string, ok bool) {
 // Decode implements bin.Decoder.
 func (c *ChannelParticipantAdmin) Decode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantAdmin#ccbebbaf to nil")
+		return fmt.Errorf("can't decode channelParticipantAdmin#34c3bb53 to nil")
 	}
 	if err := b.ConsumeID(ChannelParticipantAdminTypeID); err != nil {
-		return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: %w", err)
+		return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: %w", err)
 	}
 	return c.DecodeBare(b)
 }
@@ -895,52 +895,52 @@ func (c *ChannelParticipantAdmin) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (c *ChannelParticipantAdmin) DecodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantAdmin#ccbebbaf to nil")
+		return fmt.Errorf("can't decode channelParticipantAdmin#34c3bb53 to nil")
 	}
 	{
 		if err := c.Flags.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field flags: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field flags: %w", err)
 		}
 	}
 	c.CanEdit = c.Flags.Has(0)
 	c.Self = c.Flags.Has(1)
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field user_id: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field user_id: %w", err)
 		}
 		c.UserID = value
 	}
 	if c.Flags.Has(1) {
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field inviter_id: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field inviter_id: %w", err)
 		}
 		c.InviterID = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field promoted_by: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field promoted_by: %w", err)
 		}
 		c.PromotedBy = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field date: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field date: %w", err)
 		}
 		c.Date = value
 	}
 	{
 		if err := c.AdminRights.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field admin_rights: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field admin_rights: %w", err)
 		}
 	}
 	if c.Flags.Has(2) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantAdmin#ccbebbaf: field rank: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantAdmin#34c3bb53: field rank: %w", err)
 		}
 		c.Rank = value
 	}
@@ -960,7 +960,7 @@ var (
 	_ ChannelParticipantClass = &ChannelParticipantAdmin{}
 )
 
-// ChannelParticipantBanned represents TL type `channelParticipantBanned#50a1dfd6`.
+// ChannelParticipantBanned represents TL type `channelParticipantBanned#6df8014e`.
 // Banned/kicked user
 //
 // See https://core.telegram.org/constructor/channelParticipantBanned for reference.
@@ -975,7 +975,7 @@ type ChannelParticipantBanned struct {
 	// Peer field of ChannelParticipantBanned.
 	Peer PeerClass
 	// User was kicked by the specified admin
-	KickedBy int
+	KickedBy int64
 	// When did the user join the group
 	Date int
 	// Banned rights¹
@@ -986,7 +986,7 @@ type ChannelParticipantBanned struct {
 }
 
 // ChannelParticipantBannedTypeID is TL type id of ChannelParticipantBanned.
-const ChannelParticipantBannedTypeID = 0x50a1dfd6
+const ChannelParticipantBannedTypeID = 0x6df8014e
 
 func (c *ChannelParticipantBanned) Zero() bool {
 	if c == nil {
@@ -1027,7 +1027,7 @@ func (c *ChannelParticipantBanned) String() string {
 func (c *ChannelParticipantBanned) FillFrom(from interface {
 	GetLeft() (value bool)
 	GetPeer() (value PeerClass)
-	GetKickedBy() (value int)
+	GetKickedBy() (value int64)
 	GetDate() (value int)
 	GetBannedRights() (value ChatBannedRights)
 }) {
@@ -1089,7 +1089,7 @@ func (c *ChannelParticipantBanned) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (c *ChannelParticipantBanned) Encode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantBanned#50a1dfd6 as nil")
+		return fmt.Errorf("can't encode channelParticipantBanned#6df8014e as nil")
 	}
 	b.PutID(ChannelParticipantBannedTypeID)
 	return c.EncodeBare(b)
@@ -1098,24 +1098,24 @@ func (c *ChannelParticipantBanned) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (c *ChannelParticipantBanned) EncodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelParticipantBanned#50a1dfd6 as nil")
+		return fmt.Errorf("can't encode channelParticipantBanned#6df8014e as nil")
 	}
 	if !(c.Left == false) {
 		c.Flags.Set(0)
 	}
 	if err := c.Flags.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantBanned#50a1dfd6: field flags: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantBanned#6df8014e: field flags: %w", err)
 	}
 	if c.Peer == nil {
-		return fmt.Errorf("unable to encode channelParticipantBanned#50a1dfd6: field peer is nil")
+		return fmt.Errorf("unable to encode channelParticipantBanned#6df8014e: field peer is nil")
 	}
 	if err := c.Peer.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantBanned#50a1dfd6: field peer: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantBanned#6df8014e: field peer: %w", err)
 	}
-	b.PutInt(c.KickedBy)
+	b.PutLong(c.KickedBy)
 	b.PutInt(c.Date)
 	if err := c.BannedRights.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode channelParticipantBanned#50a1dfd6: field banned_rights: %w", err)
+		return fmt.Errorf("unable to encode channelParticipantBanned#6df8014e: field banned_rights: %w", err)
 	}
 	return nil
 }
@@ -1142,7 +1142,7 @@ func (c *ChannelParticipantBanned) GetPeer() (value PeerClass) {
 }
 
 // GetKickedBy returns value of KickedBy field.
-func (c *ChannelParticipantBanned) GetKickedBy() (value int) {
+func (c *ChannelParticipantBanned) GetKickedBy() (value int64) {
 	return c.KickedBy
 }
 
@@ -1159,10 +1159,10 @@ func (c *ChannelParticipantBanned) GetBannedRights() (value ChatBannedRights) {
 // Decode implements bin.Decoder.
 func (c *ChannelParticipantBanned) Decode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantBanned#50a1dfd6 to nil")
+		return fmt.Errorf("can't decode channelParticipantBanned#6df8014e to nil")
 	}
 	if err := b.ConsumeID(ChannelParticipantBannedTypeID); err != nil {
-		return fmt.Errorf("unable to decode channelParticipantBanned#50a1dfd6: %w", err)
+		return fmt.Errorf("unable to decode channelParticipantBanned#6df8014e: %w", err)
 	}
 	return c.DecodeBare(b)
 }
@@ -1170,38 +1170,38 @@ func (c *ChannelParticipantBanned) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (c *ChannelParticipantBanned) DecodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelParticipantBanned#50a1dfd6 to nil")
+		return fmt.Errorf("can't decode channelParticipantBanned#6df8014e to nil")
 	}
 	{
 		if err := c.Flags.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode channelParticipantBanned#50a1dfd6: field flags: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantBanned#6df8014e: field flags: %w", err)
 		}
 	}
 	c.Left = c.Flags.Has(0)
 	{
 		value, err := DecodePeer(b)
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantBanned#50a1dfd6: field peer: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantBanned#6df8014e: field peer: %w", err)
 		}
 		c.Peer = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantBanned#50a1dfd6: field kicked_by: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantBanned#6df8014e: field kicked_by: %w", err)
 		}
 		c.KickedBy = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelParticipantBanned#50a1dfd6: field date: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantBanned#6df8014e: field date: %w", err)
 		}
 		c.Date = value
 	}
 	{
 		if err := c.BannedRights.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode channelParticipantBanned#50a1dfd6: field banned_rights: %w", err)
+			return fmt.Errorf("unable to decode channelParticipantBanned#6df8014e: field banned_rights: %w", err)
 		}
 	}
 	return nil
@@ -1367,11 +1367,11 @@ var (
 //      panic(err)
 //  }
 //  switch v := g.(type) {
-//  case *tg.ChannelParticipant: // channelParticipant#15ebac1d
-//  case *tg.ChannelParticipantSelf: // channelParticipantSelf#a3289a6d
-//  case *tg.ChannelParticipantCreator: // channelParticipantCreator#447dca4b
-//  case *tg.ChannelParticipantAdmin: // channelParticipantAdmin#ccbebbaf
-//  case *tg.ChannelParticipantBanned: // channelParticipantBanned#50a1dfd6
+//  case *tg.ChannelParticipant: // channelParticipant#c00c07c0
+//  case *tg.ChannelParticipantSelf: // channelParticipantSelf#28a8bc67
+//  case *tg.ChannelParticipantCreator: // channelParticipantCreator#2fe601d3
+//  case *tg.ChannelParticipantAdmin: // channelParticipantAdmin#34c3bb53
+//  case *tg.ChannelParticipantBanned: // channelParticipantBanned#6df8014e
 //  case *tg.ChannelParticipantLeft: // channelParticipantLeft#1b03f006
 //  default: panic(v)
 //  }
@@ -1402,35 +1402,35 @@ func DecodeChannelParticipant(buf *bin.Buffer) (ChannelParticipantClass, error) 
 	}
 	switch id {
 	case ChannelParticipantTypeID:
-		// Decoding channelParticipant#15ebac1d.
+		// Decoding channelParticipant#c00c07c0.
 		v := ChannelParticipant{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode ChannelParticipantClass: %w", err)
 		}
 		return &v, nil
 	case ChannelParticipantSelfTypeID:
-		// Decoding channelParticipantSelf#a3289a6d.
+		// Decoding channelParticipantSelf#28a8bc67.
 		v := ChannelParticipantSelf{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode ChannelParticipantClass: %w", err)
 		}
 		return &v, nil
 	case ChannelParticipantCreatorTypeID:
-		// Decoding channelParticipantCreator#447dca4b.
+		// Decoding channelParticipantCreator#2fe601d3.
 		v := ChannelParticipantCreator{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode ChannelParticipantClass: %w", err)
 		}
 		return &v, nil
 	case ChannelParticipantAdminTypeID:
-		// Decoding channelParticipantAdmin#ccbebbaf.
+		// Decoding channelParticipantAdmin#34c3bb53.
 		v := ChannelParticipantAdmin{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode ChannelParticipantClass: %w", err)
 		}
 		return &v, nil
 	case ChannelParticipantBannedTypeID:
-		// Decoding channelParticipantBanned#50a1dfd6.
+		// Decoding channelParticipantBanned#6df8014e.
 		v := ChannelParticipantBanned{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode ChannelParticipantClass: %w", err)

@@ -29,13 +29,13 @@ var (
 	_ = tgerr.Error{}
 )
 
-// AccountGetAuthorizationFormRequest represents TL type `account.getAuthorizationForm#b86ba8e1`.
+// AccountGetAuthorizationFormRequest represents TL type `account.getAuthorizationForm#a929597a`.
 // Returns a Telegram Passport authorization form for sharing data with a service
 //
 // See https://core.telegram.org/method/account.getAuthorizationForm for reference.
 type AccountGetAuthorizationFormRequest struct {
 	// User identifier of the service's bot
-	BotID int
+	BotID int64
 	// Telegram Passport element types requested by the service
 	Scope string
 	// Service's public key
@@ -43,7 +43,7 @@ type AccountGetAuthorizationFormRequest struct {
 }
 
 // AccountGetAuthorizationFormRequestTypeID is TL type id of AccountGetAuthorizationFormRequest.
-const AccountGetAuthorizationFormRequestTypeID = 0xb86ba8e1
+const AccountGetAuthorizationFormRequestTypeID = 0xa929597a
 
 func (g *AccountGetAuthorizationFormRequest) Zero() bool {
 	if g == nil {
@@ -73,7 +73,7 @@ func (g *AccountGetAuthorizationFormRequest) String() string {
 
 // FillFrom fills AccountGetAuthorizationFormRequest from given interface.
 func (g *AccountGetAuthorizationFormRequest) FillFrom(from interface {
-	GetBotID() (value int)
+	GetBotID() (value int64)
 	GetScope() (value string)
 	GetPublicKey() (value string)
 }) {
@@ -124,7 +124,7 @@ func (g *AccountGetAuthorizationFormRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (g *AccountGetAuthorizationFormRequest) Encode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode account.getAuthorizationForm#b86ba8e1 as nil")
+		return fmt.Errorf("can't encode account.getAuthorizationForm#a929597a as nil")
 	}
 	b.PutID(AccountGetAuthorizationFormRequestTypeID)
 	return g.EncodeBare(b)
@@ -133,16 +133,16 @@ func (g *AccountGetAuthorizationFormRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (g *AccountGetAuthorizationFormRequest) EncodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode account.getAuthorizationForm#b86ba8e1 as nil")
+		return fmt.Errorf("can't encode account.getAuthorizationForm#a929597a as nil")
 	}
-	b.PutInt(g.BotID)
+	b.PutLong(g.BotID)
 	b.PutString(g.Scope)
 	b.PutString(g.PublicKey)
 	return nil
 }
 
 // GetBotID returns value of BotID field.
-func (g *AccountGetAuthorizationFormRequest) GetBotID() (value int) {
+func (g *AccountGetAuthorizationFormRequest) GetBotID() (value int64) {
 	return g.BotID
 }
 
@@ -159,10 +159,10 @@ func (g *AccountGetAuthorizationFormRequest) GetPublicKey() (value string) {
 // Decode implements bin.Decoder.
 func (g *AccountGetAuthorizationFormRequest) Decode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode account.getAuthorizationForm#b86ba8e1 to nil")
+		return fmt.Errorf("can't decode account.getAuthorizationForm#a929597a to nil")
 	}
 	if err := b.ConsumeID(AccountGetAuthorizationFormRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode account.getAuthorizationForm#b86ba8e1: %w", err)
+		return fmt.Errorf("unable to decode account.getAuthorizationForm#a929597a: %w", err)
 	}
 	return g.DecodeBare(b)
 }
@@ -170,26 +170,26 @@ func (g *AccountGetAuthorizationFormRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (g *AccountGetAuthorizationFormRequest) DecodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode account.getAuthorizationForm#b86ba8e1 to nil")
+		return fmt.Errorf("can't decode account.getAuthorizationForm#a929597a to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode account.getAuthorizationForm#b86ba8e1: field bot_id: %w", err)
+			return fmt.Errorf("unable to decode account.getAuthorizationForm#a929597a: field bot_id: %w", err)
 		}
 		g.BotID = value
 	}
 	{
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode account.getAuthorizationForm#b86ba8e1: field scope: %w", err)
+			return fmt.Errorf("unable to decode account.getAuthorizationForm#a929597a: field scope: %w", err)
 		}
 		g.Scope = value
 	}
 	{
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode account.getAuthorizationForm#b86ba8e1: field public_key: %w", err)
+			return fmt.Errorf("unable to decode account.getAuthorizationForm#a929597a: field public_key: %w", err)
 		}
 		g.PublicKey = value
 	}
@@ -204,7 +204,7 @@ var (
 	_ bin.BareDecoder = &AccountGetAuthorizationFormRequest{}
 )
 
-// AccountGetAuthorizationForm invokes method account.getAuthorizationForm#b86ba8e1 returning error if any.
+// AccountGetAuthorizationForm invokes method account.getAuthorizationForm#a929597a returning error if any.
 // Returns a Telegram Passport authorization form for sharing data with a service
 //
 // See https://core.telegram.org/method/account.getAuthorizationForm for reference.
