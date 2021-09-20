@@ -2674,19 +2674,19 @@ var (
 	_ ChannelAdminLogEventActionClass = &ChannelAdminLogEventActionStopPoll{}
 )
 
-// ChannelAdminLogEventActionChangeLinkedChat represents TL type `channelAdminLogEventActionChangeLinkedChat#a26f881b`.
+// ChannelAdminLogEventActionChangeLinkedChat represents TL type `channelAdminLogEventActionChangeLinkedChat#50c7ac8`.
 // The linked chat was changed
 //
 // See https://core.telegram.org/constructor/channelAdminLogEventActionChangeLinkedChat for reference.
 type ChannelAdminLogEventActionChangeLinkedChat struct {
 	// Previous linked chat
-	PrevValue int
+	PrevValue int64
 	// New linked chat
-	NewValue int
+	NewValue int64
 }
 
 // ChannelAdminLogEventActionChangeLinkedChatTypeID is TL type id of ChannelAdminLogEventActionChangeLinkedChat.
-const ChannelAdminLogEventActionChangeLinkedChatTypeID = 0xa26f881b
+const ChannelAdminLogEventActionChangeLinkedChatTypeID = 0x50c7ac8
 
 func (c *ChannelAdminLogEventActionChangeLinkedChat) Zero() bool {
 	if c == nil {
@@ -2713,8 +2713,8 @@ func (c *ChannelAdminLogEventActionChangeLinkedChat) String() string {
 
 // FillFrom fills ChannelAdminLogEventActionChangeLinkedChat from given interface.
 func (c *ChannelAdminLogEventActionChangeLinkedChat) FillFrom(from interface {
-	GetPrevValue() (value int)
-	GetNewValue() (value int)
+	GetPrevValue() (value int64)
+	GetNewValue() (value int64)
 }) {
 	c.PrevValue = from.GetPrevValue()
 	c.NewValue = from.GetNewValue()
@@ -2758,7 +2758,7 @@ func (c *ChannelAdminLogEventActionChangeLinkedChat) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (c *ChannelAdminLogEventActionChangeLinkedChat) Encode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelAdminLogEventActionChangeLinkedChat#a26f881b as nil")
+		return fmt.Errorf("can't encode channelAdminLogEventActionChangeLinkedChat#50c7ac8 as nil")
 	}
 	b.PutID(ChannelAdminLogEventActionChangeLinkedChatTypeID)
 	return c.EncodeBare(b)
@@ -2767,30 +2767,30 @@ func (c *ChannelAdminLogEventActionChangeLinkedChat) Encode(b *bin.Buffer) error
 // EncodeBare implements bin.BareEncoder.
 func (c *ChannelAdminLogEventActionChangeLinkedChat) EncodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't encode channelAdminLogEventActionChangeLinkedChat#a26f881b as nil")
+		return fmt.Errorf("can't encode channelAdminLogEventActionChangeLinkedChat#50c7ac8 as nil")
 	}
-	b.PutInt(c.PrevValue)
-	b.PutInt(c.NewValue)
+	b.PutLong(c.PrevValue)
+	b.PutLong(c.NewValue)
 	return nil
 }
 
 // GetPrevValue returns value of PrevValue field.
-func (c *ChannelAdminLogEventActionChangeLinkedChat) GetPrevValue() (value int) {
+func (c *ChannelAdminLogEventActionChangeLinkedChat) GetPrevValue() (value int64) {
 	return c.PrevValue
 }
 
 // GetNewValue returns value of NewValue field.
-func (c *ChannelAdminLogEventActionChangeLinkedChat) GetNewValue() (value int) {
+func (c *ChannelAdminLogEventActionChangeLinkedChat) GetNewValue() (value int64) {
 	return c.NewValue
 }
 
 // Decode implements bin.Decoder.
 func (c *ChannelAdminLogEventActionChangeLinkedChat) Decode(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelAdminLogEventActionChangeLinkedChat#a26f881b to nil")
+		return fmt.Errorf("can't decode channelAdminLogEventActionChangeLinkedChat#50c7ac8 to nil")
 	}
 	if err := b.ConsumeID(ChannelAdminLogEventActionChangeLinkedChatTypeID); err != nil {
-		return fmt.Errorf("unable to decode channelAdminLogEventActionChangeLinkedChat#a26f881b: %w", err)
+		return fmt.Errorf("unable to decode channelAdminLogEventActionChangeLinkedChat#50c7ac8: %w", err)
 	}
 	return c.DecodeBare(b)
 }
@@ -2798,19 +2798,19 @@ func (c *ChannelAdminLogEventActionChangeLinkedChat) Decode(b *bin.Buffer) error
 // DecodeBare implements bin.BareDecoder.
 func (c *ChannelAdminLogEventActionChangeLinkedChat) DecodeBare(b *bin.Buffer) error {
 	if c == nil {
-		return fmt.Errorf("can't decode channelAdminLogEventActionChangeLinkedChat#a26f881b to nil")
+		return fmt.Errorf("can't decode channelAdminLogEventActionChangeLinkedChat#50c7ac8 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelAdminLogEventActionChangeLinkedChat#a26f881b: field prev_value: %w", err)
+			return fmt.Errorf("unable to decode channelAdminLogEventActionChangeLinkedChat#50c7ac8: field prev_value: %w", err)
 		}
 		c.PrevValue = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode channelAdminLogEventActionChangeLinkedChat#a26f881b: field new_value: %w", err)
+			return fmt.Errorf("unable to decode channelAdminLogEventActionChangeLinkedChat#50c7ac8: field new_value: %w", err)
 		}
 		c.NewValue = value
 	}
@@ -4700,7 +4700,7 @@ var (
 //  case *tg.ChannelAdminLogEventActionTogglePreHistoryHidden: // channelAdminLogEventActionTogglePreHistoryHidden#5f5c95f1
 //  case *tg.ChannelAdminLogEventActionDefaultBannedRights: // channelAdminLogEventActionDefaultBannedRights#2df5fc0a
 //  case *tg.ChannelAdminLogEventActionStopPoll: // channelAdminLogEventActionStopPoll#8f079643
-//  case *tg.ChannelAdminLogEventActionChangeLinkedChat: // channelAdminLogEventActionChangeLinkedChat#a26f881b
+//  case *tg.ChannelAdminLogEventActionChangeLinkedChat: // channelAdminLogEventActionChangeLinkedChat#50c7ac8
 //  case *tg.ChannelAdminLogEventActionChangeLocation: // channelAdminLogEventActionChangeLocation#e6b76ae
 //  case *tg.ChannelAdminLogEventActionToggleSlowMode: // channelAdminLogEventActionToggleSlowMode#53909779
 //  case *tg.ChannelAdminLogEventActionStartGroupCall: // channelAdminLogEventActionStartGroupCall#23209745
@@ -4869,7 +4869,7 @@ func DecodeChannelAdminLogEventAction(buf *bin.Buffer) (ChannelAdminLogEventActi
 		}
 		return &v, nil
 	case ChannelAdminLogEventActionChangeLinkedChatTypeID:
-		// Decoding channelAdminLogEventActionChangeLinkedChat#a26f881b.
+		// Decoding channelAdminLogEventActionChangeLinkedChat#50c7ac8.
 		v := ChannelAdminLogEventActionChangeLinkedChat{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode ChannelAdminLogEventActionClass: %w", err)

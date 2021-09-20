@@ -29,16 +29,16 @@ var (
 	_ = tgerr.Error{}
 )
 
-// MessagesDeleteChatRequest represents TL type `messages.deleteChat#83247d11`.
+// MessagesDeleteChatRequest represents TL type `messages.deleteChat#5bd0ee50`.
 //
 // See https://core.telegram.org/method/messages.deleteChat for reference.
 type MessagesDeleteChatRequest struct {
 	// ChatID field of MessagesDeleteChatRequest.
-	ChatID int
+	ChatID int64
 }
 
 // MessagesDeleteChatRequestTypeID is TL type id of MessagesDeleteChatRequest.
-const MessagesDeleteChatRequestTypeID = 0x83247d11
+const MessagesDeleteChatRequestTypeID = 0x5bd0ee50
 
 func (d *MessagesDeleteChatRequest) Zero() bool {
 	if d == nil {
@@ -62,7 +62,7 @@ func (d *MessagesDeleteChatRequest) String() string {
 
 // FillFrom fills MessagesDeleteChatRequest from given interface.
 func (d *MessagesDeleteChatRequest) FillFrom(from interface {
-	GetChatID() (value int)
+	GetChatID() (value int64)
 }) {
 	d.ChatID = from.GetChatID()
 }
@@ -101,7 +101,7 @@ func (d *MessagesDeleteChatRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (d *MessagesDeleteChatRequest) Encode(b *bin.Buffer) error {
 	if d == nil {
-		return fmt.Errorf("can't encode messages.deleteChat#83247d11 as nil")
+		return fmt.Errorf("can't encode messages.deleteChat#5bd0ee50 as nil")
 	}
 	b.PutID(MessagesDeleteChatRequestTypeID)
 	return d.EncodeBare(b)
@@ -110,24 +110,24 @@ func (d *MessagesDeleteChatRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (d *MessagesDeleteChatRequest) EncodeBare(b *bin.Buffer) error {
 	if d == nil {
-		return fmt.Errorf("can't encode messages.deleteChat#83247d11 as nil")
+		return fmt.Errorf("can't encode messages.deleteChat#5bd0ee50 as nil")
 	}
-	b.PutInt(d.ChatID)
+	b.PutLong(d.ChatID)
 	return nil
 }
 
 // GetChatID returns value of ChatID field.
-func (d *MessagesDeleteChatRequest) GetChatID() (value int) {
+func (d *MessagesDeleteChatRequest) GetChatID() (value int64) {
 	return d.ChatID
 }
 
 // Decode implements bin.Decoder.
 func (d *MessagesDeleteChatRequest) Decode(b *bin.Buffer) error {
 	if d == nil {
-		return fmt.Errorf("can't decode messages.deleteChat#83247d11 to nil")
+		return fmt.Errorf("can't decode messages.deleteChat#5bd0ee50 to nil")
 	}
 	if err := b.ConsumeID(MessagesDeleteChatRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode messages.deleteChat#83247d11: %w", err)
+		return fmt.Errorf("unable to decode messages.deleteChat#5bd0ee50: %w", err)
 	}
 	return d.DecodeBare(b)
 }
@@ -135,12 +135,12 @@ func (d *MessagesDeleteChatRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (d *MessagesDeleteChatRequest) DecodeBare(b *bin.Buffer) error {
 	if d == nil {
-		return fmt.Errorf("can't decode messages.deleteChat#83247d11 to nil")
+		return fmt.Errorf("can't decode messages.deleteChat#5bd0ee50 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.deleteChat#83247d11: field chat_id: %w", err)
+			return fmt.Errorf("unable to decode messages.deleteChat#5bd0ee50: field chat_id: %w", err)
 		}
 		d.ChatID = value
 	}
@@ -155,10 +155,10 @@ var (
 	_ bin.BareDecoder = &MessagesDeleteChatRequest{}
 )
 
-// MessagesDeleteChat invokes method messages.deleteChat#83247d11 returning error if any.
+// MessagesDeleteChat invokes method messages.deleteChat#5bd0ee50 returning error if any.
 //
 // See https://core.telegram.org/method/messages.deleteChat for reference.
-func (c *Client) MessagesDeleteChat(ctx context.Context, chatid int) (bool, error) {
+func (c *Client) MessagesDeleteChat(ctx context.Context, chatid int64) (bool, error) {
 	var result BoolBox
 
 	request := &MessagesDeleteChatRequest{

@@ -131,7 +131,7 @@ var (
 	_ MessageActionClass = &MessageActionEmpty{}
 )
 
-// MessageActionChatCreate represents TL type `messageActionChatCreate#a6638b9a`.
+// MessageActionChatCreate represents TL type `messageActionChatCreate#bd47cbad`.
 // Group created
 //
 // See https://core.telegram.org/constructor/messageActionChatCreate for reference.
@@ -139,11 +139,11 @@ type MessageActionChatCreate struct {
 	// Group name
 	Title string
 	// List of group members
-	Users []int
+	Users []int64
 }
 
 // MessageActionChatCreateTypeID is TL type id of MessageActionChatCreate.
-const MessageActionChatCreateTypeID = 0xa6638b9a
+const MessageActionChatCreateTypeID = 0xbd47cbad
 
 func (m *MessageActionChatCreate) Zero() bool {
 	if m == nil {
@@ -171,7 +171,7 @@ func (m *MessageActionChatCreate) String() string {
 // FillFrom fills MessageActionChatCreate from given interface.
 func (m *MessageActionChatCreate) FillFrom(from interface {
 	GetTitle() (value string)
-	GetUsers() (value []int)
+	GetUsers() (value []int64)
 }) {
 	m.Title = from.GetTitle()
 	m.Users = from.GetUsers()
@@ -215,7 +215,7 @@ func (m *MessageActionChatCreate) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionChatCreate) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatCreate#a6638b9a as nil")
+		return fmt.Errorf("can't encode messageActionChatCreate#bd47cbad as nil")
 	}
 	b.PutID(MessageActionChatCreateTypeID)
 	return m.EncodeBare(b)
@@ -224,12 +224,12 @@ func (m *MessageActionChatCreate) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionChatCreate) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatCreate#a6638b9a as nil")
+		return fmt.Errorf("can't encode messageActionChatCreate#bd47cbad as nil")
 	}
 	b.PutString(m.Title)
 	b.PutVectorHeader(len(m.Users))
 	for _, v := range m.Users {
-		b.PutInt(v)
+		b.PutLong(v)
 	}
 	return nil
 }
@@ -240,17 +240,17 @@ func (m *MessageActionChatCreate) GetTitle() (value string) {
 }
 
 // GetUsers returns value of Users field.
-func (m *MessageActionChatCreate) GetUsers() (value []int) {
+func (m *MessageActionChatCreate) GetUsers() (value []int64) {
 	return m.Users
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionChatCreate) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatCreate#a6638b9a to nil")
+		return fmt.Errorf("can't decode messageActionChatCreate#bd47cbad to nil")
 	}
 	if err := b.ConsumeID(MessageActionChatCreateTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionChatCreate#a6638b9a: %w", err)
+		return fmt.Errorf("unable to decode messageActionChatCreate#bd47cbad: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -258,24 +258,24 @@ func (m *MessageActionChatCreate) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionChatCreate) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatCreate#a6638b9a to nil")
+		return fmt.Errorf("can't decode messageActionChatCreate#bd47cbad to nil")
 	}
 	{
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChatCreate#a6638b9a: field title: %w", err)
+			return fmt.Errorf("unable to decode messageActionChatCreate#bd47cbad: field title: %w", err)
 		}
 		m.Title = value
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChatCreate#a6638b9a: field users: %w", err)
+			return fmt.Errorf("unable to decode messageActionChatCreate#bd47cbad: field users: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
-			value, err := b.Int()
+			value, err := b.Long()
 			if err != nil {
-				return fmt.Errorf("unable to decode messageActionChatCreate#a6638b9a: field users: %w", err)
+				return fmt.Errorf("unable to decode messageActionChatCreate#bd47cbad: field users: %w", err)
 			}
 			m.Users = append(m.Users, value)
 		}
@@ -667,17 +667,17 @@ var (
 	_ MessageActionClass = &MessageActionChatDeletePhoto{}
 )
 
-// MessageActionChatAddUser represents TL type `messageActionChatAddUser#488a7337`.
+// MessageActionChatAddUser represents TL type `messageActionChatAddUser#15cefd00`.
 // New member in the group
 //
 // See https://core.telegram.org/constructor/messageActionChatAddUser for reference.
 type MessageActionChatAddUser struct {
 	// Users that were invited to the chat
-	Users []int
+	Users []int64
 }
 
 // MessageActionChatAddUserTypeID is TL type id of MessageActionChatAddUser.
-const MessageActionChatAddUserTypeID = 0x488a7337
+const MessageActionChatAddUserTypeID = 0x15cefd00
 
 func (m *MessageActionChatAddUser) Zero() bool {
 	if m == nil {
@@ -701,7 +701,7 @@ func (m *MessageActionChatAddUser) String() string {
 
 // FillFrom fills MessageActionChatAddUser from given interface.
 func (m *MessageActionChatAddUser) FillFrom(from interface {
-	GetUsers() (value []int)
+	GetUsers() (value []int64)
 }) {
 	m.Users = from.GetUsers()
 }
@@ -740,7 +740,7 @@ func (m *MessageActionChatAddUser) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionChatAddUser) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatAddUser#488a7337 as nil")
+		return fmt.Errorf("can't encode messageActionChatAddUser#15cefd00 as nil")
 	}
 	b.PutID(MessageActionChatAddUserTypeID)
 	return m.EncodeBare(b)
@@ -749,27 +749,27 @@ func (m *MessageActionChatAddUser) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionChatAddUser) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatAddUser#488a7337 as nil")
+		return fmt.Errorf("can't encode messageActionChatAddUser#15cefd00 as nil")
 	}
 	b.PutVectorHeader(len(m.Users))
 	for _, v := range m.Users {
-		b.PutInt(v)
+		b.PutLong(v)
 	}
 	return nil
 }
 
 // GetUsers returns value of Users field.
-func (m *MessageActionChatAddUser) GetUsers() (value []int) {
+func (m *MessageActionChatAddUser) GetUsers() (value []int64) {
 	return m.Users
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionChatAddUser) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatAddUser#488a7337 to nil")
+		return fmt.Errorf("can't decode messageActionChatAddUser#15cefd00 to nil")
 	}
 	if err := b.ConsumeID(MessageActionChatAddUserTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionChatAddUser#488a7337: %w", err)
+		return fmt.Errorf("unable to decode messageActionChatAddUser#15cefd00: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -777,17 +777,17 @@ func (m *MessageActionChatAddUser) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionChatAddUser) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatAddUser#488a7337 to nil")
+		return fmt.Errorf("can't decode messageActionChatAddUser#15cefd00 to nil")
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChatAddUser#488a7337: field users: %w", err)
+			return fmt.Errorf("unable to decode messageActionChatAddUser#15cefd00: field users: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
-			value, err := b.Int()
+			value, err := b.Long()
 			if err != nil {
-				return fmt.Errorf("unable to decode messageActionChatAddUser#488a7337: field users: %w", err)
+				return fmt.Errorf("unable to decode messageActionChatAddUser#15cefd00: field users: %w", err)
 			}
 			m.Users = append(m.Users, value)
 		}
@@ -808,17 +808,17 @@ var (
 	_ MessageActionClass = &MessageActionChatAddUser{}
 )
 
-// MessageActionChatDeleteUser represents TL type `messageActionChatDeleteUser#b2ae9b0c`.
+// MessageActionChatDeleteUser represents TL type `messageActionChatDeleteUser#a43f30cc`.
 // User left the group.
 //
 // See https://core.telegram.org/constructor/messageActionChatDeleteUser for reference.
 type MessageActionChatDeleteUser struct {
 	// Leaving user ID
-	UserID int
+	UserID int64
 }
 
 // MessageActionChatDeleteUserTypeID is TL type id of MessageActionChatDeleteUser.
-const MessageActionChatDeleteUserTypeID = 0xb2ae9b0c
+const MessageActionChatDeleteUserTypeID = 0xa43f30cc
 
 func (m *MessageActionChatDeleteUser) Zero() bool {
 	if m == nil {
@@ -842,7 +842,7 @@ func (m *MessageActionChatDeleteUser) String() string {
 
 // FillFrom fills MessageActionChatDeleteUser from given interface.
 func (m *MessageActionChatDeleteUser) FillFrom(from interface {
-	GetUserID() (value int)
+	GetUserID() (value int64)
 }) {
 	m.UserID = from.GetUserID()
 }
@@ -881,7 +881,7 @@ func (m *MessageActionChatDeleteUser) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionChatDeleteUser) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatDeleteUser#b2ae9b0c as nil")
+		return fmt.Errorf("can't encode messageActionChatDeleteUser#a43f30cc as nil")
 	}
 	b.PutID(MessageActionChatDeleteUserTypeID)
 	return m.EncodeBare(b)
@@ -890,24 +890,24 @@ func (m *MessageActionChatDeleteUser) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionChatDeleteUser) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatDeleteUser#b2ae9b0c as nil")
+		return fmt.Errorf("can't encode messageActionChatDeleteUser#a43f30cc as nil")
 	}
-	b.PutInt(m.UserID)
+	b.PutLong(m.UserID)
 	return nil
 }
 
 // GetUserID returns value of UserID field.
-func (m *MessageActionChatDeleteUser) GetUserID() (value int) {
+func (m *MessageActionChatDeleteUser) GetUserID() (value int64) {
 	return m.UserID
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionChatDeleteUser) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatDeleteUser#b2ae9b0c to nil")
+		return fmt.Errorf("can't decode messageActionChatDeleteUser#a43f30cc to nil")
 	}
 	if err := b.ConsumeID(MessageActionChatDeleteUserTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionChatDeleteUser#b2ae9b0c: %w", err)
+		return fmt.Errorf("unable to decode messageActionChatDeleteUser#a43f30cc: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -915,12 +915,12 @@ func (m *MessageActionChatDeleteUser) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionChatDeleteUser) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatDeleteUser#b2ae9b0c to nil")
+		return fmt.Errorf("can't decode messageActionChatDeleteUser#a43f30cc to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChatDeleteUser#b2ae9b0c: field user_id: %w", err)
+			return fmt.Errorf("unable to decode messageActionChatDeleteUser#a43f30cc: field user_id: %w", err)
 		}
 		m.UserID = value
 	}
@@ -940,17 +940,17 @@ var (
 	_ MessageActionClass = &MessageActionChatDeleteUser{}
 )
 
-// MessageActionChatJoinedByLink represents TL type `messageActionChatJoinedByLink#f89cf5e8`.
+// MessageActionChatJoinedByLink represents TL type `messageActionChatJoinedByLink#31224c3`.
 // A user joined the chat via an invite link
 //
 // See https://core.telegram.org/constructor/messageActionChatJoinedByLink for reference.
 type MessageActionChatJoinedByLink struct {
 	// ID of the user that created the invite link
-	InviterID int
+	InviterID int64
 }
 
 // MessageActionChatJoinedByLinkTypeID is TL type id of MessageActionChatJoinedByLink.
-const MessageActionChatJoinedByLinkTypeID = 0xf89cf5e8
+const MessageActionChatJoinedByLinkTypeID = 0x31224c3
 
 func (m *MessageActionChatJoinedByLink) Zero() bool {
 	if m == nil {
@@ -974,7 +974,7 @@ func (m *MessageActionChatJoinedByLink) String() string {
 
 // FillFrom fills MessageActionChatJoinedByLink from given interface.
 func (m *MessageActionChatJoinedByLink) FillFrom(from interface {
-	GetInviterID() (value int)
+	GetInviterID() (value int64)
 }) {
 	m.InviterID = from.GetInviterID()
 }
@@ -1013,7 +1013,7 @@ func (m *MessageActionChatJoinedByLink) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionChatJoinedByLink) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatJoinedByLink#f89cf5e8 as nil")
+		return fmt.Errorf("can't encode messageActionChatJoinedByLink#31224c3 as nil")
 	}
 	b.PutID(MessageActionChatJoinedByLinkTypeID)
 	return m.EncodeBare(b)
@@ -1022,24 +1022,24 @@ func (m *MessageActionChatJoinedByLink) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionChatJoinedByLink) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatJoinedByLink#f89cf5e8 as nil")
+		return fmt.Errorf("can't encode messageActionChatJoinedByLink#31224c3 as nil")
 	}
-	b.PutInt(m.InviterID)
+	b.PutLong(m.InviterID)
 	return nil
 }
 
 // GetInviterID returns value of InviterID field.
-func (m *MessageActionChatJoinedByLink) GetInviterID() (value int) {
+func (m *MessageActionChatJoinedByLink) GetInviterID() (value int64) {
 	return m.InviterID
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionChatJoinedByLink) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatJoinedByLink#f89cf5e8 to nil")
+		return fmt.Errorf("can't decode messageActionChatJoinedByLink#31224c3 to nil")
 	}
 	if err := b.ConsumeID(MessageActionChatJoinedByLinkTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionChatJoinedByLink#f89cf5e8: %w", err)
+		return fmt.Errorf("unable to decode messageActionChatJoinedByLink#31224c3: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -1047,12 +1047,12 @@ func (m *MessageActionChatJoinedByLink) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionChatJoinedByLink) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatJoinedByLink#f89cf5e8 to nil")
+		return fmt.Errorf("can't decode messageActionChatJoinedByLink#31224c3 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChatJoinedByLink#f89cf5e8: field inviter_id: %w", err)
+			return fmt.Errorf("unable to decode messageActionChatJoinedByLink#31224c3: field inviter_id: %w", err)
 		}
 		m.InviterID = value
 	}
@@ -1204,7 +1204,7 @@ var (
 	_ MessageActionClass = &MessageActionChannelCreate{}
 )
 
-// MessageActionChatMigrateTo represents TL type `messageActionChatMigrateTo#51bdb021`.
+// MessageActionChatMigrateTo represents TL type `messageActionChatMigrateTo#e1037f92`.
 // Indicates the chat was migrated¹ to the specified supergroup
 //
 // Links:
@@ -1213,11 +1213,11 @@ var (
 // See https://core.telegram.org/constructor/messageActionChatMigrateTo for reference.
 type MessageActionChatMigrateTo struct {
 	// The supergroup it was migrated to
-	ChannelID int
+	ChannelID int64
 }
 
 // MessageActionChatMigrateToTypeID is TL type id of MessageActionChatMigrateTo.
-const MessageActionChatMigrateToTypeID = 0x51bdb021
+const MessageActionChatMigrateToTypeID = 0xe1037f92
 
 func (m *MessageActionChatMigrateTo) Zero() bool {
 	if m == nil {
@@ -1241,7 +1241,7 @@ func (m *MessageActionChatMigrateTo) String() string {
 
 // FillFrom fills MessageActionChatMigrateTo from given interface.
 func (m *MessageActionChatMigrateTo) FillFrom(from interface {
-	GetChannelID() (value int)
+	GetChannelID() (value int64)
 }) {
 	m.ChannelID = from.GetChannelID()
 }
@@ -1280,7 +1280,7 @@ func (m *MessageActionChatMigrateTo) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionChatMigrateTo) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatMigrateTo#51bdb021 as nil")
+		return fmt.Errorf("can't encode messageActionChatMigrateTo#e1037f92 as nil")
 	}
 	b.PutID(MessageActionChatMigrateToTypeID)
 	return m.EncodeBare(b)
@@ -1289,24 +1289,24 @@ func (m *MessageActionChatMigrateTo) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionChatMigrateTo) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChatMigrateTo#51bdb021 as nil")
+		return fmt.Errorf("can't encode messageActionChatMigrateTo#e1037f92 as nil")
 	}
-	b.PutInt(m.ChannelID)
+	b.PutLong(m.ChannelID)
 	return nil
 }
 
 // GetChannelID returns value of ChannelID field.
-func (m *MessageActionChatMigrateTo) GetChannelID() (value int) {
+func (m *MessageActionChatMigrateTo) GetChannelID() (value int64) {
 	return m.ChannelID
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionChatMigrateTo) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatMigrateTo#51bdb021 to nil")
+		return fmt.Errorf("can't decode messageActionChatMigrateTo#e1037f92 to nil")
 	}
 	if err := b.ConsumeID(MessageActionChatMigrateToTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionChatMigrateTo#51bdb021: %w", err)
+		return fmt.Errorf("unable to decode messageActionChatMigrateTo#e1037f92: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -1314,12 +1314,12 @@ func (m *MessageActionChatMigrateTo) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionChatMigrateTo) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChatMigrateTo#51bdb021 to nil")
+		return fmt.Errorf("can't decode messageActionChatMigrateTo#e1037f92 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChatMigrateTo#51bdb021: field channel_id: %w", err)
+			return fmt.Errorf("unable to decode messageActionChatMigrateTo#e1037f92: field channel_id: %w", err)
 		}
 		m.ChannelID = value
 	}
@@ -1339,7 +1339,7 @@ var (
 	_ MessageActionClass = &MessageActionChatMigrateTo{}
 )
 
-// MessageActionChannelMigrateFrom represents TL type `messageActionChannelMigrateFrom#b055eaee`.
+// MessageActionChannelMigrateFrom represents TL type `messageActionChannelMigrateFrom#ea3948e9`.
 // Indicates the channel was migrated¹ from the specified chat
 //
 // Links:
@@ -1350,11 +1350,11 @@ type MessageActionChannelMigrateFrom struct {
 	// The old chat tite
 	Title string
 	// The old chat ID
-	ChatID int
+	ChatID int64
 }
 
 // MessageActionChannelMigrateFromTypeID is TL type id of MessageActionChannelMigrateFrom.
-const MessageActionChannelMigrateFromTypeID = 0xb055eaee
+const MessageActionChannelMigrateFromTypeID = 0xea3948e9
 
 func (m *MessageActionChannelMigrateFrom) Zero() bool {
 	if m == nil {
@@ -1382,7 +1382,7 @@ func (m *MessageActionChannelMigrateFrom) String() string {
 // FillFrom fills MessageActionChannelMigrateFrom from given interface.
 func (m *MessageActionChannelMigrateFrom) FillFrom(from interface {
 	GetTitle() (value string)
-	GetChatID() (value int)
+	GetChatID() (value int64)
 }) {
 	m.Title = from.GetTitle()
 	m.ChatID = from.GetChatID()
@@ -1426,7 +1426,7 @@ func (m *MessageActionChannelMigrateFrom) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionChannelMigrateFrom) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChannelMigrateFrom#b055eaee as nil")
+		return fmt.Errorf("can't encode messageActionChannelMigrateFrom#ea3948e9 as nil")
 	}
 	b.PutID(MessageActionChannelMigrateFromTypeID)
 	return m.EncodeBare(b)
@@ -1435,10 +1435,10 @@ func (m *MessageActionChannelMigrateFrom) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionChannelMigrateFrom) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionChannelMigrateFrom#b055eaee as nil")
+		return fmt.Errorf("can't encode messageActionChannelMigrateFrom#ea3948e9 as nil")
 	}
 	b.PutString(m.Title)
-	b.PutInt(m.ChatID)
+	b.PutLong(m.ChatID)
 	return nil
 }
 
@@ -1448,17 +1448,17 @@ func (m *MessageActionChannelMigrateFrom) GetTitle() (value string) {
 }
 
 // GetChatID returns value of ChatID field.
-func (m *MessageActionChannelMigrateFrom) GetChatID() (value int) {
+func (m *MessageActionChannelMigrateFrom) GetChatID() (value int64) {
 	return m.ChatID
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionChannelMigrateFrom) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChannelMigrateFrom#b055eaee to nil")
+		return fmt.Errorf("can't decode messageActionChannelMigrateFrom#ea3948e9 to nil")
 	}
 	if err := b.ConsumeID(MessageActionChannelMigrateFromTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionChannelMigrateFrom#b055eaee: %w", err)
+		return fmt.Errorf("unable to decode messageActionChannelMigrateFrom#ea3948e9: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -1466,19 +1466,19 @@ func (m *MessageActionChannelMigrateFrom) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionChannelMigrateFrom) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionChannelMigrateFrom#b055eaee to nil")
+		return fmt.Errorf("can't decode messageActionChannelMigrateFrom#ea3948e9 to nil")
 	}
 	{
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChannelMigrateFrom#b055eaee: field title: %w", err)
+			return fmt.Errorf("unable to decode messageActionChannelMigrateFrom#ea3948e9: field title: %w", err)
 		}
 		m.Title = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionChannelMigrateFrom#b055eaee: field chat_id: %w", err)
+			return fmt.Errorf("unable to decode messageActionChannelMigrateFrom#ea3948e9: field chat_id: %w", err)
 		}
 		m.ChatID = value
 	}
@@ -3797,18 +3797,18 @@ var (
 	_ MessageActionClass = &MessageActionGroupCall{}
 )
 
-// MessageActionInviteToGroupCall represents TL type `messageActionInviteToGroupCall#76b9f11a`.
+// MessageActionInviteToGroupCall represents TL type `messageActionInviteToGroupCall#502f92f7`.
 //
 // See https://core.telegram.org/constructor/messageActionInviteToGroupCall for reference.
 type MessageActionInviteToGroupCall struct {
 	// Call field of MessageActionInviteToGroupCall.
 	Call InputGroupCall
 	// Users field of MessageActionInviteToGroupCall.
-	Users []int
+	Users []int64
 }
 
 // MessageActionInviteToGroupCallTypeID is TL type id of MessageActionInviteToGroupCall.
-const MessageActionInviteToGroupCallTypeID = 0x76b9f11a
+const MessageActionInviteToGroupCallTypeID = 0x502f92f7
 
 func (m *MessageActionInviteToGroupCall) Zero() bool {
 	if m == nil {
@@ -3836,7 +3836,7 @@ func (m *MessageActionInviteToGroupCall) String() string {
 // FillFrom fills MessageActionInviteToGroupCall from given interface.
 func (m *MessageActionInviteToGroupCall) FillFrom(from interface {
 	GetCall() (value InputGroupCall)
-	GetUsers() (value []int)
+	GetUsers() (value []int64)
 }) {
 	m.Call = from.GetCall()
 	m.Users = from.GetUsers()
@@ -3880,7 +3880,7 @@ func (m *MessageActionInviteToGroupCall) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (m *MessageActionInviteToGroupCall) Encode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionInviteToGroupCall#76b9f11a as nil")
+		return fmt.Errorf("can't encode messageActionInviteToGroupCall#502f92f7 as nil")
 	}
 	b.PutID(MessageActionInviteToGroupCallTypeID)
 	return m.EncodeBare(b)
@@ -3889,14 +3889,14 @@ func (m *MessageActionInviteToGroupCall) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (m *MessageActionInviteToGroupCall) EncodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't encode messageActionInviteToGroupCall#76b9f11a as nil")
+		return fmt.Errorf("can't encode messageActionInviteToGroupCall#502f92f7 as nil")
 	}
 	if err := m.Call.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode messageActionInviteToGroupCall#76b9f11a: field call: %w", err)
+		return fmt.Errorf("unable to encode messageActionInviteToGroupCall#502f92f7: field call: %w", err)
 	}
 	b.PutVectorHeader(len(m.Users))
 	for _, v := range m.Users {
-		b.PutInt(v)
+		b.PutLong(v)
 	}
 	return nil
 }
@@ -3907,17 +3907,17 @@ func (m *MessageActionInviteToGroupCall) GetCall() (value InputGroupCall) {
 }
 
 // GetUsers returns value of Users field.
-func (m *MessageActionInviteToGroupCall) GetUsers() (value []int) {
+func (m *MessageActionInviteToGroupCall) GetUsers() (value []int64) {
 	return m.Users
 }
 
 // Decode implements bin.Decoder.
 func (m *MessageActionInviteToGroupCall) Decode(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionInviteToGroupCall#76b9f11a to nil")
+		return fmt.Errorf("can't decode messageActionInviteToGroupCall#502f92f7 to nil")
 	}
 	if err := b.ConsumeID(MessageActionInviteToGroupCallTypeID); err != nil {
-		return fmt.Errorf("unable to decode messageActionInviteToGroupCall#76b9f11a: %w", err)
+		return fmt.Errorf("unable to decode messageActionInviteToGroupCall#502f92f7: %w", err)
 	}
 	return m.DecodeBare(b)
 }
@@ -3925,22 +3925,22 @@ func (m *MessageActionInviteToGroupCall) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (m *MessageActionInviteToGroupCall) DecodeBare(b *bin.Buffer) error {
 	if m == nil {
-		return fmt.Errorf("can't decode messageActionInviteToGroupCall#76b9f11a to nil")
+		return fmt.Errorf("can't decode messageActionInviteToGroupCall#502f92f7 to nil")
 	}
 	{
 		if err := m.Call.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode messageActionInviteToGroupCall#76b9f11a: field call: %w", err)
+			return fmt.Errorf("unable to decode messageActionInviteToGroupCall#502f92f7: field call: %w", err)
 		}
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode messageActionInviteToGroupCall#76b9f11a: field users: %w", err)
+			return fmt.Errorf("unable to decode messageActionInviteToGroupCall#502f92f7: field users: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
-			value, err := b.Int()
+			value, err := b.Long()
 			if err != nil {
-				return fmt.Errorf("unable to decode messageActionInviteToGroupCall#76b9f11a: field users: %w", err)
+				return fmt.Errorf("unable to decode messageActionInviteToGroupCall#502f92f7: field users: %w", err)
 			}
 			m.Users = append(m.Users, value)
 		}
@@ -4247,6 +4247,137 @@ var (
 	_ MessageActionClass = &MessageActionGroupCallScheduled{}
 )
 
+// MessageActionSetChatTheme represents TL type `messageActionSetChatTheme#aa786345`.
+//
+// See https://core.telegram.org/constructor/messageActionSetChatTheme for reference.
+type MessageActionSetChatTheme struct {
+	// Emoticon field of MessageActionSetChatTheme.
+	Emoticon string
+}
+
+// MessageActionSetChatThemeTypeID is TL type id of MessageActionSetChatTheme.
+const MessageActionSetChatThemeTypeID = 0xaa786345
+
+func (m *MessageActionSetChatTheme) Zero() bool {
+	if m == nil {
+		return true
+	}
+	if !(m.Emoticon == "") {
+		return false
+	}
+
+	return true
+}
+
+// String implements fmt.Stringer.
+func (m *MessageActionSetChatTheme) String() string {
+	if m == nil {
+		return "MessageActionSetChatTheme(nil)"
+	}
+	type Alias MessageActionSetChatTheme
+	return fmt.Sprintf("MessageActionSetChatTheme%+v", Alias(*m))
+}
+
+// FillFrom fills MessageActionSetChatTheme from given interface.
+func (m *MessageActionSetChatTheme) FillFrom(from interface {
+	GetEmoticon() (value string)
+}) {
+	m.Emoticon = from.GetEmoticon()
+}
+
+// TypeID returns type id in TL schema.
+//
+// See https://core.telegram.org/mtproto/TL-tl#remarks.
+func (*MessageActionSetChatTheme) TypeID() uint32 {
+	return MessageActionSetChatThemeTypeID
+}
+
+// TypeName returns name of type in TL schema.
+func (*MessageActionSetChatTheme) TypeName() string {
+	return "messageActionSetChatTheme"
+}
+
+// TypeInfo returns info about TL type.
+func (m *MessageActionSetChatTheme) TypeInfo() tdp.Type {
+	typ := tdp.Type{
+		Name: "messageActionSetChatTheme",
+		ID:   MessageActionSetChatThemeTypeID,
+	}
+	if m == nil {
+		typ.Null = true
+		return typ
+	}
+	typ.Fields = []tdp.Field{
+		{
+			Name:       "Emoticon",
+			SchemaName: "emoticon",
+		},
+	}
+	return typ
+}
+
+// Encode implements bin.Encoder.
+func (m *MessageActionSetChatTheme) Encode(b *bin.Buffer) error {
+	if m == nil {
+		return fmt.Errorf("can't encode messageActionSetChatTheme#aa786345 as nil")
+	}
+	b.PutID(MessageActionSetChatThemeTypeID)
+	return m.EncodeBare(b)
+}
+
+// EncodeBare implements bin.BareEncoder.
+func (m *MessageActionSetChatTheme) EncodeBare(b *bin.Buffer) error {
+	if m == nil {
+		return fmt.Errorf("can't encode messageActionSetChatTheme#aa786345 as nil")
+	}
+	b.PutString(m.Emoticon)
+	return nil
+}
+
+// GetEmoticon returns value of Emoticon field.
+func (m *MessageActionSetChatTheme) GetEmoticon() (value string) {
+	return m.Emoticon
+}
+
+// Decode implements bin.Decoder.
+func (m *MessageActionSetChatTheme) Decode(b *bin.Buffer) error {
+	if m == nil {
+		return fmt.Errorf("can't decode messageActionSetChatTheme#aa786345 to nil")
+	}
+	if err := b.ConsumeID(MessageActionSetChatThemeTypeID); err != nil {
+		return fmt.Errorf("unable to decode messageActionSetChatTheme#aa786345: %w", err)
+	}
+	return m.DecodeBare(b)
+}
+
+// DecodeBare implements bin.BareDecoder.
+func (m *MessageActionSetChatTheme) DecodeBare(b *bin.Buffer) error {
+	if m == nil {
+		return fmt.Errorf("can't decode messageActionSetChatTheme#aa786345 to nil")
+	}
+	{
+		value, err := b.String()
+		if err != nil {
+			return fmt.Errorf("unable to decode messageActionSetChatTheme#aa786345: field emoticon: %w", err)
+		}
+		m.Emoticon = value
+	}
+	return nil
+}
+
+// construct implements constructor of MessageActionClass.
+func (m MessageActionSetChatTheme) construct() MessageActionClass { return &m }
+
+// Ensuring interfaces in compile-time for MessageActionSetChatTheme.
+var (
+	_ bin.Encoder     = &MessageActionSetChatTheme{}
+	_ bin.Decoder     = &MessageActionSetChatTheme{}
+	_ bin.BareEncoder = &MessageActionSetChatTheme{}
+	_ bin.BareDecoder = &MessageActionSetChatTheme{}
+
+	_ MessageActionClass = &MessageActionSetChatTheme{}
+)
+
 // MessageActionClass represents MessageAction generic type.
 //
 // See https://core.telegram.org/type/MessageAction for reference.
@@ -4258,16 +4389,16 @@ var (
 //  }
 //  switch v := g.(type) {
 //  case *tg.MessageActionEmpty: // messageActionEmpty#b6aef7b0
-//  case *tg.MessageActionChatCreate: // messageActionChatCreate#a6638b9a
+//  case *tg.MessageActionChatCreate: // messageActionChatCreate#bd47cbad
 //  case *tg.MessageActionChatEditTitle: // messageActionChatEditTitle#b5a1ce5a
 //  case *tg.MessageActionChatEditPhoto: // messageActionChatEditPhoto#7fcb13a8
 //  case *tg.MessageActionChatDeletePhoto: // messageActionChatDeletePhoto#95e3fbef
-//  case *tg.MessageActionChatAddUser: // messageActionChatAddUser#488a7337
-//  case *tg.MessageActionChatDeleteUser: // messageActionChatDeleteUser#b2ae9b0c
-//  case *tg.MessageActionChatJoinedByLink: // messageActionChatJoinedByLink#f89cf5e8
+//  case *tg.MessageActionChatAddUser: // messageActionChatAddUser#15cefd00
+//  case *tg.MessageActionChatDeleteUser: // messageActionChatDeleteUser#a43f30cc
+//  case *tg.MessageActionChatJoinedByLink: // messageActionChatJoinedByLink#31224c3
 //  case *tg.MessageActionChannelCreate: // messageActionChannelCreate#95d2ac92
-//  case *tg.MessageActionChatMigrateTo: // messageActionChatMigrateTo#51bdb021
-//  case *tg.MessageActionChannelMigrateFrom: // messageActionChannelMigrateFrom#b055eaee
+//  case *tg.MessageActionChatMigrateTo: // messageActionChatMigrateTo#e1037f92
+//  case *tg.MessageActionChannelMigrateFrom: // messageActionChannelMigrateFrom#ea3948e9
 //  case *tg.MessageActionPinMessage: // messageActionPinMessage#94bd38ed
 //  case *tg.MessageActionHistoryClear: // messageActionHistoryClear#9fbab604
 //  case *tg.MessageActionGameScore: // messageActionGameScore#92a72876
@@ -4282,9 +4413,10 @@ var (
 //  case *tg.MessageActionContactSignUp: // messageActionContactSignUp#f3f25f76
 //  case *tg.MessageActionGeoProximityReached: // messageActionGeoProximityReached#98e0d697
 //  case *tg.MessageActionGroupCall: // messageActionGroupCall#7a0d7f42
-//  case *tg.MessageActionInviteToGroupCall: // messageActionInviteToGroupCall#76b9f11a
+//  case *tg.MessageActionInviteToGroupCall: // messageActionInviteToGroupCall#502f92f7
 //  case *tg.MessageActionSetMessagesTTL: // messageActionSetMessagesTTL#aa1afbfd
 //  case *tg.MessageActionGroupCallScheduled: // messageActionGroupCallScheduled#b3a07661
+//  case *tg.MessageActionSetChatTheme: // messageActionSetChatTheme#aa786345
 //  default: panic(v)
 //  }
 type MessageActionClass interface {
@@ -4321,7 +4453,7 @@ func DecodeMessageAction(buf *bin.Buffer) (MessageActionClass, error) {
 		}
 		return &v, nil
 	case MessageActionChatCreateTypeID:
-		// Decoding messageActionChatCreate#a6638b9a.
+		// Decoding messageActionChatCreate#bd47cbad.
 		v := MessageActionChatCreate{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
@@ -4349,21 +4481,21 @@ func DecodeMessageAction(buf *bin.Buffer) (MessageActionClass, error) {
 		}
 		return &v, nil
 	case MessageActionChatAddUserTypeID:
-		// Decoding messageActionChatAddUser#488a7337.
+		// Decoding messageActionChatAddUser#15cefd00.
 		v := MessageActionChatAddUser{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
 		}
 		return &v, nil
 	case MessageActionChatDeleteUserTypeID:
-		// Decoding messageActionChatDeleteUser#b2ae9b0c.
+		// Decoding messageActionChatDeleteUser#a43f30cc.
 		v := MessageActionChatDeleteUser{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
 		}
 		return &v, nil
 	case MessageActionChatJoinedByLinkTypeID:
-		// Decoding messageActionChatJoinedByLink#f89cf5e8.
+		// Decoding messageActionChatJoinedByLink#31224c3.
 		v := MessageActionChatJoinedByLink{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
@@ -4377,14 +4509,14 @@ func DecodeMessageAction(buf *bin.Buffer) (MessageActionClass, error) {
 		}
 		return &v, nil
 	case MessageActionChatMigrateToTypeID:
-		// Decoding messageActionChatMigrateTo#51bdb021.
+		// Decoding messageActionChatMigrateTo#e1037f92.
 		v := MessageActionChatMigrateTo{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
 		}
 		return &v, nil
 	case MessageActionChannelMigrateFromTypeID:
-		// Decoding messageActionChannelMigrateFrom#b055eaee.
+		// Decoding messageActionChannelMigrateFrom#ea3948e9.
 		v := MessageActionChannelMigrateFrom{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
@@ -4489,7 +4621,7 @@ func DecodeMessageAction(buf *bin.Buffer) (MessageActionClass, error) {
 		}
 		return &v, nil
 	case MessageActionInviteToGroupCallTypeID:
-		// Decoding messageActionInviteToGroupCall#76b9f11a.
+		// Decoding messageActionInviteToGroupCall#502f92f7.
 		v := MessageActionInviteToGroupCall{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
@@ -4505,6 +4637,13 @@ func DecodeMessageAction(buf *bin.Buffer) (MessageActionClass, error) {
 	case MessageActionGroupCallScheduledTypeID:
 		// Decoding messageActionGroupCallScheduled#b3a07661.
 		v := MessageActionGroupCallScheduled{}
+		if err := v.Decode(buf); err != nil {
+			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
+		}
+		return &v, nil
+	case MessageActionSetChatThemeTypeID:
+		// Decoding messageActionSetChatTheme#aa786345.
+		v := MessageActionSetChatTheme{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessageActionClass: %w", err)
 		}
@@ -4899,6 +5038,19 @@ func (s MessageActionClassArray) AsMessageActionSetMessagesTTL() (to MessageActi
 func (s MessageActionClassArray) AsMessageActionGroupCallScheduled() (to MessageActionGroupCallScheduledArray) {
 	for _, elem := range s {
 		value, ok := elem.(*MessageActionGroupCallScheduled)
+		if !ok {
+			continue
+		}
+		to = append(to, *value)
+	}
+
+	return to
+}
+
+// AsMessageActionSetChatTheme returns copy with only MessageActionSetChatTheme constructors.
+func (s MessageActionClassArray) AsMessageActionSetChatTheme() (to MessageActionSetChatThemeArray) {
+	for _, elem := range s {
+		value, ok := elem.(*MessageActionSetChatTheme)
 		if !ok {
 			continue
 		}
@@ -6700,6 +6852,88 @@ func (s *MessageActionGroupCallScheduledArray) PopFirst() (v MessageActionGroupC
 
 // Pop returns last element of slice (if exists) and deletes it.
 func (s *MessageActionGroupCallScheduledArray) Pop() (v MessageActionGroupCallScheduled, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[len(a)-1]
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// MessageActionSetChatThemeArray is adapter for slice of MessageActionSetChatTheme.
+type MessageActionSetChatThemeArray []MessageActionSetChatTheme
+
+// Sort sorts slice of MessageActionSetChatTheme.
+func (s MessageActionSetChatThemeArray) Sort(less func(a, b MessageActionSetChatTheme) bool) MessageActionSetChatThemeArray {
+	sort.Slice(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// SortStable sorts slice of MessageActionSetChatTheme.
+func (s MessageActionSetChatThemeArray) SortStable(less func(a, b MessageActionSetChatTheme) bool) MessageActionSetChatThemeArray {
+	sort.SliceStable(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// Retain filters in-place slice of MessageActionSetChatTheme.
+func (s MessageActionSetChatThemeArray) Retain(keep func(x MessageActionSetChatTheme) bool) MessageActionSetChatThemeArray {
+	n := 0
+	for _, x := range s {
+		if keep(x) {
+			s[n] = x
+			n++
+		}
+	}
+	s = s[:n]
+
+	return s
+}
+
+// First returns first element of slice (if exists).
+func (s MessageActionSetChatThemeArray) First() (v MessageActionSetChatTheme, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[0], true
+}
+
+// Last returns last element of slice (if exists).
+func (s MessageActionSetChatThemeArray) Last() (v MessageActionSetChatTheme, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[len(s)-1], true
+}
+
+// PopFirst returns first element of slice (if exists) and deletes it.
+func (s *MessageActionSetChatThemeArray) PopFirst() (v MessageActionSetChatTheme, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[0]
+
+	// Delete by index from SliceTricks.
+	copy(a[0:], a[1:])
+	var zero MessageActionSetChatTheme
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// Pop returns last element of slice (if exists) and deletes it.
+func (s *MessageActionSetChatThemeArray) Pop() (v MessageActionSetChatTheme, ok bool) {
 	if s == nil || len(*s) < 1 {
 		return
 	}

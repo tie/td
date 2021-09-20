@@ -29,17 +29,17 @@ var (
 	_ = tgerr.Error{}
 )
 
-// UserEmpty represents TL type `userEmpty#200250ba`.
+// UserEmpty represents TL type `userEmpty#d3bc4b7a`.
 // Empty constructor, non-existent user.
 //
 // See https://core.telegram.org/constructor/userEmpty for reference.
 type UserEmpty struct {
 	// User identifier or 0
-	ID int
+	ID int64
 }
 
 // UserEmptyTypeID is TL type id of UserEmpty.
-const UserEmptyTypeID = 0x200250ba
+const UserEmptyTypeID = 0xd3bc4b7a
 
 func (u *UserEmpty) Zero() bool {
 	if u == nil {
@@ -63,7 +63,7 @@ func (u *UserEmpty) String() string {
 
 // FillFrom fills UserEmpty from given interface.
 func (u *UserEmpty) FillFrom(from interface {
-	GetID() (value int)
+	GetID() (value int64)
 }) {
 	u.ID = from.GetID()
 }
@@ -102,7 +102,7 @@ func (u *UserEmpty) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (u *UserEmpty) Encode(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't encode userEmpty#200250ba as nil")
+		return fmt.Errorf("can't encode userEmpty#d3bc4b7a as nil")
 	}
 	b.PutID(UserEmptyTypeID)
 	return u.EncodeBare(b)
@@ -111,24 +111,24 @@ func (u *UserEmpty) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (u *UserEmpty) EncodeBare(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't encode userEmpty#200250ba as nil")
+		return fmt.Errorf("can't encode userEmpty#d3bc4b7a as nil")
 	}
-	b.PutInt(u.ID)
+	b.PutLong(u.ID)
 	return nil
 }
 
 // GetID returns value of ID field.
-func (u *UserEmpty) GetID() (value int) {
+func (u *UserEmpty) GetID() (value int64) {
 	return u.ID
 }
 
 // Decode implements bin.Decoder.
 func (u *UserEmpty) Decode(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't decode userEmpty#200250ba to nil")
+		return fmt.Errorf("can't decode userEmpty#d3bc4b7a to nil")
 	}
 	if err := b.ConsumeID(UserEmptyTypeID); err != nil {
-		return fmt.Errorf("unable to decode userEmpty#200250ba: %w", err)
+		return fmt.Errorf("unable to decode userEmpty#d3bc4b7a: %w", err)
 	}
 	return u.DecodeBare(b)
 }
@@ -136,12 +136,12 @@ func (u *UserEmpty) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (u *UserEmpty) DecodeBare(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't decode userEmpty#200250ba to nil")
+		return fmt.Errorf("can't decode userEmpty#d3bc4b7a to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode userEmpty#200250ba: field id: %w", err)
+			return fmt.Errorf("unable to decode userEmpty#d3bc4b7a: field id: %w", err)
 		}
 		u.ID = value
 	}
@@ -161,7 +161,7 @@ var (
 	_ UserClass = &UserEmpty{}
 )
 
-// User represents TL type `user#938458c1`.
+// User represents TL type `user#3ff6ecb0`.
 // Indicates info about a certain user
 //
 // See https://core.telegram.org/constructor/user for reference.
@@ -205,7 +205,7 @@ type User struct {
 	// Fake field of User.
 	Fake bool
 	// ID of the user
-	ID int
+	ID int64
 	// Access hash of the user
 	//
 	// Use SetAccessHash and GetAccessHash helpers.
@@ -256,7 +256,7 @@ type User struct {
 }
 
 // UserTypeID is TL type id of User.
-const UserTypeID = 0x938458c1
+const UserTypeID = 0x3ff6ecb0
 
 func (u *User) Zero() bool {
 	if u == nil {
@@ -376,7 +376,7 @@ func (u *User) FillFrom(from interface {
 	GetScam() (value bool)
 	GetApplyMinPhoto() (value bool)
 	GetFake() (value bool)
-	GetID() (value int)
+	GetID() (value int64)
 	GetAccessHash() (value int64, ok bool)
 	GetFirstName() (value string, ok bool)
 	GetLastName() (value string, ok bool)
@@ -615,7 +615,7 @@ func (u *User) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (u *User) Encode(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't encode user#938458c1 as nil")
+		return fmt.Errorf("can't encode user#3ff6ecb0 as nil")
 	}
 	b.PutID(UserTypeID)
 	return u.EncodeBare(b)
@@ -624,7 +624,7 @@ func (u *User) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (u *User) EncodeBare(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't encode user#938458c1 as nil")
+		return fmt.Errorf("can't encode user#3ff6ecb0 as nil")
 	}
 	if !(u.Self == false) {
 		u.Flags.Set(10)
@@ -705,9 +705,9 @@ func (u *User) EncodeBare(b *bin.Buffer) error {
 		u.Flags.Set(22)
 	}
 	if err := u.Flags.Encode(b); err != nil {
-		return fmt.Errorf("unable to encode user#938458c1: field flags: %w", err)
+		return fmt.Errorf("unable to encode user#3ff6ecb0: field flags: %w", err)
 	}
-	b.PutInt(u.ID)
+	b.PutLong(u.ID)
 	if u.Flags.Has(0) {
 		b.PutLong(u.AccessHash)
 	}
@@ -725,18 +725,18 @@ func (u *User) EncodeBare(b *bin.Buffer) error {
 	}
 	if u.Flags.Has(5) {
 		if u.Photo == nil {
-			return fmt.Errorf("unable to encode user#938458c1: field photo is nil")
+			return fmt.Errorf("unable to encode user#3ff6ecb0: field photo is nil")
 		}
 		if err := u.Photo.Encode(b); err != nil {
-			return fmt.Errorf("unable to encode user#938458c1: field photo: %w", err)
+			return fmt.Errorf("unable to encode user#3ff6ecb0: field photo: %w", err)
 		}
 	}
 	if u.Flags.Has(6) {
 		if u.Status == nil {
-			return fmt.Errorf("unable to encode user#938458c1: field status is nil")
+			return fmt.Errorf("unable to encode user#3ff6ecb0: field status is nil")
 		}
 		if err := u.Status.Encode(b); err != nil {
-			return fmt.Errorf("unable to encode user#938458c1: field status: %w", err)
+			return fmt.Errorf("unable to encode user#3ff6ecb0: field status: %w", err)
 		}
 	}
 	if u.Flags.Has(14) {
@@ -746,7 +746,7 @@ func (u *User) EncodeBare(b *bin.Buffer) error {
 		b.PutVectorHeader(len(u.RestrictionReason))
 		for idx, v := range u.RestrictionReason {
 			if err := v.Encode(b); err != nil {
-				return fmt.Errorf("unable to encode user#938458c1: field restriction_reason element with index %d: %w", idx, err)
+				return fmt.Errorf("unable to encode user#3ff6ecb0: field restriction_reason element with index %d: %w", idx, err)
 			}
 		}
 	}
@@ -1000,7 +1000,7 @@ func (u *User) GetFake() (value bool) {
 }
 
 // GetID returns value of ID field.
-func (u *User) GetID() (value int) {
+func (u *User) GetID() (value int64) {
 	return u.ID
 }
 
@@ -1172,10 +1172,10 @@ func (u *User) GetLangCode() (value string, ok bool) {
 // Decode implements bin.Decoder.
 func (u *User) Decode(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't decode user#938458c1 to nil")
+		return fmt.Errorf("can't decode user#3ff6ecb0 to nil")
 	}
 	if err := b.ConsumeID(UserTypeID); err != nil {
-		return fmt.Errorf("unable to decode user#938458c1: %w", err)
+		return fmt.Errorf("unable to decode user#3ff6ecb0: %w", err)
 	}
 	return u.DecodeBare(b)
 }
@@ -1183,11 +1183,11 @@ func (u *User) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (u *User) DecodeBare(b *bin.Buffer) error {
 	if u == nil {
-		return fmt.Errorf("can't decode user#938458c1 to nil")
+		return fmt.Errorf("can't decode user#3ff6ecb0 to nil")
 	}
 	{
 		if err := u.Flags.Decode(b); err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field flags: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field flags: %w", err)
 		}
 	}
 	u.Self = u.Flags.Has(10)
@@ -1206,77 +1206,77 @@ func (u *User) DecodeBare(b *bin.Buffer) error {
 	u.ApplyMinPhoto = u.Flags.Has(25)
 	u.Fake = u.Flags.Has(26)
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field id: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field id: %w", err)
 		}
 		u.ID = value
 	}
 	if u.Flags.Has(0) {
 		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field access_hash: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field access_hash: %w", err)
 		}
 		u.AccessHash = value
 	}
 	if u.Flags.Has(1) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field first_name: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field first_name: %w", err)
 		}
 		u.FirstName = value
 	}
 	if u.Flags.Has(2) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field last_name: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field last_name: %w", err)
 		}
 		u.LastName = value
 	}
 	if u.Flags.Has(3) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field username: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field username: %w", err)
 		}
 		u.Username = value
 	}
 	if u.Flags.Has(4) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field phone: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field phone: %w", err)
 		}
 		u.Phone = value
 	}
 	if u.Flags.Has(5) {
 		value, err := DecodeUserProfilePhoto(b)
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field photo: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field photo: %w", err)
 		}
 		u.Photo = value
 	}
 	if u.Flags.Has(6) {
 		value, err := DecodeUserStatus(b)
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field status: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field status: %w", err)
 		}
 		u.Status = value
 	}
 	if u.Flags.Has(14) {
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field bot_info_version: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field bot_info_version: %w", err)
 		}
 		u.BotInfoVersion = value
 	}
 	if u.Flags.Has(18) {
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field restriction_reason: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field restriction_reason: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
 			var value RestrictionReason
 			if err := value.Decode(b); err != nil {
-				return fmt.Errorf("unable to decode user#938458c1: field restriction_reason: %w", err)
+				return fmt.Errorf("unable to decode user#3ff6ecb0: field restriction_reason: %w", err)
 			}
 			u.RestrictionReason = append(u.RestrictionReason, value)
 		}
@@ -1284,14 +1284,14 @@ func (u *User) DecodeBare(b *bin.Buffer) error {
 	if u.Flags.Has(19) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field bot_inline_placeholder: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field bot_inline_placeholder: %w", err)
 		}
 		u.BotInlinePlaceholder = value
 	}
 	if u.Flags.Has(22) {
 		value, err := b.String()
 		if err != nil {
-			return fmt.Errorf("unable to decode user#938458c1: field lang_code: %w", err)
+			return fmt.Errorf("unable to decode user#3ff6ecb0: field lang_code: %w", err)
 		}
 		u.LangCode = value
 	}
@@ -1321,8 +1321,8 @@ var (
 //      panic(err)
 //  }
 //  switch v := g.(type) {
-//  case *tg.UserEmpty: // userEmpty#200250ba
-//  case *tg.User: // user#938458c1
+//  case *tg.UserEmpty: // userEmpty#d3bc4b7a
+//  case *tg.User: // user#3ff6ecb0
 //  default: panic(v)
 //  }
 type UserClass interface {
@@ -1344,7 +1344,7 @@ type UserClass interface {
 	Zero() bool
 
 	// User identifier or 0
-	GetID() (value int)
+	GetID() (value int64)
 
 	// AsNotEmpty tries to map UserClass to User.
 	AsNotEmpty() (*User, bool)
@@ -1390,14 +1390,14 @@ func DecodeUser(buf *bin.Buffer) (UserClass, error) {
 	}
 	switch id {
 	case UserEmptyTypeID:
-		// Decoding userEmpty#200250ba.
+		// Decoding userEmpty#d3bc4b7a.
 		v := UserEmpty{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode UserClass: %w", err)
 		}
 		return &v, nil
 	case UserTypeID:
-		// Decoding user#938458c1.
+		// Decoding user#3ff6ecb0.
 		v := User{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode UserClass: %w", err)
@@ -1516,38 +1516,6 @@ func (s *UserClassArray) Pop() (v UserClass, ok bool) {
 	return v, true
 }
 
-// SortByID sorts slice of UserClass by ID.
-func (s UserClassArray) SortByID() UserClassArray {
-	return s.Sort(func(a, b UserClass) bool {
-		return a.GetID() < b.GetID()
-	})
-}
-
-// SortStableByID sorts slice of UserClass by ID.
-func (s UserClassArray) SortStableByID() UserClassArray {
-	return s.SortStable(func(a, b UserClass) bool {
-		return a.GetID() < b.GetID()
-	})
-}
-
-// FillUserEmptyMap fills only UserEmpty constructors to given map.
-func (s UserClassArray) FillUserEmptyMap(to map[int]*UserEmpty) {
-	for _, elem := range s {
-		value, ok := elem.(*UserEmpty)
-		if !ok {
-			continue
-		}
-		to[value.GetID()] = value
-	}
-}
-
-// UserEmptyToMap collects only UserEmpty constructors to map.
-func (s UserClassArray) UserEmptyToMap() map[int]*UserEmpty {
-	r := make(map[int]*UserEmpty, len(s))
-	s.FillUserEmptyMap(r)
-	return r
-}
-
 // AsUserEmpty returns copy with only UserEmpty constructors.
 func (s UserClassArray) AsUserEmpty() (to UserEmptyArray) {
 	for _, elem := range s {
@@ -1561,24 +1529,6 @@ func (s UserClassArray) AsUserEmpty() (to UserEmptyArray) {
 	return to
 }
 
-// FillUserMap fills only User constructors to given map.
-func (s UserClassArray) FillUserMap(to map[int]*User) {
-	for _, elem := range s {
-		value, ok := elem.(*User)
-		if !ok {
-			continue
-		}
-		to[value.GetID()] = value
-	}
-}
-
-// UserToMap collects only User constructors to map.
-func (s UserClassArray) UserToMap() map[int]*User {
-	r := make(map[int]*User, len(s))
-	s.FillUserMap(r)
-	return r
-}
-
 // AsUser returns copy with only User constructors.
 func (s UserClassArray) AsUser() (to UserArray) {
 	for _, elem := range s {
@@ -1590,24 +1540,6 @@ func (s UserClassArray) AsUser() (to UserArray) {
 	}
 
 	return to
-}
-
-// FillNotEmptyMap fills only NotEmpty constructors to given map.
-func (s UserClassArray) FillNotEmptyMap(to map[int]*User) {
-	for _, elem := range s {
-		value, ok := elem.AsNotEmpty()
-		if !ok {
-			continue
-		}
-		to[value.GetID()] = value
-	}
-}
-
-// NotEmptyToMap collects only NotEmpty constructors to map.
-func (s UserClassArray) NotEmptyToMap() map[int]*User {
-	r := make(map[int]*User, len(s))
-	s.FillNotEmptyMap(r)
-	return r
 }
 
 // AppendOnlyNotEmpty appends only NotEmpty constructors to
@@ -1747,34 +1679,6 @@ func (s *UserEmptyArray) Pop() (v UserEmpty, ok bool) {
 	return v, true
 }
 
-// SortByID sorts slice of UserEmpty by ID.
-func (s UserEmptyArray) SortByID() UserEmptyArray {
-	return s.Sort(func(a, b UserEmpty) bool {
-		return a.GetID() < b.GetID()
-	})
-}
-
-// SortStableByID sorts slice of UserEmpty by ID.
-func (s UserEmptyArray) SortStableByID() UserEmptyArray {
-	return s.SortStable(func(a, b UserEmpty) bool {
-		return a.GetID() < b.GetID()
-	})
-}
-
-// FillMap fills constructors to given map.
-func (s UserEmptyArray) FillMap(to map[int]UserEmpty) {
-	for _, value := range s {
-		to[value.GetID()] = value
-	}
-}
-
-// ToMap collects constructors to map.
-func (s UserEmptyArray) ToMap() map[int]UserEmpty {
-	r := make(map[int]UserEmpty, len(s))
-	s.FillMap(r)
-	return r
-}
-
 // UserArray is adapter for slice of User.
 type UserArray []User
 
@@ -1855,32 +1759,4 @@ func (s *UserArray) Pop() (v User, ok bool) {
 	*s = a
 
 	return v, true
-}
-
-// SortByID sorts slice of User by ID.
-func (s UserArray) SortByID() UserArray {
-	return s.Sort(func(a, b User) bool {
-		return a.GetID() < b.GetID()
-	})
-}
-
-// SortStableByID sorts slice of User by ID.
-func (s UserArray) SortStableByID() UserArray {
-	return s.SortStable(func(a, b User) bool {
-		return a.GetID() < b.GetID()
-	})
-}
-
-// FillMap fills constructors to given map.
-func (s UserArray) FillMap(to map[int]User) {
-	for _, value := range s {
-		to[value.GetID()] = value
-	}
-}
-
-// ToMap collects constructors to map.
-func (s UserArray) ToMap() map[int]User {
-	r := make(map[int]User, len(s))
-	s.FillMap(r)
-	return r
 }

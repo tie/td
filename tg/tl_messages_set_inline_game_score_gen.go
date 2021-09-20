@@ -47,7 +47,7 @@ type MessagesSetInlineGameScoreRequest struct {
 	// mistakes or banning cheaters
 	Force bool
 	// ID of the inline message
-	ID InputBotInlineMessageID
+	ID InputBotInlineMessageIDClass
 	// User identifier
 	UserID InputUserClass
 	// New score
@@ -70,7 +70,7 @@ func (s *MessagesSetInlineGameScoreRequest) Zero() bool {
 	if !(s.Force == false) {
 		return false
 	}
-	if !(s.ID.Zero()) {
+	if !(s.ID == nil) {
 		return false
 	}
 	if !(s.UserID == nil) {
@@ -96,7 +96,7 @@ func (s *MessagesSetInlineGameScoreRequest) String() string {
 func (s *MessagesSetInlineGameScoreRequest) FillFrom(from interface {
 	GetEditMessage() (value bool)
 	GetForce() (value bool)
-	GetID() (value InputBotInlineMessageID)
+	GetID() (value InputBotInlineMessageIDClass)
 	GetUserID() (value InputUserClass)
 	GetScore() (value int)
 }) {
@@ -179,6 +179,9 @@ func (s *MessagesSetInlineGameScoreRequest) EncodeBare(b *bin.Buffer) error {
 	if err := s.Flags.Encode(b); err != nil {
 		return fmt.Errorf("unable to encode messages.setInlineGameScore#15ad9f64: field flags: %w", err)
 	}
+	if s.ID == nil {
+		return fmt.Errorf("unable to encode messages.setInlineGameScore#15ad9f64: field id is nil")
+	}
 	if err := s.ID.Encode(b); err != nil {
 		return fmt.Errorf("unable to encode messages.setInlineGameScore#15ad9f64: field id: %w", err)
 	}
@@ -225,7 +228,7 @@ func (s *MessagesSetInlineGameScoreRequest) GetForce() (value bool) {
 }
 
 // GetID returns value of ID field.
-func (s *MessagesSetInlineGameScoreRequest) GetID() (value InputBotInlineMessageID) {
+func (s *MessagesSetInlineGameScoreRequest) GetID() (value InputBotInlineMessageIDClass) {
 	return s.ID
 }
 
@@ -263,9 +266,11 @@ func (s *MessagesSetInlineGameScoreRequest) DecodeBare(b *bin.Buffer) error {
 	s.EditMessage = s.Flags.Has(0)
 	s.Force = s.Flags.Has(1)
 	{
-		if err := s.ID.Decode(b); err != nil {
+		value, err := DecodeInputBotInlineMessageID(b)
+		if err != nil {
 			return fmt.Errorf("unable to decode messages.setInlineGameScore#15ad9f64: field id: %w", err)
 		}
+		s.ID = value
 	}
 	{
 		value, err := DecodeInputUser(b)

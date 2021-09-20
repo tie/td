@@ -1738,6 +1738,417 @@ var (
 	_ SendMessageActionClass = &SendMessageHistoryImportAction{}
 )
 
+// SendMessageChooseStickerAction represents TL type `sendMessageChooseStickerAction#b05ac6b1`.
+//
+// See https://core.telegram.org/constructor/sendMessageChooseStickerAction for reference.
+type SendMessageChooseStickerAction struct {
+}
+
+// SendMessageChooseStickerActionTypeID is TL type id of SendMessageChooseStickerAction.
+const SendMessageChooseStickerActionTypeID = 0xb05ac6b1
+
+func (s *SendMessageChooseStickerAction) Zero() bool {
+	if s == nil {
+		return true
+	}
+
+	return true
+}
+
+// String implements fmt.Stringer.
+func (s *SendMessageChooseStickerAction) String() string {
+	if s == nil {
+		return "SendMessageChooseStickerAction(nil)"
+	}
+	type Alias SendMessageChooseStickerAction
+	return fmt.Sprintf("SendMessageChooseStickerAction%+v", Alias(*s))
+}
+
+// TypeID returns type id in TL schema.
+//
+// See https://core.telegram.org/mtproto/TL-tl#remarks.
+func (*SendMessageChooseStickerAction) TypeID() uint32 {
+	return SendMessageChooseStickerActionTypeID
+}
+
+// TypeName returns name of type in TL schema.
+func (*SendMessageChooseStickerAction) TypeName() string {
+	return "sendMessageChooseStickerAction"
+}
+
+// TypeInfo returns info about TL type.
+func (s *SendMessageChooseStickerAction) TypeInfo() tdp.Type {
+	typ := tdp.Type{
+		Name: "sendMessageChooseStickerAction",
+		ID:   SendMessageChooseStickerActionTypeID,
+	}
+	if s == nil {
+		typ.Null = true
+		return typ
+	}
+	typ.Fields = []tdp.Field{}
+	return typ
+}
+
+// Encode implements bin.Encoder.
+func (s *SendMessageChooseStickerAction) Encode(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't encode sendMessageChooseStickerAction#b05ac6b1 as nil")
+	}
+	b.PutID(SendMessageChooseStickerActionTypeID)
+	return s.EncodeBare(b)
+}
+
+// EncodeBare implements bin.BareEncoder.
+func (s *SendMessageChooseStickerAction) EncodeBare(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't encode sendMessageChooseStickerAction#b05ac6b1 as nil")
+	}
+	return nil
+}
+
+// Decode implements bin.Decoder.
+func (s *SendMessageChooseStickerAction) Decode(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't decode sendMessageChooseStickerAction#b05ac6b1 to nil")
+	}
+	if err := b.ConsumeID(SendMessageChooseStickerActionTypeID); err != nil {
+		return fmt.Errorf("unable to decode sendMessageChooseStickerAction#b05ac6b1: %w", err)
+	}
+	return s.DecodeBare(b)
+}
+
+// DecodeBare implements bin.BareDecoder.
+func (s *SendMessageChooseStickerAction) DecodeBare(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't decode sendMessageChooseStickerAction#b05ac6b1 to nil")
+	}
+	return nil
+}
+
+// construct implements constructor of SendMessageActionClass.
+func (s SendMessageChooseStickerAction) construct() SendMessageActionClass { return &s }
+
+// Ensuring interfaces in compile-time for SendMessageChooseStickerAction.
+var (
+	_ bin.Encoder     = &SendMessageChooseStickerAction{}
+	_ bin.Decoder     = &SendMessageChooseStickerAction{}
+	_ bin.BareEncoder = &SendMessageChooseStickerAction{}
+	_ bin.BareDecoder = &SendMessageChooseStickerAction{}
+
+	_ SendMessageActionClass = &SendMessageChooseStickerAction{}
+)
+
+// SendMessageEmojiInteraction represents TL type `sendMessageEmojiInteraction#25972bcb`.
+//
+// See https://core.telegram.org/constructor/sendMessageEmojiInteraction for reference.
+type SendMessageEmojiInteraction struct {
+	// Emoticon field of SendMessageEmojiInteraction.
+	Emoticon string
+	// MsgID field of SendMessageEmojiInteraction.
+	MsgID int
+	// Interaction field of SendMessageEmojiInteraction.
+	Interaction DataJSON
+}
+
+// SendMessageEmojiInteractionTypeID is TL type id of SendMessageEmojiInteraction.
+const SendMessageEmojiInteractionTypeID = 0x25972bcb
+
+func (s *SendMessageEmojiInteraction) Zero() bool {
+	if s == nil {
+		return true
+	}
+	if !(s.Emoticon == "") {
+		return false
+	}
+	if !(s.MsgID == 0) {
+		return false
+	}
+	if !(s.Interaction.Zero()) {
+		return false
+	}
+
+	return true
+}
+
+// String implements fmt.Stringer.
+func (s *SendMessageEmojiInteraction) String() string {
+	if s == nil {
+		return "SendMessageEmojiInteraction(nil)"
+	}
+	type Alias SendMessageEmojiInteraction
+	return fmt.Sprintf("SendMessageEmojiInteraction%+v", Alias(*s))
+}
+
+// FillFrom fills SendMessageEmojiInteraction from given interface.
+func (s *SendMessageEmojiInteraction) FillFrom(from interface {
+	GetEmoticon() (value string)
+	GetMsgID() (value int)
+	GetInteraction() (value DataJSON)
+}) {
+	s.Emoticon = from.GetEmoticon()
+	s.MsgID = from.GetMsgID()
+	s.Interaction = from.GetInteraction()
+}
+
+// TypeID returns type id in TL schema.
+//
+// See https://core.telegram.org/mtproto/TL-tl#remarks.
+func (*SendMessageEmojiInteraction) TypeID() uint32 {
+	return SendMessageEmojiInteractionTypeID
+}
+
+// TypeName returns name of type in TL schema.
+func (*SendMessageEmojiInteraction) TypeName() string {
+	return "sendMessageEmojiInteraction"
+}
+
+// TypeInfo returns info about TL type.
+func (s *SendMessageEmojiInteraction) TypeInfo() tdp.Type {
+	typ := tdp.Type{
+		Name: "sendMessageEmojiInteraction",
+		ID:   SendMessageEmojiInteractionTypeID,
+	}
+	if s == nil {
+		typ.Null = true
+		return typ
+	}
+	typ.Fields = []tdp.Field{
+		{
+			Name:       "Emoticon",
+			SchemaName: "emoticon",
+		},
+		{
+			Name:       "MsgID",
+			SchemaName: "msg_id",
+		},
+		{
+			Name:       "Interaction",
+			SchemaName: "interaction",
+		},
+	}
+	return typ
+}
+
+// Encode implements bin.Encoder.
+func (s *SendMessageEmojiInteraction) Encode(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't encode sendMessageEmojiInteraction#25972bcb as nil")
+	}
+	b.PutID(SendMessageEmojiInteractionTypeID)
+	return s.EncodeBare(b)
+}
+
+// EncodeBare implements bin.BareEncoder.
+func (s *SendMessageEmojiInteraction) EncodeBare(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't encode sendMessageEmojiInteraction#25972bcb as nil")
+	}
+	b.PutString(s.Emoticon)
+	b.PutInt(s.MsgID)
+	if err := s.Interaction.Encode(b); err != nil {
+		return fmt.Errorf("unable to encode sendMessageEmojiInteraction#25972bcb: field interaction: %w", err)
+	}
+	return nil
+}
+
+// GetEmoticon returns value of Emoticon field.
+func (s *SendMessageEmojiInteraction) GetEmoticon() (value string) {
+	return s.Emoticon
+}
+
+// GetMsgID returns value of MsgID field.
+func (s *SendMessageEmojiInteraction) GetMsgID() (value int) {
+	return s.MsgID
+}
+
+// GetInteraction returns value of Interaction field.
+func (s *SendMessageEmojiInteraction) GetInteraction() (value DataJSON) {
+	return s.Interaction
+}
+
+// Decode implements bin.Decoder.
+func (s *SendMessageEmojiInteraction) Decode(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't decode sendMessageEmojiInteraction#25972bcb to nil")
+	}
+	if err := b.ConsumeID(SendMessageEmojiInteractionTypeID); err != nil {
+		return fmt.Errorf("unable to decode sendMessageEmojiInteraction#25972bcb: %w", err)
+	}
+	return s.DecodeBare(b)
+}
+
+// DecodeBare implements bin.BareDecoder.
+func (s *SendMessageEmojiInteraction) DecodeBare(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't decode sendMessageEmojiInteraction#25972bcb to nil")
+	}
+	{
+		value, err := b.String()
+		if err != nil {
+			return fmt.Errorf("unable to decode sendMessageEmojiInteraction#25972bcb: field emoticon: %w", err)
+		}
+		s.Emoticon = value
+	}
+	{
+		value, err := b.Int()
+		if err != nil {
+			return fmt.Errorf("unable to decode sendMessageEmojiInteraction#25972bcb: field msg_id: %w", err)
+		}
+		s.MsgID = value
+	}
+	{
+		if err := s.Interaction.Decode(b); err != nil {
+			return fmt.Errorf("unable to decode sendMessageEmojiInteraction#25972bcb: field interaction: %w", err)
+		}
+	}
+	return nil
+}
+
+// construct implements constructor of SendMessageActionClass.
+func (s SendMessageEmojiInteraction) construct() SendMessageActionClass { return &s }
+
+// Ensuring interfaces in compile-time for SendMessageEmojiInteraction.
+var (
+	_ bin.Encoder     = &SendMessageEmojiInteraction{}
+	_ bin.Decoder     = &SendMessageEmojiInteraction{}
+	_ bin.BareEncoder = &SendMessageEmojiInteraction{}
+	_ bin.BareDecoder = &SendMessageEmojiInteraction{}
+
+	_ SendMessageActionClass = &SendMessageEmojiInteraction{}
+)
+
+// SendMessageEmojiInteractionSeen represents TL type `sendMessageEmojiInteractionSeen#b665902e`.
+//
+// See https://core.telegram.org/constructor/sendMessageEmojiInteractionSeen for reference.
+type SendMessageEmojiInteractionSeen struct {
+	// Emoticon field of SendMessageEmojiInteractionSeen.
+	Emoticon string
+}
+
+// SendMessageEmojiInteractionSeenTypeID is TL type id of SendMessageEmojiInteractionSeen.
+const SendMessageEmojiInteractionSeenTypeID = 0xb665902e
+
+func (s *SendMessageEmojiInteractionSeen) Zero() bool {
+	if s == nil {
+		return true
+	}
+	if !(s.Emoticon == "") {
+		return false
+	}
+
+	return true
+}
+
+// String implements fmt.Stringer.
+func (s *SendMessageEmojiInteractionSeen) String() string {
+	if s == nil {
+		return "SendMessageEmojiInteractionSeen(nil)"
+	}
+	type Alias SendMessageEmojiInteractionSeen
+	return fmt.Sprintf("SendMessageEmojiInteractionSeen%+v", Alias(*s))
+}
+
+// FillFrom fills SendMessageEmojiInteractionSeen from given interface.
+func (s *SendMessageEmojiInteractionSeen) FillFrom(from interface {
+	GetEmoticon() (value string)
+}) {
+	s.Emoticon = from.GetEmoticon()
+}
+
+// TypeID returns type id in TL schema.
+//
+// See https://core.telegram.org/mtproto/TL-tl#remarks.
+func (*SendMessageEmojiInteractionSeen) TypeID() uint32 {
+	return SendMessageEmojiInteractionSeenTypeID
+}
+
+// TypeName returns name of type in TL schema.
+func (*SendMessageEmojiInteractionSeen) TypeName() string {
+	return "sendMessageEmojiInteractionSeen"
+}
+
+// TypeInfo returns info about TL type.
+func (s *SendMessageEmojiInteractionSeen) TypeInfo() tdp.Type {
+	typ := tdp.Type{
+		Name: "sendMessageEmojiInteractionSeen",
+		ID:   SendMessageEmojiInteractionSeenTypeID,
+	}
+	if s == nil {
+		typ.Null = true
+		return typ
+	}
+	typ.Fields = []tdp.Field{
+		{
+			Name:       "Emoticon",
+			SchemaName: "emoticon",
+		},
+	}
+	return typ
+}
+
+// Encode implements bin.Encoder.
+func (s *SendMessageEmojiInteractionSeen) Encode(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't encode sendMessageEmojiInteractionSeen#b665902e as nil")
+	}
+	b.PutID(SendMessageEmojiInteractionSeenTypeID)
+	return s.EncodeBare(b)
+}
+
+// EncodeBare implements bin.BareEncoder.
+func (s *SendMessageEmojiInteractionSeen) EncodeBare(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't encode sendMessageEmojiInteractionSeen#b665902e as nil")
+	}
+	b.PutString(s.Emoticon)
+	return nil
+}
+
+// GetEmoticon returns value of Emoticon field.
+func (s *SendMessageEmojiInteractionSeen) GetEmoticon() (value string) {
+	return s.Emoticon
+}
+
+// Decode implements bin.Decoder.
+func (s *SendMessageEmojiInteractionSeen) Decode(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't decode sendMessageEmojiInteractionSeen#b665902e to nil")
+	}
+	if err := b.ConsumeID(SendMessageEmojiInteractionSeenTypeID); err != nil {
+		return fmt.Errorf("unable to decode sendMessageEmojiInteractionSeen#b665902e: %w", err)
+	}
+	return s.DecodeBare(b)
+}
+
+// DecodeBare implements bin.BareDecoder.
+func (s *SendMessageEmojiInteractionSeen) DecodeBare(b *bin.Buffer) error {
+	if s == nil {
+		return fmt.Errorf("can't decode sendMessageEmojiInteractionSeen#b665902e to nil")
+	}
+	{
+		value, err := b.String()
+		if err != nil {
+			return fmt.Errorf("unable to decode sendMessageEmojiInteractionSeen#b665902e: field emoticon: %w", err)
+		}
+		s.Emoticon = value
+	}
+	return nil
+}
+
+// construct implements constructor of SendMessageActionClass.
+func (s SendMessageEmojiInteractionSeen) construct() SendMessageActionClass { return &s }
+
+// Ensuring interfaces in compile-time for SendMessageEmojiInteractionSeen.
+var (
+	_ bin.Encoder     = &SendMessageEmojiInteractionSeen{}
+	_ bin.Decoder     = &SendMessageEmojiInteractionSeen{}
+	_ bin.BareEncoder = &SendMessageEmojiInteractionSeen{}
+	_ bin.BareDecoder = &SendMessageEmojiInteractionSeen{}
+
+	_ SendMessageActionClass = &SendMessageEmojiInteractionSeen{}
+)
+
 // SendMessageActionClass represents SendMessageAction generic type.
 //
 // See https://core.telegram.org/type/SendMessageAction for reference.
@@ -1763,6 +2174,9 @@ var (
 //  case *tg.SendMessageUploadRoundAction: // sendMessageUploadRoundAction#243e1c66
 //  case *tg.SpeakingInGroupCallAction: // speakingInGroupCallAction#d92c2285
 //  case *tg.SendMessageHistoryImportAction: // sendMessageHistoryImportAction#dbda9246
+//  case *tg.SendMessageChooseStickerAction: // sendMessageChooseStickerAction#b05ac6b1
+//  case *tg.SendMessageEmojiInteraction: // sendMessageEmojiInteraction#25972bcb
+//  case *tg.SendMessageEmojiInteractionSeen: // sendMessageEmojiInteractionSeen#b665902e
 //  default: panic(v)
 //  }
 type SendMessageActionClass interface {
@@ -1892,6 +2306,27 @@ func DecodeSendMessageAction(buf *bin.Buffer) (SendMessageActionClass, error) {
 	case SendMessageHistoryImportActionTypeID:
 		// Decoding sendMessageHistoryImportAction#dbda9246.
 		v := SendMessageHistoryImportAction{}
+		if err := v.Decode(buf); err != nil {
+			return nil, fmt.Errorf("unable to decode SendMessageActionClass: %w", err)
+		}
+		return &v, nil
+	case SendMessageChooseStickerActionTypeID:
+		// Decoding sendMessageChooseStickerAction#b05ac6b1.
+		v := SendMessageChooseStickerAction{}
+		if err := v.Decode(buf); err != nil {
+			return nil, fmt.Errorf("unable to decode SendMessageActionClass: %w", err)
+		}
+		return &v, nil
+	case SendMessageEmojiInteractionTypeID:
+		// Decoding sendMessageEmojiInteraction#25972bcb.
+		v := SendMessageEmojiInteraction{}
+		if err := v.Decode(buf); err != nil {
+			return nil, fmt.Errorf("unable to decode SendMessageActionClass: %w", err)
+		}
+		return &v, nil
+	case SendMessageEmojiInteractionSeenTypeID:
+		// Decoding sendMessageEmojiInteractionSeen#b665902e.
+		v := SendMessageEmojiInteractionSeen{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode SendMessageActionClass: %w", err)
 		}
@@ -2078,6 +2513,32 @@ func (s SendMessageActionClassArray) AsSendMessageUploadRoundAction() (to SendMe
 func (s SendMessageActionClassArray) AsSendMessageHistoryImportAction() (to SendMessageHistoryImportActionArray) {
 	for _, elem := range s {
 		value, ok := elem.(*SendMessageHistoryImportAction)
+		if !ok {
+			continue
+		}
+		to = append(to, *value)
+	}
+
+	return to
+}
+
+// AsSendMessageEmojiInteraction returns copy with only SendMessageEmojiInteraction constructors.
+func (s SendMessageActionClassArray) AsSendMessageEmojiInteraction() (to SendMessageEmojiInteractionArray) {
+	for _, elem := range s {
+		value, ok := elem.(*SendMessageEmojiInteraction)
+		if !ok {
+			continue
+		}
+		to = append(to, *value)
+	}
+
+	return to
+}
+
+// AsSendMessageEmojiInteractionSeen returns copy with only SendMessageEmojiInteractionSeen constructors.
+func (s SendMessageActionClassArray) AsSendMessageEmojiInteractionSeen() (to SendMessageEmojiInteractionSeenArray) {
+	for _, elem := range s {
+		value, ok := elem.(*SendMessageEmojiInteractionSeen)
 		if !ok {
 			continue
 		}
@@ -2567,6 +3028,170 @@ func (s *SendMessageHistoryImportActionArray) PopFirst() (v SendMessageHistoryIm
 
 // Pop returns last element of slice (if exists) and deletes it.
 func (s *SendMessageHistoryImportActionArray) Pop() (v SendMessageHistoryImportAction, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[len(a)-1]
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// SendMessageEmojiInteractionArray is adapter for slice of SendMessageEmojiInteraction.
+type SendMessageEmojiInteractionArray []SendMessageEmojiInteraction
+
+// Sort sorts slice of SendMessageEmojiInteraction.
+func (s SendMessageEmojiInteractionArray) Sort(less func(a, b SendMessageEmojiInteraction) bool) SendMessageEmojiInteractionArray {
+	sort.Slice(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// SortStable sorts slice of SendMessageEmojiInteraction.
+func (s SendMessageEmojiInteractionArray) SortStable(less func(a, b SendMessageEmojiInteraction) bool) SendMessageEmojiInteractionArray {
+	sort.SliceStable(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// Retain filters in-place slice of SendMessageEmojiInteraction.
+func (s SendMessageEmojiInteractionArray) Retain(keep func(x SendMessageEmojiInteraction) bool) SendMessageEmojiInteractionArray {
+	n := 0
+	for _, x := range s {
+		if keep(x) {
+			s[n] = x
+			n++
+		}
+	}
+	s = s[:n]
+
+	return s
+}
+
+// First returns first element of slice (if exists).
+func (s SendMessageEmojiInteractionArray) First() (v SendMessageEmojiInteraction, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[0], true
+}
+
+// Last returns last element of slice (if exists).
+func (s SendMessageEmojiInteractionArray) Last() (v SendMessageEmojiInteraction, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[len(s)-1], true
+}
+
+// PopFirst returns first element of slice (if exists) and deletes it.
+func (s *SendMessageEmojiInteractionArray) PopFirst() (v SendMessageEmojiInteraction, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[0]
+
+	// Delete by index from SliceTricks.
+	copy(a[0:], a[1:])
+	var zero SendMessageEmojiInteraction
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// Pop returns last element of slice (if exists) and deletes it.
+func (s *SendMessageEmojiInteractionArray) Pop() (v SendMessageEmojiInteraction, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[len(a)-1]
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// SendMessageEmojiInteractionSeenArray is adapter for slice of SendMessageEmojiInteractionSeen.
+type SendMessageEmojiInteractionSeenArray []SendMessageEmojiInteractionSeen
+
+// Sort sorts slice of SendMessageEmojiInteractionSeen.
+func (s SendMessageEmojiInteractionSeenArray) Sort(less func(a, b SendMessageEmojiInteractionSeen) bool) SendMessageEmojiInteractionSeenArray {
+	sort.Slice(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// SortStable sorts slice of SendMessageEmojiInteractionSeen.
+func (s SendMessageEmojiInteractionSeenArray) SortStable(less func(a, b SendMessageEmojiInteractionSeen) bool) SendMessageEmojiInteractionSeenArray {
+	sort.SliceStable(s, func(i, j int) bool {
+		return less(s[i], s[j])
+	})
+	return s
+}
+
+// Retain filters in-place slice of SendMessageEmojiInteractionSeen.
+func (s SendMessageEmojiInteractionSeenArray) Retain(keep func(x SendMessageEmojiInteractionSeen) bool) SendMessageEmojiInteractionSeenArray {
+	n := 0
+	for _, x := range s {
+		if keep(x) {
+			s[n] = x
+			n++
+		}
+	}
+	s = s[:n]
+
+	return s
+}
+
+// First returns first element of slice (if exists).
+func (s SendMessageEmojiInteractionSeenArray) First() (v SendMessageEmojiInteractionSeen, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[0], true
+}
+
+// Last returns last element of slice (if exists).
+func (s SendMessageEmojiInteractionSeenArray) Last() (v SendMessageEmojiInteractionSeen, ok bool) {
+	if len(s) < 1 {
+		return
+	}
+	return s[len(s)-1], true
+}
+
+// PopFirst returns first element of slice (if exists) and deletes it.
+func (s *SendMessageEmojiInteractionSeenArray) PopFirst() (v SendMessageEmojiInteractionSeen, ok bool) {
+	if s == nil || len(*s) < 1 {
+		return
+	}
+
+	a := *s
+	v = a[0]
+
+	// Delete by index from SliceTricks.
+	copy(a[0:], a[1:])
+	var zero SendMessageEmojiInteractionSeen
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	*s = a
+
+	return v, true
+}
+
+// Pop returns last element of slice (if exists) and deletes it.
+func (s *SendMessageEmojiInteractionSeenArray) Pop() (v SendMessageEmojiInteractionSeen, ok bool) {
 	if s == nil || len(*s) < 1 {
 		return
 	}

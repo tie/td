@@ -131,7 +131,7 @@ var (
 	_ AccountWallPapersClass = &AccountWallPapersNotModified{}
 )
 
-// AccountWallPapers represents TL type `account.wallPapers#702b65a9`.
+// AccountWallPapers represents TL type `account.wallPapers#cdc3858c`.
 // Installed wallpapers
 //
 // See https://core.telegram.org/constructor/account.wallPapers for reference.
@@ -140,13 +140,13 @@ type AccountWallPapers struct {
 	//
 	// Links:
 	//  1) https://core.telegram.org/api/offsets#hash-generation
-	Hash int
+	Hash int64
 	// Wallpapers
 	Wallpapers []WallPaperClass
 }
 
 // AccountWallPapersTypeID is TL type id of AccountWallPapers.
-const AccountWallPapersTypeID = 0x702b65a9
+const AccountWallPapersTypeID = 0xcdc3858c
 
 func (w *AccountWallPapers) Zero() bool {
 	if w == nil {
@@ -173,7 +173,7 @@ func (w *AccountWallPapers) String() string {
 
 // FillFrom fills AccountWallPapers from given interface.
 func (w *AccountWallPapers) FillFrom(from interface {
-	GetHash() (value int)
+	GetHash() (value int64)
 	GetWallpapers() (value []WallPaperClass)
 }) {
 	w.Hash = from.GetHash()
@@ -218,7 +218,7 @@ func (w *AccountWallPapers) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (w *AccountWallPapers) Encode(b *bin.Buffer) error {
 	if w == nil {
-		return fmt.Errorf("can't encode account.wallPapers#702b65a9 as nil")
+		return fmt.Errorf("can't encode account.wallPapers#cdc3858c as nil")
 	}
 	b.PutID(AccountWallPapersTypeID)
 	return w.EncodeBare(b)
@@ -227,23 +227,23 @@ func (w *AccountWallPapers) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (w *AccountWallPapers) EncodeBare(b *bin.Buffer) error {
 	if w == nil {
-		return fmt.Errorf("can't encode account.wallPapers#702b65a9 as nil")
+		return fmt.Errorf("can't encode account.wallPapers#cdc3858c as nil")
 	}
-	b.PutInt(w.Hash)
+	b.PutLong(w.Hash)
 	b.PutVectorHeader(len(w.Wallpapers))
 	for idx, v := range w.Wallpapers {
 		if v == nil {
-			return fmt.Errorf("unable to encode account.wallPapers#702b65a9: field wallpapers element with index %d is nil", idx)
+			return fmt.Errorf("unable to encode account.wallPapers#cdc3858c: field wallpapers element with index %d is nil", idx)
 		}
 		if err := v.Encode(b); err != nil {
-			return fmt.Errorf("unable to encode account.wallPapers#702b65a9: field wallpapers element with index %d: %w", idx, err)
+			return fmt.Errorf("unable to encode account.wallPapers#cdc3858c: field wallpapers element with index %d: %w", idx, err)
 		}
 	}
 	return nil
 }
 
 // GetHash returns value of Hash field.
-func (w *AccountWallPapers) GetHash() (value int) {
+func (w *AccountWallPapers) GetHash() (value int64) {
 	return w.Hash
 }
 
@@ -260,10 +260,10 @@ func (w *AccountWallPapers) MapWallpapers() (value WallPaperClassArray) {
 // Decode implements bin.Decoder.
 func (w *AccountWallPapers) Decode(b *bin.Buffer) error {
 	if w == nil {
-		return fmt.Errorf("can't decode account.wallPapers#702b65a9 to nil")
+		return fmt.Errorf("can't decode account.wallPapers#cdc3858c to nil")
 	}
 	if err := b.ConsumeID(AccountWallPapersTypeID); err != nil {
-		return fmt.Errorf("unable to decode account.wallPapers#702b65a9: %w", err)
+		return fmt.Errorf("unable to decode account.wallPapers#cdc3858c: %w", err)
 	}
 	return w.DecodeBare(b)
 }
@@ -271,24 +271,24 @@ func (w *AccountWallPapers) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (w *AccountWallPapers) DecodeBare(b *bin.Buffer) error {
 	if w == nil {
-		return fmt.Errorf("can't decode account.wallPapers#702b65a9 to nil")
+		return fmt.Errorf("can't decode account.wallPapers#cdc3858c to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode account.wallPapers#702b65a9: field hash: %w", err)
+			return fmt.Errorf("unable to decode account.wallPapers#cdc3858c: field hash: %w", err)
 		}
 		w.Hash = value
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode account.wallPapers#702b65a9: field wallpapers: %w", err)
+			return fmt.Errorf("unable to decode account.wallPapers#cdc3858c: field wallpapers: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
 			value, err := DecodeWallPaper(b)
 			if err != nil {
-				return fmt.Errorf("unable to decode account.wallPapers#702b65a9: field wallpapers: %w", err)
+				return fmt.Errorf("unable to decode account.wallPapers#cdc3858c: field wallpapers: %w", err)
 			}
 			w.Wallpapers = append(w.Wallpapers, value)
 		}
@@ -320,7 +320,7 @@ var (
 //  }
 //  switch v := g.(type) {
 //  case *tg.AccountWallPapersNotModified: // account.wallPapersNotModified#1c199183
-//  case *tg.AccountWallPapers: // account.wallPapers#702b65a9
+//  case *tg.AccountWallPapers: // account.wallPapers#cdc3858c
 //  default: panic(v)
 //  }
 type AccountWallPapersClass interface {
@@ -370,7 +370,7 @@ func DecodeAccountWallPapers(buf *bin.Buffer) (AccountWallPapersClass, error) {
 		}
 		return &v, nil
 	case AccountWallPapersTypeID:
-		// Decoding account.wallPapers#702b65a9.
+		// Decoding account.wallPapers#cdc3858c.
 		v := AccountWallPapers{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode AccountWallPapersClass: %w", err)

@@ -42,7 +42,7 @@ type MessagesEditInlineBotMessageRequest struct {
 	// Disable webpage preview
 	NoWebpage bool
 	// Sent inline message ID
-	ID InputBotInlineMessageID
+	ID InputBotInlineMessageIDClass
 	// Message
 	//
 	// Use SetMessage and GetMessage helpers.
@@ -77,7 +77,7 @@ func (e *MessagesEditInlineBotMessageRequest) Zero() bool {
 	if !(e.NoWebpage == false) {
 		return false
 	}
-	if !(e.ID.Zero()) {
+	if !(e.ID == nil) {
 		return false
 	}
 	if !(e.Message == "") {
@@ -108,7 +108,7 @@ func (e *MessagesEditInlineBotMessageRequest) String() string {
 // FillFrom fills MessagesEditInlineBotMessageRequest from given interface.
 func (e *MessagesEditInlineBotMessageRequest) FillFrom(from interface {
 	GetNoWebpage() (value bool)
-	GetID() (value InputBotInlineMessageID)
+	GetID() (value InputBotInlineMessageIDClass)
 	GetMessage() (value string, ok bool)
 	GetMedia() (value InputMediaClass, ok bool)
 	GetReplyMarkup() (value ReplyMarkupClass, ok bool)
@@ -222,6 +222,9 @@ func (e *MessagesEditInlineBotMessageRequest) EncodeBare(b *bin.Buffer) error {
 	if err := e.Flags.Encode(b); err != nil {
 		return fmt.Errorf("unable to encode messages.editInlineBotMessage#83557dba: field flags: %w", err)
 	}
+	if e.ID == nil {
+		return fmt.Errorf("unable to encode messages.editInlineBotMessage#83557dba: field id is nil")
+	}
 	if err := e.ID.Encode(b); err != nil {
 		return fmt.Errorf("unable to encode messages.editInlineBotMessage#83557dba: field id: %w", err)
 	}
@@ -275,7 +278,7 @@ func (e *MessagesEditInlineBotMessageRequest) GetNoWebpage() (value bool) {
 }
 
 // GetID returns value of ID field.
-func (e *MessagesEditInlineBotMessageRequest) GetID() (value InputBotInlineMessageID) {
+func (e *MessagesEditInlineBotMessageRequest) GetID() (value InputBotInlineMessageIDClass) {
 	return e.ID
 }
 
@@ -370,9 +373,11 @@ func (e *MessagesEditInlineBotMessageRequest) DecodeBare(b *bin.Buffer) error {
 	}
 	e.NoWebpage = e.Flags.Has(1)
 	{
-		if err := e.ID.Decode(b); err != nil {
+		value, err := DecodeInputBotInlineMessageID(b)
+		if err != nil {
 			return fmt.Errorf("unable to decode messages.editInlineBotMessage#83557dba: field id: %w", err)
 		}
+		e.ID = value
 	}
 	if e.Flags.Has(11) {
 		value, err := b.String()

@@ -29,17 +29,17 @@ var (
 	_ = tgerr.Error{}
 )
 
-// MessagesGetFullChatRequest represents TL type `messages.getFullChat#3b831c66`.
+// MessagesGetFullChatRequest represents TL type `messages.getFullChat#aeb00b34`.
 // Returns full chat info according to its ID.
 //
 // See https://core.telegram.org/method/messages.getFullChat for reference.
 type MessagesGetFullChatRequest struct {
 	// Chat ID
-	ChatID int
+	ChatID int64
 }
 
 // MessagesGetFullChatRequestTypeID is TL type id of MessagesGetFullChatRequest.
-const MessagesGetFullChatRequestTypeID = 0x3b831c66
+const MessagesGetFullChatRequestTypeID = 0xaeb00b34
 
 func (g *MessagesGetFullChatRequest) Zero() bool {
 	if g == nil {
@@ -63,7 +63,7 @@ func (g *MessagesGetFullChatRequest) String() string {
 
 // FillFrom fills MessagesGetFullChatRequest from given interface.
 func (g *MessagesGetFullChatRequest) FillFrom(from interface {
-	GetChatID() (value int)
+	GetChatID() (value int64)
 }) {
 	g.ChatID = from.GetChatID()
 }
@@ -102,7 +102,7 @@ func (g *MessagesGetFullChatRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (g *MessagesGetFullChatRequest) Encode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode messages.getFullChat#3b831c66 as nil")
+		return fmt.Errorf("can't encode messages.getFullChat#aeb00b34 as nil")
 	}
 	b.PutID(MessagesGetFullChatRequestTypeID)
 	return g.EncodeBare(b)
@@ -111,24 +111,24 @@ func (g *MessagesGetFullChatRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (g *MessagesGetFullChatRequest) EncodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode messages.getFullChat#3b831c66 as nil")
+		return fmt.Errorf("can't encode messages.getFullChat#aeb00b34 as nil")
 	}
-	b.PutInt(g.ChatID)
+	b.PutLong(g.ChatID)
 	return nil
 }
 
 // GetChatID returns value of ChatID field.
-func (g *MessagesGetFullChatRequest) GetChatID() (value int) {
+func (g *MessagesGetFullChatRequest) GetChatID() (value int64) {
 	return g.ChatID
 }
 
 // Decode implements bin.Decoder.
 func (g *MessagesGetFullChatRequest) Decode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode messages.getFullChat#3b831c66 to nil")
+		return fmt.Errorf("can't decode messages.getFullChat#aeb00b34 to nil")
 	}
 	if err := b.ConsumeID(MessagesGetFullChatRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode messages.getFullChat#3b831c66: %w", err)
+		return fmt.Errorf("unable to decode messages.getFullChat#aeb00b34: %w", err)
 	}
 	return g.DecodeBare(b)
 }
@@ -136,12 +136,12 @@ func (g *MessagesGetFullChatRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (g *MessagesGetFullChatRequest) DecodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode messages.getFullChat#3b831c66 to nil")
+		return fmt.Errorf("can't decode messages.getFullChat#aeb00b34 to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getFullChat#3b831c66: field chat_id: %w", err)
+			return fmt.Errorf("unable to decode messages.getFullChat#aeb00b34: field chat_id: %w", err)
 		}
 		g.ChatID = value
 	}
@@ -156,7 +156,7 @@ var (
 	_ bin.BareDecoder = &MessagesGetFullChatRequest{}
 )
 
-// MessagesGetFullChat invokes method messages.getFullChat#3b831c66 returning error if any.
+// MessagesGetFullChat invokes method messages.getFullChat#aeb00b34 returning error if any.
 // Returns full chat info according to its ID.
 //
 // Possible errors:
@@ -165,7 +165,7 @@ var (
 //
 // See https://core.telegram.org/method/messages.getFullChat for reference.
 // Can be used by bots.
-func (c *Client) MessagesGetFullChat(ctx context.Context, chatid int) (*MessagesChatFull, error) {
+func (c *Client) MessagesGetFullChat(ctx context.Context, chatid int64) (*MessagesChatFull, error) {
 	var result MessagesChatFull
 
 	request := &MessagesGetFullChatRequest{

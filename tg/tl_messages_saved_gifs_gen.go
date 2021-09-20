@@ -131,7 +131,7 @@ var (
 	_ MessagesSavedGifsClass = &MessagesSavedGifsNotModified{}
 )
 
-// MessagesSavedGifs represents TL type `messages.savedGifs#2e0709a5`.
+// MessagesSavedGifs represents TL type `messages.savedGifs#84a02a0d`.
 // Saved gifs
 //
 // See https://core.telegram.org/constructor/messages.savedGifs for reference.
@@ -140,13 +140,13 @@ type MessagesSavedGifs struct {
 	//
 	// Links:
 	//  1) https://core.telegram.org/api/offsets#hash-generation
-	Hash int
+	Hash int64
 	// List of saved gifs
 	Gifs []DocumentClass
 }
 
 // MessagesSavedGifsTypeID is TL type id of MessagesSavedGifs.
-const MessagesSavedGifsTypeID = 0x2e0709a5
+const MessagesSavedGifsTypeID = 0x84a02a0d
 
 func (s *MessagesSavedGifs) Zero() bool {
 	if s == nil {
@@ -173,7 +173,7 @@ func (s *MessagesSavedGifs) String() string {
 
 // FillFrom fills MessagesSavedGifs from given interface.
 func (s *MessagesSavedGifs) FillFrom(from interface {
-	GetHash() (value int)
+	GetHash() (value int64)
 	GetGifs() (value []DocumentClass)
 }) {
 	s.Hash = from.GetHash()
@@ -218,7 +218,7 @@ func (s *MessagesSavedGifs) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (s *MessagesSavedGifs) Encode(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't encode messages.savedGifs#2e0709a5 as nil")
+		return fmt.Errorf("can't encode messages.savedGifs#84a02a0d as nil")
 	}
 	b.PutID(MessagesSavedGifsTypeID)
 	return s.EncodeBare(b)
@@ -227,23 +227,23 @@ func (s *MessagesSavedGifs) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (s *MessagesSavedGifs) EncodeBare(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't encode messages.savedGifs#2e0709a5 as nil")
+		return fmt.Errorf("can't encode messages.savedGifs#84a02a0d as nil")
 	}
-	b.PutInt(s.Hash)
+	b.PutLong(s.Hash)
 	b.PutVectorHeader(len(s.Gifs))
 	for idx, v := range s.Gifs {
 		if v == nil {
-			return fmt.Errorf("unable to encode messages.savedGifs#2e0709a5: field gifs element with index %d is nil", idx)
+			return fmt.Errorf("unable to encode messages.savedGifs#84a02a0d: field gifs element with index %d is nil", idx)
 		}
 		if err := v.Encode(b); err != nil {
-			return fmt.Errorf("unable to encode messages.savedGifs#2e0709a5: field gifs element with index %d: %w", idx, err)
+			return fmt.Errorf("unable to encode messages.savedGifs#84a02a0d: field gifs element with index %d: %w", idx, err)
 		}
 	}
 	return nil
 }
 
 // GetHash returns value of Hash field.
-func (s *MessagesSavedGifs) GetHash() (value int) {
+func (s *MessagesSavedGifs) GetHash() (value int64) {
 	return s.Hash
 }
 
@@ -260,10 +260,10 @@ func (s *MessagesSavedGifs) MapGifs() (value DocumentClassArray) {
 // Decode implements bin.Decoder.
 func (s *MessagesSavedGifs) Decode(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't decode messages.savedGifs#2e0709a5 to nil")
+		return fmt.Errorf("can't decode messages.savedGifs#84a02a0d to nil")
 	}
 	if err := b.ConsumeID(MessagesSavedGifsTypeID); err != nil {
-		return fmt.Errorf("unable to decode messages.savedGifs#2e0709a5: %w", err)
+		return fmt.Errorf("unable to decode messages.savedGifs#84a02a0d: %w", err)
 	}
 	return s.DecodeBare(b)
 }
@@ -271,24 +271,24 @@ func (s *MessagesSavedGifs) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (s *MessagesSavedGifs) DecodeBare(b *bin.Buffer) error {
 	if s == nil {
-		return fmt.Errorf("can't decode messages.savedGifs#2e0709a5 to nil")
+		return fmt.Errorf("can't decode messages.savedGifs#84a02a0d to nil")
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.savedGifs#2e0709a5: field hash: %w", err)
+			return fmt.Errorf("unable to decode messages.savedGifs#84a02a0d: field hash: %w", err)
 		}
 		s.Hash = value
 	}
 	{
 		headerLen, err := b.VectorHeader()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.savedGifs#2e0709a5: field gifs: %w", err)
+			return fmt.Errorf("unable to decode messages.savedGifs#84a02a0d: field gifs: %w", err)
 		}
 		for idx := 0; idx < headerLen; idx++ {
 			value, err := DecodeDocument(b)
 			if err != nil {
-				return fmt.Errorf("unable to decode messages.savedGifs#2e0709a5: field gifs: %w", err)
+				return fmt.Errorf("unable to decode messages.savedGifs#84a02a0d: field gifs: %w", err)
 			}
 			s.Gifs = append(s.Gifs, value)
 		}
@@ -320,7 +320,7 @@ var (
 //  }
 //  switch v := g.(type) {
 //  case *tg.MessagesSavedGifsNotModified: // messages.savedGifsNotModified#e8025ca2
-//  case *tg.MessagesSavedGifs: // messages.savedGifs#2e0709a5
+//  case *tg.MessagesSavedGifs: // messages.savedGifs#84a02a0d
 //  default: panic(v)
 //  }
 type MessagesSavedGifsClass interface {
@@ -370,7 +370,7 @@ func DecodeMessagesSavedGifs(buf *bin.Buffer) (MessagesSavedGifsClass, error) {
 		}
 		return &v, nil
 	case MessagesSavedGifsTypeID:
-		// Decoding messages.savedGifs#2e0709a5.
+		// Decoding messages.savedGifs#84a02a0d.
 		v := MessagesSavedGifs{}
 		if err := v.Decode(buf); err != nil {
 			return nil, fmt.Errorf("unable to decode MessagesSavedGifsClass: %w", err)

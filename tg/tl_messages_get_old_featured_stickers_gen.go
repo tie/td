@@ -29,7 +29,7 @@ var (
 	_ = tgerr.Error{}
 )
 
-// MessagesGetOldFeaturedStickersRequest represents TL type `messages.getOldFeaturedStickers#5fe7025b`.
+// MessagesGetOldFeaturedStickersRequest represents TL type `messages.getOldFeaturedStickers#7ed094a1`.
 // Method for fetching previously featured stickers
 //
 // See https://core.telegram.org/method/messages.getOldFeaturedStickers for reference.
@@ -45,11 +45,11 @@ type MessagesGetOldFeaturedStickersRequest struct {
 	//
 	// Links:
 	//  1) https://core.telegram.org/api/offsets#hash-generation
-	Hash int
+	Hash int64
 }
 
 // MessagesGetOldFeaturedStickersRequestTypeID is TL type id of MessagesGetOldFeaturedStickersRequest.
-const MessagesGetOldFeaturedStickersRequestTypeID = 0x5fe7025b
+const MessagesGetOldFeaturedStickersRequestTypeID = 0x7ed094a1
 
 func (g *MessagesGetOldFeaturedStickersRequest) Zero() bool {
 	if g == nil {
@@ -81,7 +81,7 @@ func (g *MessagesGetOldFeaturedStickersRequest) String() string {
 func (g *MessagesGetOldFeaturedStickersRequest) FillFrom(from interface {
 	GetOffset() (value int)
 	GetLimit() (value int)
-	GetHash() (value int)
+	GetHash() (value int64)
 }) {
 	g.Offset = from.GetOffset()
 	g.Limit = from.GetLimit()
@@ -130,7 +130,7 @@ func (g *MessagesGetOldFeaturedStickersRequest) TypeInfo() tdp.Type {
 // Encode implements bin.Encoder.
 func (g *MessagesGetOldFeaturedStickersRequest) Encode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode messages.getOldFeaturedStickers#5fe7025b as nil")
+		return fmt.Errorf("can't encode messages.getOldFeaturedStickers#7ed094a1 as nil")
 	}
 	b.PutID(MessagesGetOldFeaturedStickersRequestTypeID)
 	return g.EncodeBare(b)
@@ -139,11 +139,11 @@ func (g *MessagesGetOldFeaturedStickersRequest) Encode(b *bin.Buffer) error {
 // EncodeBare implements bin.BareEncoder.
 func (g *MessagesGetOldFeaturedStickersRequest) EncodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't encode messages.getOldFeaturedStickers#5fe7025b as nil")
+		return fmt.Errorf("can't encode messages.getOldFeaturedStickers#7ed094a1 as nil")
 	}
 	b.PutInt(g.Offset)
 	b.PutInt(g.Limit)
-	b.PutInt(g.Hash)
+	b.PutLong(g.Hash)
 	return nil
 }
 
@@ -158,17 +158,17 @@ func (g *MessagesGetOldFeaturedStickersRequest) GetLimit() (value int) {
 }
 
 // GetHash returns value of Hash field.
-func (g *MessagesGetOldFeaturedStickersRequest) GetHash() (value int) {
+func (g *MessagesGetOldFeaturedStickersRequest) GetHash() (value int64) {
 	return g.Hash
 }
 
 // Decode implements bin.Decoder.
 func (g *MessagesGetOldFeaturedStickersRequest) Decode(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode messages.getOldFeaturedStickers#5fe7025b to nil")
+		return fmt.Errorf("can't decode messages.getOldFeaturedStickers#7ed094a1 to nil")
 	}
 	if err := b.ConsumeID(MessagesGetOldFeaturedStickersRequestTypeID); err != nil {
-		return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#5fe7025b: %w", err)
+		return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#7ed094a1: %w", err)
 	}
 	return g.DecodeBare(b)
 }
@@ -176,26 +176,26 @@ func (g *MessagesGetOldFeaturedStickersRequest) Decode(b *bin.Buffer) error {
 // DecodeBare implements bin.BareDecoder.
 func (g *MessagesGetOldFeaturedStickersRequest) DecodeBare(b *bin.Buffer) error {
 	if g == nil {
-		return fmt.Errorf("can't decode messages.getOldFeaturedStickers#5fe7025b to nil")
+		return fmt.Errorf("can't decode messages.getOldFeaturedStickers#7ed094a1 to nil")
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#5fe7025b: field offset: %w", err)
+			return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#7ed094a1: field offset: %w", err)
 		}
 		g.Offset = value
 	}
 	{
 		value, err := b.Int()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#5fe7025b: field limit: %w", err)
+			return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#7ed094a1: field limit: %w", err)
 		}
 		g.Limit = value
 	}
 	{
-		value, err := b.Int()
+		value, err := b.Long()
 		if err != nil {
-			return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#5fe7025b: field hash: %w", err)
+			return fmt.Errorf("unable to decode messages.getOldFeaturedStickers#7ed094a1: field hash: %w", err)
 		}
 		g.Hash = value
 	}
@@ -210,7 +210,7 @@ var (
 	_ bin.BareDecoder = &MessagesGetOldFeaturedStickersRequest{}
 )
 
-// MessagesGetOldFeaturedStickers invokes method messages.getOldFeaturedStickers#5fe7025b returning error if any.
+// MessagesGetOldFeaturedStickers invokes method messages.getOldFeaturedStickers#7ed094a1 returning error if any.
 // Method for fetching previously featured stickers
 //
 // See https://core.telegram.org/method/messages.getOldFeaturedStickers for reference.
